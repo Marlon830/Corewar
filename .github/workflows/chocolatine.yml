@@ -1,4 +1,4 @@
-name: my_rpg
+name: corewar
 on:
   push:
     branches-ignore:
