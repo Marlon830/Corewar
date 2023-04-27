@@ -6,3 +6,16 @@
 */
 
 #pragma once
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct error_s {
+    int have_name;
+    int have_comment;
+} error_t;
+
+char **str_to_arr(char *str);
+int my_strlen(char *str);
+int check_error(char *argv[]);
+char **malloc_2d_array(int row, int col);

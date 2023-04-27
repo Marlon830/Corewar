@@ -5,7 +5,10 @@
 ## Makefile
 ##
 
-SRC = main.c
+SRC = 	main.c \
+		error_gestion.c \
+		strings.c \
+		strings_bis.c
 
 OBJ = $(SRC:.c=.o)
 
