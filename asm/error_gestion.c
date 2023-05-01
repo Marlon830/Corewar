@@ -9,8 +9,7 @@
 
 void print_arr(char **arr)
 {
-    for (int i = 0; arr[i] != NULL; i++)
-        printf("%s\n", arr[i]);
+    for (int i = 0; arr[i] != NULL; i++);
 }
 
 error_t *init_struct(void)
