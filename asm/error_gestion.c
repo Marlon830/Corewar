@@ -46,6 +46,8 @@ int check_error(char *argv[])
     while (getline(&line, &len, stream) != -1) {
         arr = str_to_arr(line);
         get_labels(arr, error);
+        if (arr[0] == NULL)
+            continue;
         check_name_and_comment(error, arr);
     }
     if (check_error_label(error))

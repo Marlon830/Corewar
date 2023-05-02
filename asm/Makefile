@@ -11,7 +11,7 @@ OBJ = $(SRC:.c=.o)
 
 CFLAGS = -W -Wall -Wextra
 
-CPPFLAGS = -I./include
+CPPFLAGS = -I./include -g3
 
 TARGET = asm
 

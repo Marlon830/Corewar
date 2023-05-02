@@ -10,6 +10,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include "op.h"
 
 typedef struct list_s {
     char *label;
@@ -41,3 +45,4 @@ void print_list(list_t *list);
 int my_strcmp(char *s1, char *s2);
 int how_many_char_in_str(char c, char *str);
 void check_name_and_comment(error_t *error, char **arr);
+void compile_champion(char *argv[]);
