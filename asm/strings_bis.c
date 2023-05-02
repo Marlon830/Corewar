@@ -17,3 +17,27 @@ char **malloc_2d_array(int row, int col)
     ans[i] = NULL;
     return ans;
 }
+
+int my_strcmp(char *s1, char *s2)
+{
+    int i = 0;
+
+    while (s1[i] == s2[i]) {
+        i = i + 1;
+        if (s1[i] == '\0' && s2[i] == '\0') {
+            return 0;
+        }
+    }
+    return s1[i] - s2[i];
+}
+
+int how_many_char_in_str(char c, char *str)
+{
+    int ans = 0;
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (c == str[i])
+            ans++;
+    }
+    return ans;
+}

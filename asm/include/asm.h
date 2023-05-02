@@ -19,3 +19,6 @@ char **str_to_arr(char *str);
 int my_strlen(char *str);
 int check_error(char *argv[]);
 char **malloc_2d_array(int row, int col);
+int my_strcmp(char *s1, char *s2);
+int how_many_char_in_str(char c, char *str);
+void check_name_and_comment(error_t *error, char **arr);

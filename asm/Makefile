@@ -5,11 +5,7 @@
 ## Makefile
 ##
 
-SRC = 	main.c \
-		error_gestion.c \
-		strings.c \
-		strings_bis.c \
-		op.c
+SRC = $(shell find -name "*.c")
 
 OBJ = $(SRC:.c=.o)
 
