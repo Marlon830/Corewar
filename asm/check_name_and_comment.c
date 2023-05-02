@@ -36,10 +36,14 @@ void check_name_and_comment(error_t *error, char **arr)
     if (arr[0] == NULL)
         return;
     if (!my_strcmp(".name", arr[0])) {
+        if (error->have_name == 1)
+            error->have_name = 84;
         if (check_validity_name_comment(arr, 128))
             error->have_name += 1;
     }
     if (!my_strcmp(".comment", arr[0])) {
+        if (error->have_comment == 1)
+            error->have_comment = 84;
         if (check_validity_name_comment(arr, 2048))
             error->have_comment += 1;
     }
