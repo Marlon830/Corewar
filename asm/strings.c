@@ -47,7 +47,7 @@ int count_word(char *str)
     while (str[i] != '\0' && str[i] != '\n') {
         while (str[i] == ' ' || str[i] == '\t')
             i++;
-        if (str[i] == '\n' || str[i] == '\0')
+        if (str[i] == '\n' || str[i] == '\0' || str[i] == '#')
             break;
         count++;
         while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
@@ -62,7 +62,8 @@ char **str_to_arr(char *str)
     int pos_char = 0;
     int pos_word = 0;
 
-    while (str[pos_char] != '\0' && str[pos_char] != '\n') {
+    while (str[pos_char] != '\0' && str[pos_char] != '\n' &&
+    str[pos_char] != '#') {
         arr[pos_word++] = get_word(str + pos_char);
         pos_char += skip_space(str + pos_char);
         pos_char += my_strlen(arr[pos_word - 1]);

@@ -7,11 +7,6 @@
 
 #include "asm.h"
 
-void print_arr(char **arr)
-{
-    for (int i = 0; arr[i] != NULL; i++);
-}
-
 error_t *init_struct(void)
 {
     error_t *error = malloc(sizeof(*error));
@@ -46,7 +41,8 @@ int check_error(char *argv[])
         if (verif_functions_param(arr) == 0)
             return 84;
     }
-    if (error->have_name != 1 || error->have_comment != 1)
+    if (error->have_name != 1 || error->have_comment != 1) {
         return 84;
+    }
     return 0;
 }

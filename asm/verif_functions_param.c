@@ -8,9 +8,15 @@
 #include "asm.h"
 #include "op.h"
 
-int tab_len(char **arr)
+int arr_len(char **arr)
 {
-    
+    int i = 0;
+
+    for (; arr[i] != NULL; i++) {
+        if (arr[i] == '#')
+            return i;
+    }
+    return i;
 }
 
 int verif_params(char **arr, int index)
@@ -19,6 +25,8 @@ int verif_params(char **arr, int index)
     int b = 0;
     int a = 0;
 
+    if (arr_len(arr) - 1 != op_tab[index].nbr_args)
+        return 0;
     for (int i = 0; i < op_tab[index].nbr_args; i++) {
         a = op_tab[index].type[i];
         if ((N_REG(a) == 1 && is_reg(arr[j]) == 1))

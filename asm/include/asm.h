@@ -32,3 +32,4 @@ int is_ind(char *str);
 int is_dir(char *str);
 int is_reg(char *str);
 int verif_functions_param(char **arr);
+void free_array(char **arr);
