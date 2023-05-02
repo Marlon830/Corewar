@@ -3,3 +3,5 @@ corewar/corewar
 *.o
 .vscode
 ressources
+B-CPE_200_Corewar.pdf
+coding-style-reports.log
