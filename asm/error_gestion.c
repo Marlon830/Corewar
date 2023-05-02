@@ -16,6 +16,8 @@ error_t *init_struct(void)
 {
     error_t *error = malloc(sizeof(*error));
 
+    error->have_name = 0;
+    error->have_comment = 0;
     return error;
 }
 
@@ -31,7 +33,9 @@ int check_error(char *argv[])
         return 84;
     while (getline(&line, &len, stream) != -1) {
         arr = str_to_arr(line);
-        print_arr(arr);
+        check_name_and_comment(error, arr);
     }
+    if (error->have_name != 1 || error->have_comment != 1)
+        return 84;
     return 0;
 }
