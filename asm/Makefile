@@ -8,7 +8,8 @@
 SRC = 	main.c \
 		error_gestion.c \
 		strings.c \
-		strings_bis.c
+		strings_bis.c \
+		op.c
 
 OBJ = $(SRC:.c=.o)
 
