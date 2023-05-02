@@ -24,6 +24,5 @@ int main(int argc, char **argv)
 
     if (handling_error(argc, argv, vm))
         return 84;
-    display_vm_data(vm);
     return 0;
 }
