@@ -33,6 +33,8 @@ int check_error(char *argv[])
         return 84;
     while (getline(&line, &len, stream) != -1) {
         arr = str_to_arr(line);
+        if (arr[0] == NULL)
+            continue;
         check_name_and_comment(error, arr);
     }
     if (error->have_name != 1 || error->have_comment != 1)
