@@ -23,6 +23,16 @@ error_t *init_struct(void)
     return error;
 }
 
+int check_error_label(error_t *error)
+{
+    if (!is_name_labels_correct(error->labels_defined) ||
+    !is_name_labels_correct(error->labels_used) ||
+    is_same_label(error->labels_defined) ||
+    !check_label_exist(error->labels_defined, error->labels_used))
+        return 1;
+    return 0;
+}
+
 int check_error(char *argv[])
 {
     FILE *stream = fopen(argv[1], "r");
@@ -38,6 +48,8 @@ int check_error(char *argv[])
         get_labels(arr, error);
         check_name_and_comment(error, arr);
     }
+    if (check_error_label(error))
+        return 84;
     if (error->have_name != 1 || error->have_comment != 1)
         return 84;
     return 0;
