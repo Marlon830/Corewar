@@ -17,6 +17,8 @@ error_t *init_struct(void)
 {
     error_t *error = malloc(sizeof(*error));
 
+    error->labels_defined = init_list();
+    error->labels_used = init_list();
     return error;
 }
 
@@ -32,7 +34,7 @@ int check_error(char *argv[])
         return 84;
     while (getline(&line, &len, stream) != -1) {
         arr = str_to_arr(line);
-        print_arr(arr);
+        get_labels(arr, error);
     }
     return 0;
 }
