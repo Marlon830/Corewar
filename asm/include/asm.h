@@ -30,3 +30,6 @@ char **malloc_2d_array(int row, int col);
 
 list_t *init_list(void);
 void add_elem_to_list(list_t *list, char *label);
+int my_strcmp(char *s1, char *s2);
+int how_many_char_in_str(char c, char *str);
+void check_name_and_comment(error_t *error, char **arr);

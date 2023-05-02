@@ -26,7 +26,7 @@ int skip_space(char *str)
 
 char *get_word(char *str)
 {
-    char *ans = malloc(sizeof(char) * my_strlen(str));
+    char *ans = malloc(sizeof(char) * (my_strlen(str) + 1));
     int i = skip_space(str);
     int j = 0;
 
@@ -64,7 +64,9 @@ char **str_to_arr(char *str)
 
     while (str[pos_char] != '\0' && str[pos_char] != '\n') {
         arr[pos_word++] = get_word(str + pos_char);
-        pos_char += skip_space(str + pos_char) + my_strlen(arr[pos_word - 1]);
+        pos_char += skip_space(str + pos_char);
+        pos_char += my_strlen(arr[pos_word - 1]);
+        pos_char += skip_space(str + pos_char);
     }
     return arr;
 }

@@ -8,7 +8,7 @@ on:
       - 'ga-ignore-*'
 env:
   MIRROR_URL: "git@github.com:EpitechPromo2027/B-CPE-200-MPL-2-1-corewar-marlon.pegahi.git"
-  EXECUTABLES: "asm,corewar"
+  EXECUTABLES: "asm/asm"
   ALLOWED_FUNCS: "open,fopen,read,fread,write,fwrite,getline,lseek,fseek,close,fclose,malloc,realloc,free,exit"
 jobs:
   check_coding_style:
