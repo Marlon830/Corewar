@@ -41,3 +41,24 @@ int how_many_char_in_str(char c, char *str)
     }
     return ans;
 }
+
+int is_alphanum(char c)
+{
+    if (c >= 'a' && c <= 'z')
+        return 1;
+    if (c >= '0' && c <= '9')
+        return 1;
+    return 0;
+}
+
+char *my_strcpy(char *dest, char *src)
+{
+    int i = 0;
+
+    while (src[i] != '\0') {
+        dest[i] = src[i];
+        i = i + 1;
+    }
+    dest[i] = '\0';
+    return dest;
+}
