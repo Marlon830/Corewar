@@ -13,6 +13,7 @@ list_t *init_list(void)
 
     list->label = NULL;
     list->next = NULL;
+    return list;
 }
 
 void add_elem_to_list(list_t *list, char *label)
@@ -30,4 +31,16 @@ void add_elem_to_list(list_t *list, char *label)
     while (temp->next != NULL)
         temp = temp->next;
     temp->next = new;
+}
+
+void print_list(list_t *list)
+{
+    list_t *temp = list;
+
+    if (temp->label == NULL)
+        return;
+    while (temp != NULL) {
+        write(1, temp->label, my_strlen(temp->label));
+        temp = temp->next;
+    }
 }
