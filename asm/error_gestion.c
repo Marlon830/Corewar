@@ -28,11 +28,13 @@ int check_error_label(error_t *error)
     return 0;
 }
 
-void print_array(char **arr)
+int check_error_bis(error_t *error)
 {
-    for (int i = 0; arr[i] != NULL; i++)
-        printf("%s ", arr[i]);
-    printf("\n");
+    if (check_error_label(error))
+        return 84;
+    if (error->have_name != 1 || error->have_comment != 1)
+        return 84;
+    return 0;
 }
 
 int check_error(char *argv[])
@@ -54,9 +56,5 @@ int check_error(char *argv[])
         if (verif_functions_param(arr) == 0)
             return 84;
     }
-    if (check_error_label(error))
-        return 84;
-    if (error->have_name != 1 || error->have_comment != 1)
-        return 84;
-    return 0;
+    return check_error_bis(error);
 }
