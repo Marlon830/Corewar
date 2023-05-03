@@ -13,6 +13,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include "op.h"
 
 #define IS_COM(str) (str[0] == '#' || str[0] == '.')
