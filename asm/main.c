@@ -13,6 +13,6 @@ int main(int argc, char *argv[])
         return 84;
     if (check_error(argv) == 84)
         return 84;
-    //compile_champion(argv);
+    compile_champion(argv);
     return 0;
 }
