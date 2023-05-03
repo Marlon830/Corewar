@@ -14,6 +14,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <fcntl.h>
+#include "string.h"
 
 typedef struct list_s {
     void *data;
@@ -34,16 +35,8 @@ typedef struct vm_s {
     list_t *champ_list;
 } vm_t;
 
-int handling_error(int argc, char **argv, vm_t *vm);
-int my_strcmp(char *s1, char *s2);
-int my_getnbr(char *str);
-int my_strlen(char *str);
 void push(list_t **list, void *data);
-bool check_champions_exist(char *champ_path, vm_t *vm);
-champion_t *new_champ(char *champ_path, vm_t *vm);
 void display_help(void);
 void display_vm_data(vm_t *vm);
-int check_args(char **argv, int id, vm_t *vm);
-int check_valid_champ(char **argv, int id, vm_t *vm);
-int check_next_prog_num(char **argv, int id, vm_t *vm);
-int check_next_address(char **argv, int id, vm_t *vm);
+int handling_error(int argc, char **argv, vm_t *vm);
+void fill_champ_list(vm_t *vm);
