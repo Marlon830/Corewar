@@ -13,7 +13,7 @@ int arr_len(char **arr)
     int i = 0;
 
     for (; arr[i] != NULL; i++) {
-        if (arr[i] == '#')
+        if (arr[i][0] == '#')
             return i;
     }
     return i;
