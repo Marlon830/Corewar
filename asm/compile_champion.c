@@ -64,6 +64,31 @@ void set_bit_at(int *x, int n, int value)
     *x = *x | value << n;
 }
 
+char get_coding_byte(char **arr, op_t op)
+{
+    char ans = 0;
+    char all_args[4] = {0, 0, 0, 0};
+    int i = 0;
+    int j = 0;
+
+    for (int i = 0; i != op.nbr_args; i++) {
+        if (is_reg(arr[i]))
+            all_args[i] = 1;
+        if (is_dir(arr[i]))
+            all_args[i] = 2;
+        if (is_ind(arr[i]))
+            all_args[i] = 3;
+    }
+    for (int i = 0; i != 8; i += 2) {
+        set_bit_at(&ans, i, all_args[j++] >> 0 & 1);
+        set_bit_at(&ans, i + 1, all_args[j++] >> 1 & 1);
+    }
+    for (int i = 7; i >= 0; i--) {
+        printf("%i\n", ans >> i & 1);
+    }
+    return ans;
+}
+
 void compile_champion(char *argv[])
 {
     FILE *stream = fopen(argv[1], "r");
@@ -74,10 +99,15 @@ void compile_champion(char *argv[])
     header_t header = {0xea83f3, get_header_value(argv, ".name"),
     get_prog_size(argv), get_header_value(argv, ".comment")};
 
+    write(output_fd, &header, sizeof(header));
     while (getline(&line, &len, stream) != -1) {
         arr = str_to_arr(line);
         for (int i = 0; op_tab[i].nbr_args != 0; i++) {
             if (!my_strcmp(op_tab[i].mnemonique, get_instruction(arr))) {
+                get_coding_byte(arr + 1, op_tab[i]);
+                exit(0);
+                write(output_fd, op_tab[i].code, 1);
+                write(output_fd, &get_coding_byte(arr + 1, op_tab[i]), 1);
                 write_parameters(output_fd, arr, i);
             }
         }
