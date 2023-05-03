@@ -24,5 +24,6 @@ int main(int argc, char **argv)
 
     if (handling_error(argc, argv, vm))
         return 84;
+    fill_champ_list(vm);
     return 0;
 }
