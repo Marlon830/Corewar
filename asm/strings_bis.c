@@ -53,14 +53,11 @@ int is_alphanum(char c)
     return 0;
 }
 
-char *my_strcpy(char *dest, char *src)
+void my_strcpy(char *dest, char *src)
 {
-    int i = 0;
+    int src_len = my_strlen(src);
 
-    while (src[i] != '\0') {
+    for (int i = 0; src[i]; i++)
         dest[i] = src[i];
-        i = i + 1;
-    }
-    dest[i] = '\0';
-    return dest;
+    dest[src_len] = '\0';
 }

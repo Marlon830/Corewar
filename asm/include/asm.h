@@ -38,8 +38,6 @@ char **str_to_arr(char *str);
 int my_strlen(char *str);
 int is_alphanum(char c);
 int my_getnbr(char const *str);
-void set_bit_at(int *x, int n, int value);
-char *my_strcpy(char *dest, char *src);
 int check_error(char *argv[]);
 void get_labels(char **arr, error_t *error);
 int is_name_labels_correct(list_t *list);
