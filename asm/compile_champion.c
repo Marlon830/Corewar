@@ -108,10 +108,9 @@ void compile_champion(char *argv[])
                 get_coding_byte(arr + 1, op_tab[i]);
                 exit(0);
                 write(output_fd, op_tab[i].code, 1);
-                write(output_fd, &get_coding_byte(arr + 1, op_tab[i]), 1);
-                write_parameters(output_fd, arr, i);
                 coding_byte = get_coding_byte(arr + 1, op_tab[i]);
                 write(output_fd, &coding_byte, 1);
+                write_parameters(output_fd, arr, i);
             }
         }
     }
