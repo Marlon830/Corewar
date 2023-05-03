@@ -22,11 +22,5 @@ int handling_error(int argc, char **argv, vm_t *vm)
     }
     if (vm->nbr_cycle <= 0 || vm->nb_champ < 2)
         return 84;
-    tmp = vm->champ_list;
-    for (int i = 0; i != vm->nb_champ; i++) {
-        ((champion_t *)tmp->data)->prog_number = vm->prog_number + i + 1;
-        ((champion_t *)tmp->data)->load_address = vm->load_address * i;
-        tmp = tmp->next;
-    }
     return 0;
 }
