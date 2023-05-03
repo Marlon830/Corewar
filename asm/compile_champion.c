@@ -30,9 +30,9 @@ void compile_champion(char *argv[])
     size_t len = 0;
     char **arr;
     header_t header = {.magic = 0xea83f3,
-    .prog_name = get_header_value(argv, ".name"),
-    .prog_size = get_prog_size(argv),
-    .comment = get_header_value(argv, ".comment")};
+    .prog_size = get_prog_size(argv)};
+    my_strcpy(header.prog_name, get_header_value(argv, ".name"));
+    my_strcpy(header.comment, get_header_value(argv, ".comment"));
 
     write(output_fd, &header, sizeof(header));
     while (getline(&line, &len, stream) != -1) {

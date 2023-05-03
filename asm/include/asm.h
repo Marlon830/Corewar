@@ -43,3 +43,4 @@ void set_bit_at(char *x, int n, int value);
 void write_instructions(int output_fd, char **arr);
 int get_prog_size(char *argv[]);
 char *get_header_value(char *argv[], char *value);
+void my_strcpy(char *dest, char *src);
