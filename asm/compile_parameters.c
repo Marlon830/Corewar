@@ -15,7 +15,7 @@ void write_reg(int output_fd, char *param)
     write(output_fd, &reg, 1);
 }
 
-void write_dir(int output_fd, char *param)
+void write_ind(int output_fd, char *param)
 {
     char byte1 = 0;
     char byte2 = 0;
@@ -29,7 +29,7 @@ void write_dir(int output_fd, char *param)
     write(output_fd, &byte1, 1);
 }
 
-void write_ind(int output_fd, char *param)
+void write_dir(int output_fd, char *param)
 {
     char byte1 = 0;
     char byte2 = 0;
