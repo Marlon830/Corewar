@@ -7,11 +7,6 @@
 
 #include "asm.h"
 
-void print_arr(char **arr)
-{
-    for (int i = 0; arr[i] != NULL; i++);
-}
-
 error_t *init_struct(void)
 {
     error_t *error = malloc(sizeof(*error));
@@ -33,6 +28,13 @@ int check_error_label(error_t *error)
     return 0;
 }
 
+void print_array(char **arr)
+{
+    for (int i = 0; arr[i] != NULL; i++)
+        printf("%s ", arr[i]);
+    printf("\n");
+}
+
 int check_error(char *argv[])
 {
     FILE *stream = fopen(argv[1], "r");
@@ -49,10 +51,13 @@ int check_error(char *argv[])
         if (arr[0] == NULL)
             continue;
         check_name_and_comment(error, arr);
+        if (verif_functions_param(arr) == 0)
+            return 84;
     }
     if (check_error_label(error))
         return 84;
     if (error->have_name != 1 || error->have_comment != 1)
         return 84;
+    }
     return 0;
 }

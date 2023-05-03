@@ -96,6 +96,7 @@ void compile_champion(char *argv[])
     char *line = NULL;
     size_t len = 0;
     char **arr;
+    char coding_byte = 0;
     header_t header = {0xea83f3, get_header_value(argv, ".name"),
     get_prog_size(argv), get_header_value(argv, ".comment")};
 
@@ -109,6 +110,8 @@ void compile_champion(char *argv[])
                 write(output_fd, op_tab[i].code, 1);
                 write(output_fd, &get_coding_byte(arr + 1, op_tab[i]), 1);
                 write_parameters(output_fd, arr, i);
+                coding_byte = get_coding_byte(arr + 1, op_tab[i]);
+                write(output_fd, &coding_byte, 1);
             }
         }
     }

@@ -15,6 +15,12 @@
 #include <fcntl.h>
 #include "op.h"
 
+#define IS_COM(str) (str[0] == '#' || str[0] == '.')
+#define IS_LABEL(str) (str[my_strlen(str) - 1] == ':')
+#define N_REG(x) (x == 7 || x == 1 || x == 3 || x == 5)
+#define N_DIR(x) (x == 2 || x == 6 || x == 3 || x == 7)
+#define N_IND(x) (x == 4 || x == 5 || x == 6 || x == 7)
+
 typedef struct list_s {
     char *label;
     struct list_s *next;
@@ -50,3 +56,8 @@ void check_name_and_comment(error_t *error, char **arr);
 void compile_champion(char *argv[]);
 char *get_instruction(char **arr);
 void write_parameters(int output_fd, char **arr, int i);
+int is_ind(char *str);
+int is_dir(char *str);
+int is_reg(char *str);
+int verif_functions_param(char **arr);
+void free_array(char **arr);
