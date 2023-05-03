@@ -37,13 +37,26 @@ char *get_instruction(char **arr)
     return arr[0];
 }
 
+char *check_instruction_cb(char **arr)
+{
+    if (!my_strcmp("live", arr[0]) || !my_strcmp("zjmp", arr[0]) ||
+    !my_strcmp("fork", arr[0]) || !my_strcmp("lfork", arr[0]))
+        return "\0";
+    if (arr[0][0] == '.')
+        return "\0";
+    if (arr[0][my_strlen(arr[0]) - 1] == ':')
+        return arr[1];
+    return arr[0];
+}
+
 void write_instructions(int output_fd, char **arr)
 {
     char coding_byte = 0;
 
     for (int i = 0; op_tab[i].nbr_args != 0; i++) {
-        if (!my_strcmp(op_tab[i].mnemonique, get_instruction(arr))) {
+        if (!my_strcmp(op_tab[i].mnemonique, get_instruction(arr)))
             write(output_fd, &op_tab[i].code, 1);
+        if (!my_strcmp(op_tab[i].mnemonique, check_instruction_cb(arr))) {
             coding_byte = get_coding_byte(arr + 1, op_tab[i]);
             write(output_fd, &coding_byte, 1);
         }
