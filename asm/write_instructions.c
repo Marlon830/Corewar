@@ -61,6 +61,6 @@ void write_instructions(int output_fd, char **arr)
             write(output_fd, &coding_byte, 1);
         }
         if (!my_strcmp(op_tab[i].mnemonique, get_instruction(arr)))
-            write_parameters(output_fd, arr, i);
+            write_parameters(output_fd, arr);
     }
 }

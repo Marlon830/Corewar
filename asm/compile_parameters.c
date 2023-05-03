@@ -51,7 +51,7 @@ void write_dir(int output_fd, char *param)
     write(output_fd, &byte1, 1);
 }
 
-void write_parameters(int output_fd, char **arr, int i)
+void write_parameters(int output_fd, char **arr)
 {
     int pos = 0;
 
@@ -60,15 +60,15 @@ void write_parameters(int output_fd, char **arr, int i)
     else
         pos += 2;
     for (; arr[pos] != NULL; pos++) {
-        if (is_reg(arr[i])) {
+        if (is_reg(arr[pos])) {
             write_reg(output_fd, arr[pos]);
             continue;
         }
-        if (is_dir(arr[i])) {
+        if (is_dir(arr[pos])) {
             write_dir(output_fd, arr[pos]);
             continue;
         }
-        if (is_ind(arr[i])) {
+        if (is_ind(arr[pos])) {
             write_ind(output_fd, arr[pos]);
             continue;
         }

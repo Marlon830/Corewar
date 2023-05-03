@@ -54,7 +54,7 @@ int how_many_char_in_str(char c, char *str);
 void check_name_and_comment(error_t *error, char **arr);
 void compile_champion(char *argv[]);
 char *get_instruction(char **arr);
-void write_parameters(int output_fd, char **arr, int i);
+void write_parameters(int output_fd, char **arr);
 int is_ind(char *str);
 int is_dir(char *str);
 int is_reg(char *str);
