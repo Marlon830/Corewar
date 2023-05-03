@@ -64,30 +64,21 @@ void set_bit_at(int *x, int n, int value)
     *x = *x | value << n;
 }
 
-char get_coding_byte(char **arr)
-{
-    char ans = 0;
-
-    
-}
-
 void compile_champion(char *argv[])
 {
     FILE *stream = fopen(argv[1], "r");
-    //int output_fd = open(get_output_file(argv), O_CREAT | O_TRUNC, 0644);
+    int output_fd = open(get_output_file(argv), O_CREAT | O_TRUNC, 0644);
     char *line = NULL;
     size_t len = 0;
     char **arr;
     header_t header = {0xea83f3, get_header_value(argv, ".name"),
     get_prog_size(argv), get_header_value(argv, ".comment")};
 
-    //write(output_fd, &header, sizeof(header));
     while (getline(&line, &len, stream) != -1) {
         arr = str_to_arr(line);
         for (int i = 0; op_tab[i].nbr_args != 0; i++) {
             if (!my_strcmp(op_tab[i].mnemonique, get_instruction(arr))) {
-                //write(output_fd, op_tab[i].code, 1);
-                //write(output_fd, &get_coding_byte(arr), 1);
+                write_parameters(output_fd, arr, i);
             }
         }
     }
