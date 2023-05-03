@@ -30,6 +30,8 @@ typedef struct error_s {
 char **str_to_arr(char *str);
 int my_strlen(char *str);
 int is_alphanum(char c);
+int my_getnbr(char const *str);
+void set_bit_at(int *x, int n, int value);
 char *my_strcpy(char *dest, char *src);
 int check_error(char *argv[]);
 void get_labels(char **arr, error_t *error);
@@ -46,3 +48,5 @@ int my_strcmp(char *s1, char *s2);
 int how_many_char_in_str(char c, char *str);
 void check_name_and_comment(error_t *error, char **arr);
 void compile_champion(char *argv[]);
+char *get_instruction(char **arr);
+void write_parameters(int output_fd, char **arr, int i);
