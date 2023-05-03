@@ -58,6 +58,5 @@ int check_error(char *argv[])
         return 84;
     if (error->have_name != 1 || error->have_comment != 1)
         return 84;
-    }
     return 0;
 }
