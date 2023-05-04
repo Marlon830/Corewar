@@ -25,6 +25,7 @@ compil_t *init_compil_struct(void)
     compil->label_list = init_label_list();
     compil->act_pos = 0;
     compil->nb_bytes = 0;
+    compil->bytes_line_pos = 0;
     return compil;
 }
 
