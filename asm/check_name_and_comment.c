@@ -33,7 +33,7 @@ int check_validity_name_comment(char **arr, int max_len)
 
 void check_name_and_comment(error_t *error, char **arr)
 {
-    if (arr[0] == NULL)
+    if (arr[0] == NULL || arr[0][0] == '\0')
         return;
     if (!my_strcmp(".name", arr[0])) {
         if (error->have_name == 1)
