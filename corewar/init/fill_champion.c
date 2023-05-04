@@ -36,5 +36,6 @@ void fill_champ_list(vm_t *vm)
         champ = tmp->data;
         if (champ->prog_number == -1)
             champ->prog_number = get_first_prog_number(vm);
+        open_bin(champ);
     }
 }

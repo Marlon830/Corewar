@@ -26,6 +26,8 @@ typedef struct champion_s {
     int prog_number;
     int load_address;
     char *path;
+    header_t *header;
+    char *body;
 } champion_t;
 
 typedef struct vm_s {
