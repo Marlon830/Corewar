@@ -22,6 +22,8 @@ int my_strcmp(char *s1, char *s2)
 {
     int i = 0;
 
+    if (s1 == NULL || s2 == NULL)
+        return -1;
     while (s1[i] == s2[i]) {
         i = i + 1;
         if (s1[i] == '\0' && s2[i] == '\0') {
@@ -40,4 +42,22 @@ int how_many_char_in_str(char c, char *str)
             ans++;
     }
     return ans;
+}
+
+int is_alphanum(char c)
+{
+    if (c >= 'a' && c <= 'z')
+        return 1;
+    if (c >= '0' && c <= '9')
+        return 1;
+    return 0;
+}
+
+void my_strcpy(char *dest, char *src)
+{
+    int src_len = my_strlen(src);
+
+    for (int i = 0; src[i]; i++)
+        dest[i] = src[i];
+    dest[src_len] = '\0';
 }

@@ -22,74 +22,24 @@ char *get_output_file(char *argv[])
     return ans;
 }
 
-char *get_header_value(char *argv[], char *value)
-{
-    FILE *stream = fopen(argv[1], "r");
-    char *line = NULL;
-    size_t len = 0;
-    char **arr;
-    char *ans;
-    int i = 0;
-    int j = 0;
-    while (getline(&line, &len, stream) != -1) {
-        arr = str_to_arr(line);
-        if (!my_strcmp(arr[0], value))
-            break;
-    }
-    ans = malloc(sizeof(char) * (my_strlen(line)));
-    for (; line[i] != '"'; i++);
-    i++;
-    for (; line[i] != '"'; i++)
-        ans[j++] = line[i];
-    ans[j] = '\0';
-    return ans;
-}
-
-int get_prog_size(char *argv[])
-{
-    return 10;
-}
-
-char *get_instruction(char **arr)
-{
-    if (arr[0][0] == '.')
-        return "\0";
-    if (arr[0][my_strlen(arr[0]) - 1] == ':')
-        return arr[1];
-    return arr[0];
-}
-
-void set_bit_at(int *x, int n, int value)
-{
-    *x = *x | value << n;
-}
-
-char get_coding_byte(char **arr)
-{
-    char ans = 0;
-
-    
-}
-
 void compile_champion(char *argv[])
 {
     FILE *stream = fopen(argv[1], "r");
-    //int output_fd = open(get_output_file(argv), O_CREAT | O_TRUNC, 0644);
+    int output_fd = open(get_output_file(argv), O_CREAT | O_TRUNC, 0644);
     char *line = NULL;
     size_t len = 0;
     char **arr;
-    header_t header = {0xea83f3, get_header_value(argv, ".name"),
-    get_prog_size(argv), get_header_value(argv, ".comment")};
+    header_t header = {.magic = 0xea83f3,
+    .prog_size = get_prog_size(argv)};
+    my_strcpy(header.prog_name, get_header_value(argv, ".name"));
+    my_strcpy(header.comment, get_header_value(argv, ".comment"));
 
-    //write(output_fd, &header, sizeof(header));
+    write(output_fd, &header, sizeof(header));
     while (getline(&line, &len, stream) != -1) {
         arr = str_to_arr(line);
-        for (int i = 0; op_tab[i].nbr_args != 0; i++) {
-            if (!my_strcmp(op_tab[i].mnemonique, get_instruction(arr))) {
-                //write(output_fd, op_tab[i].code, 1);
-                //write(output_fd, &get_coding_byte(arr), 1);
-            }
-        }
+        if (arr[0] == NULL)
+            continue;
+        write_instructions(output_fd, arr);
     }
     return;
 }
