@@ -16,3 +16,4 @@ int check_next_address(char **argv, int id, vm_t *vm);
 bool check_champions_exist(char *champ_path, vm_t *vm);
 champion_t *new_champ(char *champ_path, vm_t *vm);
 void open_bin(champion_t *champ);
+void set_champ_address(vm_t *vm);
