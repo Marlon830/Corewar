@@ -21,7 +21,7 @@ void write_ind(int output_fd, char *param, compil_t *compil)
 {
     char byte1 = 0;
     char byte2 = 0;
-    int nb = my_getnbr(param);
+    int nb = get_nb_to_write(param, compil);
 
     for (int i = 0; i < 8; i++) {
         set_bit_at(&byte1, i, nb >> i & 1);
@@ -39,7 +39,7 @@ void write_dir(int output_fd, char *param, compil_t *compil)
     char byte2 = 0;
     char byte3 = 0;
     char byte4 = 0;
-    int nb = my_getnbr(param);
+    int nb = get_nb_to_write(param, compil);
 
     for (int i = 0; i < 8; i++) {
         set_bit_at(&byte1, i, nb >> i & 1);
