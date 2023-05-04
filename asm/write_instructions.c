@@ -58,7 +58,8 @@ void write_instructions(int output_fd, char **arr, compil_t *compil)
             compil->bytes_line_pos += 1;
         }
         if (!my_strcmp(op_tab[i].mnemonique, check_instruction_cb(arr))) {
-            coding_byte = get_coding_byte(arr + 1, op_tab[i]);
+            coding_byte = get_coding_byte(arr +
+            (arr[0][my_strlen(arr[0]) - 1] == ':' ? 2 : 1), op_tab[i]);
             write(output_fd, &coding_byte, 1);
             compil->act_pos += 1;
             compil->bytes_line_pos += 1;

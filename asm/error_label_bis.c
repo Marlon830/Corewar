@@ -52,7 +52,7 @@ int label_is_in_list(char *label, list_t *list)
     char *temp_label = malloc(sizeof(char) * my_strlen(label) + 1);
     list_t *temp = list;
     char *temp_defined;
-    my_strcpy(temp_label, label + 2);
+    my_strcpy(temp_label, label + (label[0] == ':' ? 1 : 2));
     if (label[my_strlen(label) - 1] == ',')
         temp_label[my_strlen(temp_label) - 1] = '\0';
     if (temp->label == NULL) {

@@ -81,6 +81,8 @@ int is_ind(char *str)
 {
     int i = 0;
 
+    if (str[0] == ':')
+        return 1;
     for (; str[i] != '\0'; i++) {
         if ((str[i] < '0' || str[i] > '9') && str[i] != ',' && str[i] != '-')
             return 0;

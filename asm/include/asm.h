@@ -84,6 +84,7 @@ char *get_header_value(char *argv[], char *value);
 void my_strcpy(char *dest, char *src);
 void my_put_nbr(int nb);
 char *check_instruction_cb(char **arr);
+int get_nb_to_write(char *param, compil_t *compil);
 
 compil_t *init_compil_struct(void);
 label_t *init_label_list(void);

@@ -24,8 +24,11 @@ int check_name_label_defined(char *label)
 int check_name_label_used(char *label)
 {
     int len = my_strlen(label);
+    int i = 2;
 
-    for (int i = 2; i < len - 1; i++) {
+    if (label[0] == ':')
+        i = 1;
+    for (; i < len - 1; i++) {
         if (!is_alphanum(label[i]) && label[i] != '_')
             return 0;
     }
@@ -42,9 +45,12 @@ int is_name_labels_correct(list_t *list)
     if (temp->label == NULL)
         return 1;
     while (temp != NULL) {
+        if (temp->label[0] == ':' && !check_name_label_used(temp->label))
+            return 0;
         if (temp->label[0] == '%' && !check_name_label_used(temp->label))
             return 0;
-        if (temp->label[0] != '%' && !check_name_label_defined(temp->label))
+        if (temp->label[0] != '%' && temp->label[0] != ':' &&
+        !check_name_label_defined(temp->label))
             return 0;
         temp = temp->next;
     }
@@ -57,6 +63,8 @@ void get_labels(char **arr, error_t *error)
         if (i == 0 && arr[i][my_strlen(arr[i]) - 1] == ':')
             add_elem_to_list(error->labels_defined, arr[i]);
         if (i != 0 && arr[i][0] == '%' && arr[i][1] == ':')
+            add_elem_to_list(error->labels_used, arr[i]);
+        if (i != 0 && arr[i][0] == ':')
             add_elem_to_list(error->labels_used, arr[i]);
     }
 }
