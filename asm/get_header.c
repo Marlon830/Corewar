@@ -29,8 +29,3 @@ char *get_header_value(char *argv[], char *value)
     ans[j] = '\0';
     return ans;
 }
-
-int get_prog_size(char *argv[])
-{
-    return 0;
-}

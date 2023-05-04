@@ -9,10 +9,13 @@
 
 int main(int argc, char *argv[])
 {
+    compil_t *compil = init_compil_struct();
+
     if (argc != 2)
         return 84;
     if (check_error(argv) == 84)
         return 84;
-    compile_champion(argv);
+    get_all_labels_info(compil, argv);
+    compile_champion(compil, argv);
     return 0;
 }
