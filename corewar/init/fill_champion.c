@@ -38,4 +38,5 @@ void fill_champ_list(vm_t *vm)
             champ->prog_number = get_first_prog_number(vm);
         open_bin(champ);
     }
+    set_champ_address(vm);
 }
