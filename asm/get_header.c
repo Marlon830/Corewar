@@ -32,5 +32,5 @@ char *get_header_value(char *argv[], char *value)
 
 int get_prog_size(char *argv[])
 {
-    return 10;
+    return 0;
 }
