@@ -15,6 +15,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include "string.h"
+#include "op.h"
 
 typedef struct list_s {
     void *data;
@@ -25,6 +26,8 @@ typedef struct champion_s {
     int prog_number;
     int load_address;
     char *path;
+    header_t *header;
+    char *body;
 } champion_t;
 
 typedef struct vm_s {
