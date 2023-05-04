@@ -50,7 +50,8 @@ int count_word(char *str)
         if (str[i] == '\n' || str[i] == '\0' || str[i] == '#')
             break;
         count++;
-        while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+        while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' &&
+        str[i] != '\0')
             i++;
     }
     return count;
