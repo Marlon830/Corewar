@@ -44,3 +44,5 @@ void display_help(void);
 void display_vm_data(vm_t *vm);
 int handling_error(int argc, char **argv, vm_t *vm);
 void fill_champ_list(vm_t *vm);
+int my_strcory(char *dest, char *src, int n);
+int init_arena(vm_t *vm);
