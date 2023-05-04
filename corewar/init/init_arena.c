@@ -12,6 +12,8 @@ int init_arena(vm_t *vm)
     list_t *temp = vm->champ_list;
     champion_t *champ = NULL;
 
+    vm->cycles = 0;
+    vm->cycle_to_die = CYCLE_TO_DIE;
     vm->arena = malloc(sizeof(char) * MEM_SIZE);
     for (int i = 0; i < MEM_SIZE; i++)
         vm->arena[i] = 0;
