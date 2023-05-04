@@ -15,6 +15,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include "string.h"
+#include "op.h"
 
 typedef struct list_s {
     void *data;
@@ -32,6 +33,7 @@ typedef struct vm_s {
     int prog_number;
     int load_address;
     int nb_champ;
+    char *arena;
     list_t *champ_list;
 } vm_t;
 
