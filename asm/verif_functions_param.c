@@ -54,12 +54,14 @@ int recup_index(char *str)
     return -1;
 }
 
-int verif_not_function(char **arr)
+int verif_not_function(char ***arr)
 {
-    if (IS_COM(arr[0]) == 1)
+    if (IS_COM((*arr)[0]) == 1)
         return 1;
-    if (IS_LABEL(arr[0]) == 1)
+    if (IS_LABEL((*arr)[0]) == 1 && arr_len((*arr)) == 1)
         return 1;
+    if (IS_LABEL((*arr)[0]) == 1 && arr_len((*arr)) != 1)
+        (*arr) += 1;
     return 0;
 }
 
@@ -67,7 +69,7 @@ int verif_functions_param(char **arr)
 {
     int index;
 
-    if (verif_not_function(arr) == 1)
+    if (verif_not_function(&arr) == 1)
         return 1;
     index = recup_index(arr[0]);
     if (index == -1)
