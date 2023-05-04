@@ -49,18 +49,21 @@ char *check_instruction_cb(char **arr)
     return arr[0];
 }
 
-void write_instructions(int output_fd, char **arr)
+void write_instructions(int output_fd, char **arr, compil_t *compil)
 {
     char coding_byte = 0;
 
     for (int i = 0; op_tab[i].nbr_args != 0; i++) {
-        if (!my_strcmp(op_tab[i].mnemonique, get_instruction(arr)))
+        if (!my_strcmp(op_tab[i].mnemonique, get_instruction(arr))) {
             write(output_fd, &op_tab[i].code, 1);
+            compil->act_pos += 1;
+        }
         if (!my_strcmp(op_tab[i].mnemonique, check_instruction_cb(arr))) {
             coding_byte = get_coding_byte(arr + 1, op_tab[i]);
             write(output_fd, &coding_byte, 1);
+            compil->act_pos += 1;
         }
         if (!my_strcmp(op_tab[i].mnemonique, get_instruction(arr)))
-            write_parameters(output_fd, arr);
+            write_parameters(output_fd, arr, compil);
     }
 }
