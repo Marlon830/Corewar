@@ -46,7 +46,7 @@ int check_error(char *argv[])
     error_t *error = init_struct();
 
     if (stream == NULL)
-        return 84;
+        return write_error("\33[31m\33[1merror:\33[0m can't open file\n");
     while (getline(&line, &len, stream) != -1) {
         arr = str_to_arr(line);
         get_labels(arr, error);
@@ -54,7 +54,7 @@ int check_error(char *argv[])
             continue;
         check_name_and_comment(error, arr);
         if (verif_functions_param(arr) == 0)
-            return 84;
+            return write_error("\33[31m\33[1merror:\33[0m invalid param\n");
     }
     return check_error_bis(error);
 }
