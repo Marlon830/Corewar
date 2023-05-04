@@ -3,4 +3,6 @@ corewar/corewar
 *.o
 .vscode
 ressources
+test.s
+coding-style-reports.log
 todo.txt

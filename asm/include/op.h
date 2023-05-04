@@ -37,6 +37,7 @@ typedef char args_type_t;
     #define T_REG 1       /* register */
     #define T_DIR 2       /* direct  (ld  #1,r1  put 1 into r1) */
     #define T_IND 4
+    #define T_IDX 8
                     /* indirect always relative
                     (ld 1,r1 put what's in the
                     address (1+pc)
@@ -58,9 +59,10 @@ typedef struct op_s op_t;
 /*
 ** size (in bytes)
 */
+    #define REG_SIZE 1
     #define IND_SIZE 2
+    #define IDX_SIZE 2
     #define DIR_SIZE 4
-    #define REG_SIZE DIR_SIZE
 
 /*
 ** op_tab
