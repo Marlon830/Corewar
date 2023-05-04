@@ -44,12 +44,13 @@ typedef struct compil_s {
     label_t *label_list;
     int nb_bytes;
     int act_pos;
+    int bytes_line_pos;
 } compil_t;
 
 char **str_to_arr(char *str);
 int my_strlen(char *str);
 int is_alphanum(char c);
-int my_getnbr(char const *str);
+int my_getnbr(char *str);
 int check_error(char *argv[]);
 void get_labels(char **arr, error_t *error);
 int is_name_labels_correct(list_t *list);
@@ -89,3 +90,5 @@ label_t *init_label_list(void);
 void add_elem_label_list(label_t *label_list, char *name, int pos);
 void print_label_list(label_t *label_list);
 label_t *get_label_with_name(label_t *label_list, char *name);
+
+int reverse_endian(int x);
