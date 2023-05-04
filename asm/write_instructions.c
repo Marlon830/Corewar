@@ -39,14 +39,12 @@ char *get_instruction(char **arr)
 
 char *check_instruction_cb(char **arr)
 {
-    if (!my_strcmp("live", arr[0]) || !my_strcmp("zjmp", arr[0]) ||
-    !my_strcmp("fork", arr[0]) || !my_strcmp("lfork", arr[0]))
+    char *ans = get_instruction(arr);
+
+    if (!my_strcmp("live", ans) || !my_strcmp("zjmp", ans) ||
+    !my_strcmp("fork", ans) || !my_strcmp("lfork", ans))
         return "\0";
-    if (arr[0][0] == '.')
-        return "\0";
-    if (arr[0][my_strlen(arr[0]) - 1] == ':')
-        return arr[1];
-    return arr[0];
+    return ans;
 }
 
 void write_instructions(int output_fd, char **arr, compil_t *compil)
@@ -57,11 +55,13 @@ void write_instructions(int output_fd, char **arr, compil_t *compil)
         if (!my_strcmp(op_tab[i].mnemonique, get_instruction(arr))) {
             write(output_fd, &op_tab[i].code, 1);
             compil->act_pos += 1;
+            compil->bytes_line_pos += 1;
         }
         if (!my_strcmp(op_tab[i].mnemonique, check_instruction_cb(arr))) {
             coding_byte = get_coding_byte(arr + 1, op_tab[i]);
             write(output_fd, &coding_byte, 1);
             compil->act_pos += 1;
+            compil->bytes_line_pos += 1;
         }
         if (!my_strcmp(op_tab[i].mnemonique, get_instruction(arr)))
             write_parameters(output_fd, arr, compil);
