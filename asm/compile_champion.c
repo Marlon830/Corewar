@@ -27,7 +27,9 @@ void write_header(compil_t *compil, char *argv[], int output_fd)
     header_t header = {0};
 
     header.magic = 0xea83f3;
+    header.magic = reverse_endian(header.magic);
     header.prog_size = compil->nb_bytes;
+    header.prog_size = reverse_endian(header.prog_size);
     my_strcpy(header.prog_name, get_header_value(argv, ".name"));
     my_strcpy(header.comment, get_header_value(argv, ".comment"));
     write(output_fd, &header, sizeof(header));
@@ -48,6 +50,7 @@ void compile_champion(compil_t *compil, char *argv[])
         if (arr[0] == NULL)
             continue;
         write_instructions(output_fd, arr, compil);
+        compil->bytes_line_pos = 0;
     }
     fclose(stream);
     close(output_fd);
