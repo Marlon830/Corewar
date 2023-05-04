@@ -7,7 +7,23 @@
 
 #include "corewar.h"
 
-int main(int argc, char *argv[])
+vm_t *init_vm(void)
 {
-    return 84;
+    vm_t *vm = malloc(sizeof(vm_t));
+    vm->nbr_cycle = -1;
+    vm->load_address = -1;
+    vm->prog_number = -1;
+    vm->nb_champ = 0;
+    vm->champ_list = NULL;
+    return vm;
+}
+
+int main(int argc, char **argv)
+{
+    vm_t *vm = init_vm();
+
+    if (handling_error(argc, argv, vm))
+        return 84;
+    fill_champ_list(vm);
+    return 0;
 }
