@@ -34,6 +34,18 @@ typedef struct error_s {
     list_t *labels_used;
 } error_t;
 
+typedef struct label_s {
+    char *name;
+    int pos;
+    struct label_s *next;
+} label_t;
+
+typedef struct compil_s {
+    label_t *label_list;
+    int nb_bytes;
+    int act_pos;
+} compil_t;
+
 char **str_to_arr(char *str);
 int my_strlen(char *str);
 int is_alphanum(char c);
@@ -42,6 +54,8 @@ int check_error(char *argv[]);
 void get_labels(char **arr, error_t *error);
 int is_name_labels_correct(list_t *list);
 int is_same_label(list_t *list);
+int is_index(char **arr, int pos);
+char *get_name_defined_label(char *label);
 int check_label_exist(list_t *label_defined, list_t *label_used);
 char **malloc_2d_array(int row, int col);
 
@@ -49,19 +63,29 @@ list_t *init_list(void);
 void add_elem_to_list(list_t *list, char *label);
 void print_list(list_t *list);
 
+int is_alphanumeric(char c);
 int my_strcmp(char *s1, char *s2);
 int how_many_char_in_str(char c, char *str);
 void check_name_and_comment(error_t *error, char **arr);
-void compile_champion(char *argv[]);
+void compile_champion(compil_t *compil, char *argv[]);
+void get_all_labels_info(compil_t *compil, char *argv[]);
 char *get_instruction(char **arr);
-void write_parameters(int output_fd, char **arr);
+void write_parameters(int output_fd, char **arr, compil_t *compil);
 int is_ind(char *str);
 int is_dir(char *str);
 int is_reg(char *str);
 int verif_functions_param(char **arr);
 void free_array(char **arr);
 void set_bit_at(char *x, int n, int value);
-void write_instructions(int output_fd, char **arr);
+void write_instructions(int output_fd, char **arr, compil_t *compil);
 int get_prog_size(char *argv[]);
 char *get_header_value(char *argv[], char *value);
 void my_strcpy(char *dest, char *src);
+void my_put_nbr(int nb);
+char *check_instruction_cb(char **arr);
+
+compil_t *init_compil_struct(void);
+label_t *init_label_list(void);
+void add_elem_label_list(label_t *label_list, char *name, int pos);
+void print_label_list(label_t *label_list);
+label_t *get_label_with_name(label_t *label_list, char *name);
