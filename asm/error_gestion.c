@@ -55,7 +55,7 @@ int check_error(char *argv[])
     error_t *error = init_struct();
     char *temp;
     if (stream == NULL)
-        return write_error("\33[31m\33[1merror:\33[0m can't open file\n");
+        return write_error(RED BOLD"error: "NC"can't open file\n");
     while (getline(&line, &len, stream) != -1) {
         temp = malloc(sizeof(char) * my_strlen(line) + 1);
         my_strcpy_without_comment(temp, line);
@@ -65,7 +65,7 @@ int check_error(char *argv[])
         get_labels(arr, error);
         check_name_and_comment(error, arr);
         if (verif_functions_param(arr) == 0)
-            return write_error("\33[31m\33[1merror:\33[0m invalid param\n");
+            return write_error(RED BOLD"error: "NC"invalid param\n");
     }
     return check_error_bis(error);
 }

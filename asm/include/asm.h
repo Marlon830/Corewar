@@ -21,6 +21,9 @@
 #define N_REG(x) (x == 7 || x == 1 || x == 3 || x == 5)
 #define N_DIR(x) (x == 2 || x == 6 || x == 3 || x == 7)
 #define N_IND(x) (x == 4 || x == 5 || x == 6 || x == 7)
+#define RED "\33[31m"
+#define BOLD "\33[1m"
+#define NC "\33[0m"
 
 typedef struct list_s {
     char *label;
