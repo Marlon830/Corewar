@@ -34,6 +34,8 @@ int is_index(char **arr, int pos)
 {
     char *instruction = get_instruction(arr);
 
+    if (arr[pos][0] == 'r')
+        return 0;
     if (!my_strcmp(instruction, "zjmp"))
         return 1;
     if (!my_strcmp(instruction, "ldi")) {

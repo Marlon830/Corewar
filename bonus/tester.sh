@@ -10,6 +10,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 BOLD='\033[1m'
+temp=0
 
 for fich in `ls ../champions/$fich`
 do
@@ -25,9 +26,13 @@ do
         hexdump -C ../champions/$new_fich > ../champions/$new_fich.hex
         hexdump -C $new_fich > $new_fich.hex
         diff ../champions/$new_fich.hex $new_fich.hex
+        temp=1
     fi
 done
 rm ../champions/*.cor
 rm *.cor
-rm ../champions/*.hex
-rm *.hex
+if [ $temp -eq 1 ]
+then
+    rm *.hex
+    rm ../champions/*.hex
+fi
