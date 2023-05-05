@@ -18,12 +18,12 @@ int my_getnbr(char *str)
     int sign = 1;
     int i = 0;
 
+    while (!is_num(str[i]) && str[i] != '\0' && str[i] != '-')
+        i++;
     if (str[i] == '-') {
         sign = -1;
         i++;
     }
-    while (!is_num(str[i]) && str[i] != '\0')
-        i++;
     while (is_num(str[i])) {
         number = number * 10 + (str[i] - '0');
         i++;

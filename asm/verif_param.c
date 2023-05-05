@@ -34,6 +34,8 @@ int is_index(char **arr, int pos)
 {
     char *instruction = get_instruction(arr);
 
+    if (arr[pos][0] == 'r')
+        return 0;
     if (!my_strcmp(instruction, "zjmp"))
         return 1;
     if (!my_strcmp(instruction, "ldi")) {
@@ -71,7 +73,8 @@ int is_dir(char *str)
         return 0;
     i++;
     for (; str[i] != '\0'; i++) {
-        if (!is_alphanumeric(str[i]) && str[i] != ',' && str[i] != ':')
+        if (!is_alphanumeric(str[i]) && str[i] != ',' &&
+        str[i] != ':' && str[i] != '_')
             return 0;
     }
     return 1;
