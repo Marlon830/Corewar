@@ -19,7 +19,7 @@ int skip_space(char *str)
 {
     int i = 0;
 
-    while (str[i] == ' ' || str[i] == '\t')
+    while (str[i] == ' ' || str[i] == '\t' || str[i] == ',')
         i++;
     return i;
 }
@@ -33,7 +33,8 @@ char *get_word(char *str)
     for (; str[i] != ' ' &&
     str[i] != '\0' &&
     str[i] != '\t' &&
-    str[i] != '\n'; i++)
+    str[i] != '\n' &&
+    str[i] != ','; i++)
         ans[j++] = str[i];
     ans[j] = '\0';
     return ans;
@@ -45,13 +46,13 @@ int count_word(char *str)
     int i = 0;
 
     while (str[i] != '\0' && str[i] != '\n') {
-        while (str[i] == ' ' || str[i] == '\t')
+        while (str[i] == ' ' || str[i] == '\t' || str[i] == ',')
             i++;
         if (str[i] == '\n' || str[i] == '\0' || str[i] == '#')
             break;
         count++;
         while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' &&
-        str[i] != '\0')
+        str[i] != '\0' && str[i] != ',')
             i++;
     }
     return count;
