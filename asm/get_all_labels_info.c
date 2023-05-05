@@ -49,10 +49,13 @@ void get_all_labels_info(compil_t *compil, char *argv[])
     char *line = NULL;
     size_t len = 0;
     char **arr;
+    char *temp;
 
     while (getline(&line, &len, stream) != -1) {
-        arr = str_to_arr(line);
-        if (arr[0] == NULL)
+        temp = malloc(sizeof(char) * my_strlen(line) + 1);
+        my_strcpy_without_comment(temp, line);
+        arr = str_to_arr(temp);
+        if (arr[0] == NULL || arr[0][0] == '\0')
             continue;
         if (IS_LABEL(arr[0]))
             add_elem_label_list(compil->label_list,

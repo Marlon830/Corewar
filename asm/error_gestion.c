@@ -37,6 +37,15 @@ int check_error_bis(error_t *error)
     return 0;
 }
 
+void my_strcpy_without_comment(char *dest, char *src)
+{
+    int i = 0;
+
+    for (; src[i] != '\0' && src[i] != '#'; i++)
+        dest[i] = src[i];
+    dest[i] = '\0';
+}
+
 int check_error(char *argv[])
 {
     FILE *stream = fopen(argv[1], "r");
@@ -44,14 +53,16 @@ int check_error(char *argv[])
     size_t len = 0;
     char **arr;
     error_t *error = init_struct();
-
+    char *temp;
     if (stream == NULL)
         return write_error("\33[31m\33[1merror:\33[0m can't open file\n");
     while (getline(&line, &len, stream) != -1) {
-        arr = str_to_arr(line);
-        get_labels(arr, error);
-        if (arr[0] == NULL)
+        temp = malloc(sizeof(char) * my_strlen(line) + 1);
+        my_strcpy_without_comment(temp, line);
+        arr = str_to_arr(temp);
+        if (arr[0] == NULL || arr[0][0] == '\0')
             continue;
+        get_labels(arr, error);
         check_name_and_comment(error, arr);
         if (verif_functions_param(arr) == 0)
             return write_error("\33[31m\33[1merror:\33[0m invalid param\n");

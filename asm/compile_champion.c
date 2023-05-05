@@ -43,11 +43,13 @@ void compile_champion(compil_t *compil, char *argv[])
     char *line = NULL;
     size_t len = 0;
     char **arr;
-
+    char *temp;
     write_header(compil, argv, output_fd);
     while (getline(&line, &len, stream) != -1) {
-        arr = str_to_arr(line);
-        if (arr[0] == NULL)
+        temp = malloc(sizeof(char) * my_strlen(line) + 1);
+        my_strcpy_without_comment(temp, line);
+        arr = str_to_arr(temp);
+        if (arr[0] == NULL || arr[0][0] == '\0')
             continue;
         write_instructions(output_fd, arr, compil);
         compil->bytes_line_pos = 0;

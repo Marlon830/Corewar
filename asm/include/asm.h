@@ -66,6 +66,7 @@ void print_list(list_t *list);
 
 int is_alphanumeric(char c);
 int my_strcmp(char *s1, char *s2);
+void my_strcpy_without_comment(char *dest, char *src);
 int how_many_char_in_str(char c, char *str);
 void check_name_and_comment(error_t *error, char **arr);
 void compile_champion(compil_t *compil, char *argv[]);
@@ -84,7 +85,7 @@ char *get_header_value(char *argv[], char *value);
 void my_strcpy(char *dest, char *src);
 void my_put_nbr(int nb);
 char *check_instruction_cb(char **arr);
-int get_nb_to_write(char *param, compil_t *compil);
+int get_nb_to_write(char *param, compil_t *compil, int is_direct);
 
 compil_t *init_compil_struct(void);
 label_t *init_label_list(void);

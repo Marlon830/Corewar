@@ -63,6 +63,10 @@ char **str_to_arr(char *str)
     int pos_char = 0;
     int pos_word = 0;
 
+    if (count_word(str) == 0) {
+        arr[0] = NULL;
+        return arr;
+    }
     while (str[pos_char] != '\0' && str[pos_char] != '\n' &&
     str[pos_char] != '#') {
         arr[pos_word++] = get_word(str + pos_char);
