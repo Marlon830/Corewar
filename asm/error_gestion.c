@@ -55,7 +55,7 @@ int check_error(char *argv[])
     error_t *error = init_struct();
     char *temp;
     if (stream == NULL)
-        return write_error("can't open file\n", -1, argv);
+        return write_error("can't open file\n", -1, NULL);
     while (getline(&line, &(size_t){0}, stream) != -1) {
         temp = malloc(sizeof(char) * my_strlen(line) + 1);
         my_strcpy_without_comment(temp, line);
