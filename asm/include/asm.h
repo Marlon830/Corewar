@@ -100,3 +100,4 @@ label_t *get_label_with_name(label_t *label_list, char *name);
 
 int reverse_endian(int x);
 int write_error(char *str, int line, char *argv[]);
+int write_help(void);
