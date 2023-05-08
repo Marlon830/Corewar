@@ -82,7 +82,7 @@ int check_label_exist(list_t *label_defined, list_t *label_used, char *argv[])
         return 1;
     while (temp != NULL) {
         if (!label_is_in_list(temp->label, label_defined)) {
-            write_error(BOLD"Label don't exist "NC, temp->line, argv);
+            write_error(BOLD"label doesn't exist "NC, temp->line, argv);
             return 0;
         }
         temp = temp->next;
