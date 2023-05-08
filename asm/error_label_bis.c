@@ -24,15 +24,18 @@ int is_same_label_in_list(list_t *list, char *label)
     return 0;
 }
 
-int is_same_label(list_t *list)
+int is_same_label(list_t *list, char *argv[])
 {
     list_t *temp = list;
 
     if (temp->label == NULL)
         return 0;
     while (temp != NULL) {
-        if (is_same_label_in_list(list, temp->label))
+        if (is_same_label_in_list(list, temp->label)) {
+            write_error(BOLD"Can't define the same label multiple times "NC,
+            temp->line, argv);
             return 1;
+        }
         temp = temp->next;
     }
     return 0;
@@ -71,15 +74,17 @@ int label_is_in_list(char *label, list_t *list)
     return 0;
 }
 
-int check_label_exist(list_t *label_defined, list_t *label_used)
+int check_label_exist(list_t *label_defined, list_t *label_used, char *argv[])
 {
     list_t *temp = label_used;
 
     if (temp->label == NULL)
         return 1;
     while (temp != NULL) {
-        if (!label_is_in_list(temp->label, label_defined))
+        if (!label_is_in_list(temp->label, label_defined)) {
+            write_error(BOLD"Label don't exist "NC, temp->line, argv);
             return 0;
+        }
         temp = temp->next;
     }
     return 1;
