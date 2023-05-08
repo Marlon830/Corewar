@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     compil_t *compil = init_compil_struct();
 
     if (argc != 2) {
-        write_error("Invalid number of arguments\n", -1, NULL);
+        write_error(BOLD"Invalid number of arguments\n"NC, -1, NULL);
         write_help();
         return 84;
     }
