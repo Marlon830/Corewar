@@ -28,6 +28,7 @@
 
 typedef struct list_s {
     char *label;
+    int line;
     struct list_s *next;
 } list_t;
 
@@ -58,15 +59,15 @@ int is_alphanum(char c);
 int my_getnbr(char *str);
 int check_error(char *argv[]);
 void get_labels(char **arr, error_t *error);
-int is_name_labels_correct(list_t *list);
-int is_same_label(list_t *list);
+int is_name_labels_correct(list_t *list, char *argv[]);
+int is_same_label(list_t *list, char *argv[]);
 int is_index(char **arr, int pos);
 char *get_name_defined_label(char *label);
-int check_label_exist(list_t *label_defined, list_t *label_used);
+int check_label_exist(list_t *label_defined, list_t *label_used, char *argv[]);
 char **malloc_2d_array(int row, int col);
 
 list_t *init_list(void);
-void add_elem_to_list(list_t *list, char *label);
+void add_elem_to_list(list_t *list, char *label, int line);
 void print_list(list_t *list);
 
 int is_alphanumeric(char c);
