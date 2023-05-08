@@ -19,19 +19,24 @@ error_t *init_struct(void)
     return error;
 }
 
-int check_error_label(error_t *error)
+int check_error_label(error_t *error, char *argv[])
 {
-    if (!is_name_labels_correct(error->labels_defined) ||
-    !is_name_labels_correct(error->labels_used) ||
-    is_same_label(error->labels_defined) ||
-    !check_label_exist(error->labels_defined, error->labels_used))
+    if (!is_name_labels_correct(error->labels_defined, argv) ||
+    !is_name_labels_correct(error->labels_used, argv)) {
         return 1;
+    }
+    if (is_same_label(error->labels_defined, argv)) {
+        return 1;
+    }
+    if (!check_label_exist(error->labels_defined, error->labels_used, argv)) {
+        return 1;
+    }
     return 0;
 }
 
-int check_error_bis(error_t *error)
+int check_error_bis(error_t *error, char *argv[])
 {
-    if (check_error_label(error))
+    if (check_error_label(error, argv))
         return 84;
     if (error->have_name != 1 || error->have_comment != 1)
         return write_error(BOLD"no name or comment\n"NC, -1, NULL);
@@ -55,7 +60,7 @@ int check_error(char *argv[])
     error_t *error = init_struct();
     char *temp;
     if (stream == NULL)
-        return write_error("can't open file\n", -1, NULL);
+        return write_error(BOLD"can't open file\n"NC, -1, NULL);
     while (getline(&line, &(size_t){0}, stream) != -1) {
         temp = malloc(sizeof(char) * my_strlen(line) + 1);
         my_strcpy_without_comment(temp, line);
@@ -66,7 +71,7 @@ int check_error(char *argv[])
         get_labels(arr, error);
         check_name_and_comment(error, arr);
         if (verif_functions_param(arr) == 0)
-            return write_error("invalid param ", error->line + 1, argv);
+            return write_error(BOLD"invalid param "NC, error->line + 1, argv);
     }
-    return check_error_bis(error);
+    return check_error_bis(error, argv);
 }
