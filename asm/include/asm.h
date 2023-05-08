@@ -24,6 +24,7 @@
 #define RED "\33[31m"
 #define BOLD "\33[1m"
 #define NC "\33[0m"
+#define PURPLE "\33[35m"
 
 typedef struct list_s {
     char *label;
@@ -31,6 +32,7 @@ typedef struct list_s {
 } list_t;
 
 typedef struct error_s {
+    int line;
     int have_name;
     int have_comment;
     list_t *labels_defined;
@@ -97,4 +99,5 @@ void print_label_list(label_t *label_list);
 label_t *get_label_with_name(label_t *label_list, char *name);
 
 int reverse_endian(int x);
-int write_error(char *str);
+int write_error(char *str, int line, char *argv[]);
+int write_help(void);
