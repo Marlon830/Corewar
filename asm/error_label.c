@@ -38,7 +38,7 @@ int check_name_label_used(char *label)
     return 1;
 }
 
-int is_name_labels_correct(list_t *list)
+int is_name_labels_correct(list_t *list, char *argv[])
 {
     list_t *temp = list;
 
@@ -50,8 +50,10 @@ int is_name_labels_correct(list_t *list)
         if (temp->label[0] == '%' && !check_name_label_used(temp->label))
             return 0;
         if (temp->label[0] != '%' && temp->label[0] != ':' &&
-        !check_name_label_defined(temp->label))
+        !check_name_label_defined(temp->label)) {
+            write_error(BOLD"Invalid label name "NC, temp->line, argv);
             return 0;
+        }
         temp = temp->next;
     }
     return 1;
@@ -61,10 +63,10 @@ void get_labels(char **arr, error_t *error)
 {
     for (int i = 0; arr[i] != NULL; i++) {
         if (i == 0 && arr[i][my_strlen(arr[i]) - 1] == ':')
-            add_elem_to_list(error->labels_defined, arr[i]);
+            add_elem_to_list(error->labels_defined, arr[i], error->line + 1);
         if (i != 0 && arr[i][0] == '%' && arr[i][1] == ':')
-            add_elem_to_list(error->labels_used, arr[i]);
+            add_elem_to_list(error->labels_used, arr[i], error->line + 1);
         if (i != 0 && arr[i][0] == ':')
-            add_elem_to_list(error->labels_used, arr[i]);
+            add_elem_to_list(error->labels_used, arr[i], error->line + 1);
     }
 }
