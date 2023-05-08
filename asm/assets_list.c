@@ -13,21 +13,24 @@ list_t *init_list(void)
 
     list->label = NULL;
     list->next = NULL;
+    list->line = 1;
     return list;
 }
 
-void add_elem_to_list(list_t *list, char *label)
+void add_elem_to_list(list_t *list, char *label, int line)
 {
     list_t *temp = list;
     list_t *new = malloc(sizeof(*new));
 
     if (list->label == NULL) {
         list->label = label;
+        list->line = line;
         free(new);
         return;
     }
     new->label = label;
     new->next = NULL;
+    new->line = line;
     while (temp->next != NULL)
         temp = temp->next;
     temp->next = new;
