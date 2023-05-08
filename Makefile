@@ -18,3 +18,6 @@ fclean : clean
 	make fclean -C corewar/
 
 re : fclean all
+
+tests_run:
+	make tests_run -C asm/
