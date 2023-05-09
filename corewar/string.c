@@ -45,3 +45,18 @@ int my_strlen(char *str)
     for (; str[i] != '\0'; i++);
     return i;
 }
+
+int my_strcory(char *dest, char *src, int n)
+{
+    int i = n;
+    int j = 0;
+
+    for (; src[j] != '\0'; j++) {
+        if (dest[i] == 0)
+            dest[i] = src[j];
+        else
+            return 84;
+        i++;
+    }
+    return 0;
+}

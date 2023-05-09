@@ -8,3 +8,7 @@ coding-style-reports.log
 test.s
 todo.txt
 champions/
+tyron.s
+.gitignore
+test.cor
+tyron.cor

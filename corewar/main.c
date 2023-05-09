@@ -25,5 +25,10 @@ int main(int argc, char **argv)
     if (handling_error(argc, argv, vm))
         return 84;
     fill_champ_list(vm);
+    if (init_arena(vm)) {
+        write(2, "Error: init arena\n", 18);
+        return 84;
+    }
+    free(vm->arena);
     return 0;
 }
