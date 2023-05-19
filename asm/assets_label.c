@@ -48,20 +48,20 @@ void add_elem_label_list(label_t *label_list, char *name, int pos)
     temp->next = new;
 }
 
-void print_label_list(label_t *label_list)
+int print_label_list(label_t *label_list)
 {
     label_t *temp = label_list;
 
     if (temp->name == NULL)
-        return;
+        return 0;
     while (temp != NULL) {
-        write(1, "name : ", 7);
         write(1, temp->name, my_strlen(temp->name));
-        write(1, "\npos : ", 7);
+        write(1, ": ", 2);
         my_put_nbr(temp->pos);
-        write(1, "\n\n", 2);
+        write(1, "\n", 1);
         temp = temp->next;
     }
+    return 1;
 }
 
 label_t *get_label_with_name(label_t *label_list, char *name)

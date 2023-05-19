@@ -16,8 +16,9 @@ Test(test, test_for_test) {
     for (int i = 0; i < 3; i++)
         argv[i] = malloc(sizeof(char) * 17);
     argv[0] = "./asm";
-    argv[1] = "../champions/zork.s";
+    argv[1] = "../champions/tyron.s";
     argv[2] = NULL;
     get_all_labels_info(compil, argv);
     compile_champion(compil, argv);
+    free(argv);
 }

@@ -16,8 +16,10 @@ clean :
 fclean : clean
 	make fclean -C asm/
 	make fclean -C corewar/
+	$(RM) tests/*.html tests/*.css
 
 re : fclean all
 
 tests_run:
 	make tests_run -C asm/
+	gcovr --html-details -o tests/gcovr_html/asm.html --branches asm/
