@@ -36,6 +36,7 @@ typedef struct champion_s {
 typedef struct vm_s {
     int nbr_cycle_to_print;
     int nbr_cycle;
+    int carry;
     int prog_number;
     int load_address;
     int nb_champ;
