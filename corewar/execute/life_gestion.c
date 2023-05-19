@@ -10,7 +10,6 @@
 int verif_whos_alive(vm_t *vm)
 {
     int nb_alive = 0;
-    int champ = 0;
 
     for (list_t *tmp = vm->champ_list; tmp; tmp = tmp->next) {
         if (((champion_t *)tmp->data)->alive)
