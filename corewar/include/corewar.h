@@ -17,6 +17,13 @@
 #include "string.h"
 #include "op.h"
 
+typedef struct vm_s vm_t;
+typedef struct champion_s champion_t;
+
+typedef struct function_s {
+    void (*exec_instr)(vm_t *vm, champion_t *champ);
+} function_t;
+
 typedef struct list_s {
     void *data;
     struct list_s *next;
@@ -44,6 +51,7 @@ typedef struct vm_s {
     int cycles;
     int cycle_to_die;
     list_t *champ_list;
+    function_t *exec_func;
     char *r;
 } vm_t;
 
@@ -57,3 +65,20 @@ int init_arena(vm_t *vm);
 int verif_whos_alive(vm_t *vm);
 int nb_of_live(vm_t *vm);
 void check_alive(vm_t *vm);
+
+void exec_live(vm_t *vm, champion_t *champ);
+void exec_ld(vm_t *vm, champion_t *champ);
+void exec_st(vm_t *vm, champion_t *champ);
+void exec_add(vm_t *vm, champion_t *champ);
+void exec_sub(vm_t *vm, champion_t *champ);
+void exec_and(vm_t *vm, champion_t *champ);
+void exec_or(vm_t *vm, champion_t *champ);
+void exec_xor(vm_t *vm, champion_t *champ);
+void exec_zjmp(vm_t *vm, champion_t *champ);
+void exec_ldi(vm_t *vm, champion_t *champ);
+void exec_sti(vm_t *vm, champion_t *champ);
+void exec_fork(vm_t *vm, champion_t *champ);
+void exec_lld(vm_t *vm, champion_t *champ);
+void exec_lldi(vm_t *vm, champion_t *champ);
+void exec_lfork(vm_t *vm, champion_t *champ);
+void exec_aff(vm_t *vm, champion_t *champ);
