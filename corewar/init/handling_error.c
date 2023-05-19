@@ -19,7 +19,7 @@ int handling_error(int argc, char **argv, vm_t *vm)
             return 84;
         i += check_flag;
     }
-    if (vm->nbr_cycle <= 0 || vm->nb_champ < 2)
+    if (vm->nb_champ < 2)
         return 84;
     return 0;
 }

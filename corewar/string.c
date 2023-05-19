@@ -46,14 +46,14 @@ int my_strlen(char *str)
     return i;
 }
 
-int my_strcory(char *dest, char *src, int n)
+int my_strcory(char *dest, champion_t *champ)
 {
-    int i = n;
+    int i = champ->load_address;
     int j = 0;
 
-    for (; src[j] != '\0'; j++) {
+    for (; j != champ->header->prog_size; j++) {
         if (dest[i] == 0)
-            dest[i] = src[j];
+            dest[i] = champ->body[j];
         else
             return 84;
         i++;

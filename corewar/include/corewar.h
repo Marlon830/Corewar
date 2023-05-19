@@ -30,9 +30,11 @@ typedef struct champion_s {
     char *path;
     header_t *header;
     char *body;
+    int pc;
 } champion_t;
 
 typedef struct vm_s {
+    int nbr_cycle_to_print;
     int nbr_cycle;
     int prog_number;
     int load_address;
@@ -41,6 +43,7 @@ typedef struct vm_s {
     int cycles;
     int cycle_to_die;
     list_t *champ_list;
+    char *r;
 } vm_t;
 
 void push(list_t **list, void *data);
@@ -48,7 +51,7 @@ void display_help(void);
 void display_vm_data(vm_t *vm);
 int handling_error(int argc, char **argv, vm_t *vm);
 void fill_champ_list(vm_t *vm);
-int my_strcory(char *dest, char *src, int n);
+int my_strcory(char *dest, champion_t *champ);
 int init_arena(vm_t *vm);
 int verif_whos_alive(vm_t *vm);
 int nb_of_live(vm_t *vm);
