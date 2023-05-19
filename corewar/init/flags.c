@@ -17,9 +17,9 @@ bool is_arg(char *arg)
 int check_dump(char **argv, int id, vm_t *vm)
 {
     if (!my_strcmp(argv[id], "-dump") && is_arg(argv[id + 1])) {
-        if (vm->nbr_cycle != -1)
+        if (vm->nbr_cycle_to_print != -1)
             return 84;
-        vm->nbr_cycle = my_getnbr(argv[id + 1]);
+        vm->nbr_cycle_to_print = my_getnbr(argv[id + 1]);
         return 1;
     }
     return 0;
