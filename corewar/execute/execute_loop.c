@@ -15,6 +15,7 @@ void cycle_gestion(vm_t *vm)
     }
     if (vm->nbr_cycle == vm->cycle_to_die) {
         check_alive(vm);
+        vm->nbr_cycle = 0;
     }
     vm->nbr_cycle++;
     vm->cycles++;
