@@ -39,4 +39,8 @@ void fill_champ_list(vm_t *vm)
         open_bin(champ);
     }
     set_champ_address(vm);
+    for (list_t *tmp = vm->champ_list; tmp; tmp = tmp->next) {
+        champ = tmp->data;
+        champ->pc = champ->load_address;
+    }
 }
