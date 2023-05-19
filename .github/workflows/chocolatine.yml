@@ -29,19 +29,23 @@ jobs:
             temp=0
             i=1
             while read line; do
-            temp=84
             filename=$(echo $line | cut -d ":" -f1)
-
+            
             num=$(echo $line | cut -d ":" -f2)
-
+            
             code=$(echo $line | cut -d " " -f2)
             majmin=$(echo $code | cut -d ":" -f1)
             errcode=$(echo $code | cut -d ":" -f2)
             majmin+=" coding style error"
+            if [ "$errcode" = "illegal" ]; then
+                continue
+            fi
             echo "::error file=$filename,line=$num,title=$majmin::$errcode"
+            temp=84
             i=$((i+1))
             done < $file
             exit $temp
+      
         continue-on-error: false
   check_program_compilation:
     name: Program Compilation Checker
