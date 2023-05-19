@@ -10,6 +10,7 @@
 champion_t *new_champ(char *champ_path, vm_t *vm)
 {
     champion_t *champ = malloc(sizeof(champion_t));
+
     champ->path = champ_path;
     champ->prog_number = vm->prog_number;
     champ->load_address = vm->load_address;
