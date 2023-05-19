@@ -48,6 +48,7 @@ typedef struct vm_s {
 
 void push(list_t **list, void *data);
 void display_help(void);
+void display_arena(vm_t *vm);
 void display_vm_data(vm_t *vm);
 int handling_error(int argc, char **argv, vm_t *vm);
 void fill_champ_list(vm_t *vm);

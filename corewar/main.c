@@ -30,7 +30,7 @@ int main(int argc, char **argv)
         write(2, "Error: init arena\n", 18);
         return 84;
     }
-    write(1, vm->arena, MEM_SIZE);
+    display_arena(vm);
     free(vm->arena);
     return 0;
 }
