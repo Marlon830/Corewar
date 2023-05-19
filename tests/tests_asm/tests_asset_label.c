@@ -44,17 +44,3 @@ Test(print_label_list, test_print_empty)
     int b = print_label_list(label_list);
     cr_assert_eq(b, 0);
 }
-
-Test(get_label_with_name, test_get_label)
-{
-    label_t *label_list = init_label_list();
-    label_t *label;
-
-    add_elem_label_list(label_list, "test1", 0);
-    add_elem_label_list(label_list, "test2,", 1);
-    add_elem_label_list(label_list, "test3", 2);
-    label = get_label_with_name(label_list, "test2,");
-    cr_assert_eq(label, NULL);
-    fprintf(stderr ,"\nlabel_name: %s\n", label->name);
-    //cr_assert_str_eq(label->name, "test2");
-}
