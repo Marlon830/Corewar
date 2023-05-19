@@ -12,43 +12,37 @@ void display_help(void)
     write(1, "Help: voilà\n", 13);
 }
 
-void my_revstr(char *str)
+void display_line_pos(vm_t *vm, int i)
 {
-    int i = 0;
-    int j = my_strlen(str) - 1;
-    char tmp;
+    char *hex = convert_to_hexa(i);
 
-    while (i < j) {
-        tmp = str[i];
-        str[i] = str[j];
-        str[j] = tmp;
-        i = i + 1;
-        j = j - 1;
+    if (i == 0) {
+        write(1, "0    : ", 7);
+        return;
     }
-}
-
-char *convert_to_hexa(int nb)
-{
-    char *hexa = malloc(sizeof(char) * 3);
-    int i = 0;
-    int tmp = 0;
-
-    for (; nb != 0; i++) {
-        tmp = nb % 16;
-        if (tmp < 10)
-            hexa[i] = tmp + 48;
-        else
-            hexa[i] = tmp + 55;
-        nb = nb / 16;
-    }
-    if (i == 1)
-        hexa[i++] = '0';
-    hexa[i] = '\0';
-    my_revstr(hexa);
-    return hexa;
+    write(1, "\n", 1);
+    write(1, hex, my_strlen(hex));
+    for (int i = 0; i != 4 - my_strlen(hex); i++)
+        write(1, " ", 1);
+    write(1, " : ", 3);
 }
 
 void display_arena(vm_t *vm)
 {
-    
+
+    for (int i = 0; i != MEM_SIZE; i++) {
+        if (i % 32 == 0) {
+            display_line_pos(vm, i);
+        }
+        if (vm->arena[i] == 0) {
+            write(1, "00 ", 3);
+        } else {
+            unsigned char chr = (unsigned char)vm->arena[i];
+            char hexa[3];
+            hexa[0] = "0123456789ABCDEF"[chr / 16];
+            hexa[1] = "0123456789ABCDEF"[chr % 16];
+            hexa[2] = ' ';
+            write(1, hexa, 3);
+        }
+    }
 }
