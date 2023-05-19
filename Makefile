@@ -22,4 +22,4 @@ re : fclean all
 
 tests_run:
 	make tests_run -C asm/
-	gcovr --html-details -o tests/gcovr_html/asm.html --branches asm/
+	make tests_run -C corewar/
