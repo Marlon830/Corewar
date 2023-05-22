@@ -23,32 +23,61 @@ void exec_live(vm_t *vm, champion_t *champion)
         champion_live->nbr_live += 1;
     }
     champion->pc += byte_size;
-    return;
 }
 
 void exec_ld(vm_t *vm, champion_t *champion)
 {
     int byte_size = get_nb_byte(vm->arena[champion->pc],
     vm->arena[champion->pc + 1]);
+    int param1 = 0;
+    int type = 0;
 
+    set_bit_int_at(&type, 0, get_bit_at(vm->arena[champion->pc + 1], 6));
+    set_bit_int_at(&type, 1, get_bit_at(vm->arena[champion->pc + 1], 7));
+    param1 = get_value_of_param(vm, type, champion->pc + 2);
+    if (type == 2) {
+        champion->r[vm->arena[champion->pc + 6]] = param1;
+        if (param1 == 0)
+            champion->carry = 1;
+    }
+    if (type == 3) {
+        champion->r[vm->arena[champion->pc + 4]] = vm->arena[(champion->pc +
+        param1) % IDX_MOD];
+        if (champion->r[vm->arena[champion->pc + 4]] == 0)
+            champion->carry = 1;
+    }
     champion->pc += byte_size;
-    return;
 }
 
 void exec_st(vm_t *vm, champion_t *champion)
 {
     int byte_size = get_nb_byte(vm->arena[champion->pc],
     vm->arena[champion->pc + 1]);
+    int param1 = champion->r[vm->arena[champion->pc + 2]];
+    int param2 = 0;
+    int type = 0;
 
+    set_bit_int_at(&type, 0, get_bit_at(vm->arena[champion->pc + 1], 4));
+    set_bit_int_at(&type, 1, get_bit_at(vm->arena[champion->pc + 1], 5));
+    if (type == 1)
+        champion->r[vm->arena[champion->pc + 3]] = param1;
+    if (type == 3) {
+        param2 = get_value_of_param(vm, type, champion->pc + 3);
+        write_four_bytes(vm->arena, (champion->pc + param2) % IDX_MOD, param1);
+    }
     champion->pc += byte_size;
-    return;
 }
 
 void exec_add(vm_t *vm, champion_t *champion)
 {
-    int byte_size = get_nb_byte(vm->arena[champion->pc],
-    vm->arena[champion->pc + 1]);
+    int byte_size = 5;
+    int a = champion->r[vm->arena[champion->pc + 2]];
+    int b = champion->r[vm->arena[champion->pc + 3]];
 
+    champion->r[vm->arena[champion->pc + 4]] = a + b;
+    if (a + b == 0)
+        champion->carry = 1;
+    else
+        champion->carry = 0;
     champion->pc += byte_size;
-    return;
 }
