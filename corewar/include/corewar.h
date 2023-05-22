@@ -55,12 +55,13 @@ typedef struct champion_s {
     header_t *header;
     char *body;
     int pc;
+    int carry;
+    int *r;
 } champion_t;
 
 typedef struct vm_s {
     int nbr_cycle_to_print;
     int nbr_cycle;
-    int carry;
     int prog_number;
     int load_address;
     int nb_champ;
@@ -89,6 +90,9 @@ void set_bit_at(char *x, int n, int value);
 void set_bit_int_at(int *x, int n, int value);
 int get_live_params(vm_t *vm, champion_t *champion);
 champion_t *get_champion_with_prog_number(list_t *champ_list, int prog_number);
+void write_four_bytes(char *to_write, int pc, int param);
+int get_value_of_param(vm_t *vm, int type, int pc);
+int analyze_type(int type, int *act_pc, champion_t *champion, vm_t *vm);
 
 void exec_live(vm_t *vm, champion_t *champ);
 void exec_ld(vm_t *vm, champion_t *champ);
