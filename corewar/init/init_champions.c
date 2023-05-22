@@ -19,6 +19,8 @@ champion_t *new_champ(char *champ_path, vm_t *vm)
     champ->alive = true;
     champ->nbr_live = 0;
     champ->header = NULL;
+    champ->is_loading = false;
+    champ->load_cycle = 0;
     return champ;
 }
 
