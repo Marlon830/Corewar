@@ -50,6 +50,7 @@ typedef struct champion_s {
     int prog_number;
     int load_address;
     int alive;
+    bool is_dead;
     int nbr_live;
     char *path;
     header_t *header;
@@ -98,6 +99,7 @@ int get_value_of_param(vm_t *vm, int type, int pc);
 int analyze_type(int type, int *act_pc, champion_t *champion, vm_t *vm);
 int main_loop(vm_t *vm);
 int get_value_indirect(vm_t *vm, champion_t *champion, int copy);
+void init_exec_func(vm_t *vm);
 
 void exec_live(vm_t *vm, champion_t *champ);
 void exec_ld(vm_t *vm, champion_t *champ);
