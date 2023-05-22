@@ -15,7 +15,6 @@ vm_t *init_vm(void)
     vm->load_address = -1;
     vm->prog_number = -1;
     vm->nb_champ = 0;
-    vm->carry = 0;
     vm->champ_list = NULL;
     return vm;
 }
