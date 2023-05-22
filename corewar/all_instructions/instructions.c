@@ -19,7 +19,7 @@ void exec_live(vm_t *vm, champion_t *champion)
         my_put_nbr(param);
         my_putstr(" (");
         my_putstr(champion_live->header->prog_name);
-        my_putstr(")is alive.");
+        my_putstr(")is alive.\n");
         champion_live->nbr_live += 1;
     }
     champion->pc += byte_size;
@@ -41,8 +41,8 @@ void exec_ld(vm_t *vm, champion_t *champion)
             champion->carry = 1;
     }
     if (type == 3) {
-        champion->r[(int) vm->arena[champion->pc + 4]] = vm->arena[(champion->pc +
-        param1) % IDX_MOD];
+        champion->r[(int) vm->arena[champion->pc + 4]] =
+        vm->arena[champion->pc + param1 % IDX_MOD];
         if (champion->r[(int) vm->arena[champion->pc + 4]] == 0)
             champion->carry = 1;
     }
@@ -63,7 +63,7 @@ void exec_st(vm_t *vm, champion_t *champion)
         champion->r[(int) vm->arena[champion->pc + 3]] = param1;
     if (type == 3) {
         param2 = get_value_of_param(vm, type, champion->pc + 3);
-        write_four_bytes(vm->arena, (champion->pc + param2) % IDX_MOD, param1);
+        write_four_bytes(vm->arena, champion->pc + param2 % IDX_MOD, param1);
     }
     champion->pc += byte_size;
 }
