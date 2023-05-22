@@ -49,7 +49,7 @@ void write_four_bytes(char *to_write, int pc, int param)
 
     for (int i = pc; i < pc + 4; i++) {
         to_write[i] = 0;
-        for (int j = 7; j >= 0; j++) {
+        for (int j = 7; j >= 0; j--) {
             set_bit_at(&to_write[i], j, get_bit_at(param, j + 8 * k));
         }
         k--;
