@@ -42,3 +42,35 @@ int get_nb_byte(char instruction, char bytecode)
     }
     return count + 2;
 }
+
+void write_four_bytes(char *to_write, int pc, int param)
+{
+    int k = 3;
+
+    for (int i = pc; i < pc + 4; i++) {
+        to_write[i] = 0;
+        for (int j = 7; j >= 0; j++) {
+            set_bit_at(&to_write[i], j, get_bit_at(param, j + 8 * k));
+        }
+        k--;
+    }
+}
+
+int analyze_type(int type, int *act_pc, champion_t *champion, vm_t *vm)
+{
+    int param = 0;
+
+    if (type == 1) {
+        param = champion->r[vm->arena[*act_pc]];
+        *act_pc += 1;
+    }
+    if (type == 2) {
+        param = get_value_of_param(vm, type, *act_pc);
+        *act_pc += 4;
+    }
+    if (type == 3) {
+        param = get_value_of_param(vm, type, *act_pc);
+        *act_pc += 2;
+    }
+    return param;
+}
