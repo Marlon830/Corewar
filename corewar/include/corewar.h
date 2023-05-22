@@ -55,6 +55,8 @@ typedef struct champion_s {
     header_t *header;
     char *body;
     int pc;
+    bool is_loading;
+    int load_cycle;
 } champion_t;
 
 typedef struct vm_s {
@@ -90,6 +92,7 @@ void set_bit_at(char *x, int n, int value);
 void set_bit_int_at(int *x, int n, int value);
 int get_live_params(vm_t *vm, champion_t *champion);
 champion_t *get_champion_with_prog_number(list_t *champ_list, int prog_number);
+int main_loop(vm_t *vm);
 
 void exec_live(vm_t *vm, champion_t *champ);
 void exec_ld(vm_t *vm, champion_t *champ);
