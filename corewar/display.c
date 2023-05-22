@@ -45,4 +45,5 @@ void display_arena(vm_t *vm)
             write(1, hexa, 3);
         }
     }
+    write(1, "\n", 1);
 }
