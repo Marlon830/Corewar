@@ -36,3 +36,12 @@ void set_bit_int_at(int *x, int n, int value)
 {
     *x = *x | value << n;
 }
+
+int power(int nb, int p)
+{
+    int res = 1;
+
+    for (int i = 0; i < p; i++)
+        res *= nb;
+    return res;
+}
