@@ -19,6 +19,9 @@ champion_t *new_champ(char *champ_path, vm_t *vm)
     champ->alive = true;
     champ->nbr_live = 0;
     champ->header = NULL;
+    champ->carry = 0;
+    champ->r = malloc(sizeof(int) * 17);
+    champ->r[1] = champ->prog_number;
     return champ;
 }
 
