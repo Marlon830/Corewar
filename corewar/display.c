@@ -12,7 +12,7 @@ void display_help(void)
     write(1, "Help: voilà\n", 13);
 }
 
-void display_line_pos(vm_t *vm, int i)
+void display_line_pos(int i)
 {
     char *hex = convert_to_hexa(i);
 
@@ -32,7 +32,7 @@ void display_arena(vm_t *vm)
 
     for (int i = 0; i != MEM_SIZE; i++) {
         if (i % 32 == 0) {
-            display_line_pos(vm, i);
+            display_line_pos(i);
         }
         if (vm->arena[i] == 0) {
             write(1, "00 ", 3);

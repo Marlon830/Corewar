@@ -49,9 +49,9 @@ void exec_ldi(vm_t *vm, champion_t *champion)
     set_bit_int_at(&type, 0, get_bit_at(vm->arena[champion->pc + 1], 4));
     set_bit_int_at(&type, 1, get_bit_at(vm->arena[champion->pc + 1], 5));
     param2 = analyze_type(type, &act_pc, champion, vm);
-    champion->r[vm->arena[act_pc]] =
+    champion->r[(int) vm->arena[act_pc]] =
     vm->arena[(champion->pc + param1 + param2) % IDX_MOD];
-    champion->carry = (champion->r[vm->arena[act_pc]] == 0) ? 1 : 0;
+    champion->carry = (champion->r[(int) vm->arena[act_pc]] == 0) ? 1 : 0;
     champion->pc += byte_size;
 }
 
@@ -75,7 +75,7 @@ void exec_sti(vm_t *vm, champion_t *champion)
     set_bit_int_at(&type, 1, get_bit_at(vm->arena[champion->pc + 1], 3));
     param3 = analyze_type(type, &act_pc, champion, vm);
     write_four_bytes(vm->arena, (champion->pc + param2 + param3) % IDX_MOD,
-    champion->r[vm->arena[champion->pc + 2]]);
+    champion->r[(int) vm->arena[champion->pc + 2]]);
     champion->pc += byte_size;
 }
 

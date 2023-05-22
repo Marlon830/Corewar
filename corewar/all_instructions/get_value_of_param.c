@@ -25,8 +25,6 @@ int get_value_of_param_bis(vm_t *vm, int pc, int offset)
 int get_value_of_param(vm_t *vm, int type, int pc)
 {
     int param = 0;
-    char temp_byte;
-    int k = 0;
 
     if (type == 2)
         return get_value_of_param_bis(vm, pc, 3);

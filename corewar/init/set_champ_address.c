@@ -7,17 +7,6 @@
 
 #include "init.h"
 
-int get_champ_len(vm_t *vm)
-{
-    int len = 0;
-
-    for (list_t *list = vm->champ_list; list; list = list->next) {
-        champion_t *champ = list->data;
-        len += champ->header->prog_size;
-    }
-    return len;
-}
-
 int nb_champ(vm_t *vm)
 {
     int nb = 0;
@@ -29,7 +18,6 @@ int nb_champ(vm_t *vm)
 
 void set_champ_address(vm_t *vm)
 {
-    int len = get_champ_len(vm);
     int offset = MEM_SIZE / nb_champ(vm);
     int i = 0;
 

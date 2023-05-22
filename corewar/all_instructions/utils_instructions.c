@@ -61,7 +61,7 @@ int analyze_type(int type, int *act_pc, champion_t *champion, vm_t *vm)
     int param = 0;
 
     if (type == 1) {
-        param = champion->r[vm->arena[*act_pc]];
+        param = champion->r[(int) vm->arena[*act_pc]];
         *act_pc += 1;
     }
     if (type == 2) {

@@ -97,6 +97,7 @@ void write_four_bytes(char *to_write, int pc, int param);
 int get_value_of_param(vm_t *vm, int type, int pc);
 int analyze_type(int type, int *act_pc, champion_t *champion, vm_t *vm);
 int main_loop(vm_t *vm);
+int get_value_indirect(vm_t *vm, champion_t *champion, int copy);
 
 void exec_live(vm_t *vm, champion_t *champ);
 void exec_ld(vm_t *vm, champion_t *champ);
