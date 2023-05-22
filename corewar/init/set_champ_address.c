@@ -30,7 +30,7 @@ int nb_champ(vm_t *vm)
 void set_champ_address(vm_t *vm)
 {
     int len = get_champ_len(vm);
-    int offset = (MEM_SIZE - len) / nb_champ(vm);
+    int offset = MEM_SIZE / nb_champ(vm);
     int i = 0;
 
     for (list_t *tmp = vm->champ_list; tmp; tmp = tmp->next) {
