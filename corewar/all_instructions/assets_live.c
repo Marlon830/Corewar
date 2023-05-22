@@ -26,7 +26,7 @@ int get_live_params(vm_t *vm, champion_t *champion)
     int param = 0;
     int k = 0;
 
-    for (int i = champion->pc + 3; i >= champion->pc; i--) {
+    for (int i = champion->pc + 4; i >= champion->pc + 1; i--) {
         temp_byte = vm->arena[i];
         for (int j = 0; j < 8; j++)
             set_bit_int_at(&param, k * 8 + j, get_bit_at(temp_byte, j));
