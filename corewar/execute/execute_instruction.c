@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-int exec_instr(char *str, vm_t *vm)
-{
-    int index = str[0] - 1;
-}
+// int exec_instr(char *str, vm_t *vm)
+// {
+
+// }

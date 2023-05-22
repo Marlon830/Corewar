@@ -12,3 +12,5 @@ int my_getnbr(char *str);
 int my_strlen(char *str);
 void my_revstr(char *str);
 char *convert_to_hexa(int nb);
+void my_putstr(char *str);
+void my_put_nbr(int nb);

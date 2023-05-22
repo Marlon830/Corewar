@@ -60,3 +60,8 @@ int my_strcory(char *dest, champion_t *champ)
     }
     return 0;
 }
+
+void my_putstr(char *str)
+{
+    write(1, str, my_strlen(str));
+}

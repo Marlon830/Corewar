@@ -7,11 +7,13 @@ B-CPE_200_Corewar.pdf
 coding-style-reports.log
 test.s
 todo.txt
-champions/
-tyron.s
 .gitignore
 test.cor
 tyron.cor
 res2
 res
 get_offset.py
+test.html
+*.html
+*.css
+champions/
