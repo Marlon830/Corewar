@@ -57,6 +57,8 @@ typedef struct champion_s {
     int pc;
     int carry;
     int *r;
+    bool is_loading;
+    int load_cycle;
 } champion_t;
 
 typedef struct vm_s {
@@ -75,6 +77,7 @@ typedef struct vm_s {
 
 void push(list_t **list, void *data);
 void display_help(void);
+void display_arena(vm_t *vm);
 void display_vm_data(vm_t *vm);
 int handling_error(int argc, char **argv, vm_t *vm);
 void fill_champ_list(vm_t *vm);
@@ -93,6 +96,7 @@ champion_t *get_champion_with_prog_number(list_t *champ_list, int prog_number);
 void write_four_bytes(char *to_write, int pc, int param);
 int get_value_of_param(vm_t *vm, int type, int pc);
 int analyze_type(int type, int *act_pc, champion_t *champion, vm_t *vm);
+int main_loop(vm_t *vm);
 
 void exec_live(vm_t *vm, champion_t *champ);
 void exec_ld(vm_t *vm, champion_t *champ);

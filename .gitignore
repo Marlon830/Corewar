@@ -10,6 +10,9 @@ todo.txt
 .gitignore
 test.cor
 tyron.cor
+res2
+res
+get_offset.py
 test.html
 *.html
 *.css

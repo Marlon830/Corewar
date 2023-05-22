@@ -22,6 +22,8 @@ champion_t *new_champ(char *champ_path, vm_t *vm)
     champ->carry = 0;
     champ->r = malloc(sizeof(int) * 17);
     champ->r[1] = champ->prog_number;
+    champ->is_loading = false;
+    champ->load_cycle = 0;
     return champ;
 }
 
