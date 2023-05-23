@@ -46,11 +46,11 @@ void champ_gestion(vm_t *vm)
 void print_winner(vm_t *vm)
 {
     if (vm->winner != NULL) {
-        my_putstr("The player ");
+        my_putstr("Le joueur ");
         my_put_nbr(vm->winner->prog_number);
         my_putstr(" (");
         my_putstr(vm->winner->header->prog_name);
-        my_putstr(") has won.\n");
+        my_putstr(") a gagné.\n");
     }
 }
 

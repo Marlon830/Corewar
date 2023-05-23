@@ -15,11 +15,11 @@ void exec_live(vm_t *vm, champion_t *champion)
     get_champion_with_prog_number(vm->champ_list, param);
 
     if (champion_live != NULL) {
-        my_putstr("The player ");
+        my_putstr("Le joueur ");
         my_put_nbr(param);
         my_putstr(" (");
         my_putstr(champion_live->header->prog_name);
-        my_putstr(") is alive.\n");
+        my_putstr(") est en vie.\n");
         vm->nbr_live += 1;
         champion_live->nbr_live += 1;
         vm->winner = champion_live;
