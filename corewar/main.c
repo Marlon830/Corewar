@@ -16,6 +16,7 @@ vm_t *init_vm(void)
     vm->prog_number = -1;
     vm->nb_champ = 0;
     vm->champ_list = NULL;
+    vm->nbr_live = 0;
     return vm;
 }
 
