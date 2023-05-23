@@ -3,7 +3,7 @@
 ## EPITECH PROJECT, 2022
 ## corewar
 ## File description:
-## tester.sh
+## tester_vm.sh
 ##
 
 RED='\033[0;31m'
@@ -13,14 +13,13 @@ BOLD='\033[1m'
 
 for fich in `ls ../champions_cor/$fich`
 do
-    ../corewar/corewar -dump 1000 ../champions_cor/$fich ../champions_cor/$fich > $fich.1.txt
-    ../ressources/corewar/corewar -dump 1000 ../champions_cor/$fich ../champions_cor/$fich > $fich.2.txt
-    if cmp -s $fich.1.txt $fich.2.txt
+    ../corewar/corewar -dump 1000 ../champions_cor/$fich ../champions_cor/$fich > ../champions_cor/$fich.1.txt
+    if cmp -s ../champions_cor/$fich.1.txt ../champions_cor/$fich.2.txt
     then
         echo -e "$fich : ${GREEN}${BOLD}SUCCESS${NC}"
     else
         echo -e "$fich : ${RED}${BOLD}FAILURE${NC}"
-        diff $fich.1.txt $fich.2.txt
+        diff ../champions_cor/$fich.1.txt ../champions_cor/$fich.2.txt
     fi
-    rm $fich.1.txt $fich.2.txt
+    rm ../champions_cor/$fich.1.txt
 done
