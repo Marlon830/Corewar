@@ -19,8 +19,10 @@ void exec_live(vm_t *vm, champion_t *champion)
         my_put_nbr(param);
         my_putstr(" (");
         my_putstr(champion_live->header->prog_name);
-        my_putstr(")is alive.\n");
+        my_putstr(") is alive.\n");
+        vm->nbr_live += 1;
         champion_live->nbr_live += 1;
+        vm->winner = champion_live;
     }
     champion->pc += byte_size;
 }
