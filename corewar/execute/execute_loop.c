@@ -24,7 +24,6 @@ void champ_gestion(vm_t *vm)
 {
     champion_t *champ;
     op_t op;
-    int count = 1;
 
     for (list_t *tmp = vm->champ_list; tmp; tmp = tmp->next) {
         champ = tmp->data;
@@ -39,7 +38,6 @@ void champ_gestion(vm_t *vm)
             vm->exec_func[op.code - 1].exec_instr(vm, champ);
             champ->is_loading = false;
         }
-        count++;
     }
 }
 
