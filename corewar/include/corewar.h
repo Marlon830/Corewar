@@ -71,9 +71,11 @@ typedef struct vm_s {
     char *arena;
     int cycles;
     int cycle_to_die;
+    int nbr_live;
     list_t *champ_list;
     function_t *exec_func;
     char *r;
+    champion_t *winner;
 } vm_t;
 
 void push(list_t **list, void *data);
