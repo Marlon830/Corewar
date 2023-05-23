@@ -34,8 +34,10 @@ void fill_champ_list(vm_t *vm)
 
     for (list_t *tmp = vm->champ_list; tmp; tmp = tmp->next) {
         champ = tmp->data;
-        if (champ->prog_number == -1)
+        if (champ->prog_number == -1) {
             champ->prog_number = get_first_prog_number(vm);
+            champ->r[1] = champ->prog_number;
+        }
         open_bin(champ);
     }
     set_champ_address(vm);
