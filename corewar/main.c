@@ -10,6 +10,7 @@
 vm_t *init_vm(void)
 {
     vm_t *vm = malloc(sizeof(vm_t));
+
     vm->nbr_cycle = 0;
     vm->nbr_cycle_to_print = -1;
     vm->load_address = -1;
