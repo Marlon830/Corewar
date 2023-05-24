@@ -7,17 +7,18 @@
 
 #include "corewar.h"
 
-champion_t *get_champion_with_prog_number(list_t *champ_list, int prog_number)
+list_t *get_champion_with_prog_number(list_t *champ_list, int prog_number)
 {
     champion_t *champ_data;
+    list_t *ret_champ_list = NULL;
 
     while (champ_list != NULL) {
         champ_data = champ_list->data;
         if (champ_data->prog_number == prog_number)
-            return champ_list->data;
+            push(&ret_champ_list, champ_data);
         champ_list = champ_list->next;
     }
-    return NULL;
+    return ret_champ_list;
 }
 
 int get_live_params(vm_t *vm, champion_t *champion)
