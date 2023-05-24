@@ -20,6 +20,20 @@ void cycle_gestion(vm_t *vm)
     vm->nbr_cycle++;
 }
 
+int check_champ_pc(vm_t *vm, champion_t *champ)
+{
+    if (champ->is_dead)
+        return 0;
+    if (champ->pc >= MEM_SIZE || champ->pc < 0)
+        champ->pc = champ->pc % MEM_SIZE;
+    if ((vm->arena[champ->pc] - 1) > 15 || (vm->arena[champ->pc] - 1) < 0 ||
+    !is_valid_instruction(vm, champ)) {
+        champ->pc += 1;
+        return 0;
+    }
+    return 1;
+}
+
 void champ_gestion(vm_t *vm)
 {
     champion_t *champ;
@@ -27,7 +41,7 @@ void champ_gestion(vm_t *vm)
 
     for (list_t *tmp = vm->champ_list; tmp; tmp = tmp->next) {
         champ = tmp->data;
-        if (champ->is_dead)
+        if (!check_champ_pc(vm, champ))
             continue;
         op = op_tab[vm->arena[champ->pc] - 1];
         if (!champ->is_loading) {
@@ -57,9 +71,6 @@ int main_loop(vm_t *vm)
     while (verif_whos_alive(vm) && vm->cycle_to_die > 0) {
         if (vm->cycles == vm->nbr_cycle_to_print) {
             display_arena(vm);
-            cycle_gestion(vm);
-            champ_gestion(vm);
-            vm->cycles++;
             break;
         }
         cycle_gestion(vm);
