@@ -24,8 +24,7 @@ int check_champ_pc(vm_t *vm, champion_t *champ)
 {
     if (champ->is_dead)
         return 0;
-    if (champ->pc >= MEM_SIZE || champ->pc < 0)
-        champ->pc = champ->pc % MEM_SIZE;
+    champ->pc = champ->pc % MEM_SIZE;
     if ((vm->arena[champ->pc] - 1) > 15 || (vm->arena[champ->pc] - 1) < 0 ||
     !is_valid_instruction(vm, champ)) {
         champ->pc += 1;
