@@ -58,12 +58,12 @@ void exec_lldi(vm_t *vm, champion_t *champion)
 void exec_lfork(vm_t *vm, champion_t *champion)
 {
     int byte_size = 3;
-    champion_t new_champ = *champion;
+    champion_t *new_champ = copy_champion(champion);
     int act_pc = champion->pc + 1;
     int param = analyze_type(3, &act_pc, champion, vm);
 
-    new_champ.pc = (champion->pc + param);
-    push(&vm->champ_list, &new_champ);
+    new_champ->pc = champion->pc + param;
+    push(&vm->champ_list, new_champ);
     champion->pc += byte_size;
 }
 
