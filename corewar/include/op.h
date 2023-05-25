@@ -22,8 +22,6 @@
     #define NAME_CMD_STRING ".name"
     #define COMMENT_CMD_STRING ".comment"
 
-    #define Byte
-
 /*
 ** regs
 */

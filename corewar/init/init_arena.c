@@ -52,5 +52,7 @@ int init_arena(vm_t *vm)
         if (my_strcory(vm->arena, champ) == 84)
             return 84;
     }
+    init_exec_func(vm);
+    vm->winner = NULL;
     return 0;
 }

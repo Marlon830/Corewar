@@ -19,6 +19,9 @@ int get_value_of_param_bis(vm_t *vm, int pc, int offset)
             set_bit_int_at(&param, k * 8 + j, get_bit_at(temp_byte, j));
         k++;
     }
+    if (get_bit_at(param, offset * 8 + 7) == 1) {
+        param -= power(2, (offset + 1) * 8);
+    }
     return param;
 }
 

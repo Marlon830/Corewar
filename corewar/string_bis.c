@@ -24,7 +24,7 @@ void my_revstr(char *str)
 
 char *convert_to_hexa(int nb)
 {
-    char *hexa = malloc(sizeof(char) * 3);
+    char *hexa = malloc(sizeof(char) * 10);
     int i = 0;
     int tmp = 0;
 

@@ -10,12 +10,14 @@
 vm_t *init_vm(void)
 {
     vm_t *vm = malloc(sizeof(vm_t));
+
     vm->nbr_cycle = 0;
     vm->nbr_cycle_to_print = -1;
     vm->load_address = -1;
     vm->prog_number = -1;
     vm->nb_champ = 0;
     vm->champ_list = NULL;
+    vm->nbr_live = 0;
     return vm;
 }
 
@@ -30,6 +32,7 @@ int main(int argc, char **argv)
         write(2, "Error: init arena\n", 18);
         return 84;
     }
+    main_loop(vm);
     free(vm->arena);
     return 0;
 }

@@ -12,7 +12,7 @@ int verif_whos_alive(vm_t *vm)
     int nb_alive = 0;
 
     for (list_t *tmp = vm->champ_list; tmp; tmp = tmp->next) {
-        if (((champion_t *)tmp->data)->alive)
+        if (((champion_t *)tmp->data)->is_dead == false)
             nb_alive++;
     }
     if (nb_alive <= 1)
@@ -33,9 +33,11 @@ int nb_of_live(vm_t *vm)
 void check_alive(vm_t *vm)
 {
     for (list_t *tmp = vm->champ_list; tmp; tmp = tmp->next) {
-        if (((champion_t *)tmp->data)->nbr_live == 0)
-            ((champion_t *)tmp->data)->alive = false;
-        else
+        if (((champion_t *)tmp->data)->nbr_live == 0) {
+            ((champion_t *)tmp->data)->is_dead = true;
+        } else {
             ((champion_t *)tmp->data)->nbr_live = 0;
+            ((champion_t *)tmp->data)->alive = false;
+        }
     }
 }

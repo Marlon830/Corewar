@@ -16,14 +16,18 @@ champion_t *new_champ(char *champ_path, vm_t *vm)
     champ->load_address = vm->load_address;
     champ->pc = vm->load_address;
     champ->body = NULL;
-    champ->alive = true;
+    champ->alive = false;
     champ->nbr_live = 0;
     champ->header = NULL;
     champ->carry = 0;
     champ->r = malloc(sizeof(int) * 17);
+    for (int i = 0; i != 17; i++)
+        champ->r[i] = 0;
     champ->r[1] = champ->prog_number;
     champ->is_loading = false;
     champ->load_cycle = 0;
+    champ->is_dead = false;
+    champ->is_invalid_register = false;
     return champ;
 }
 
