@@ -14,7 +14,7 @@ OBJ = $(SRC:.c=.o)
 all : $(TARGET)
 
 $(TARGET) : $(OBJ)
-	$(CC) -o $(TARGET) $(OBJ) -lraylib -lm -lopenal -lsndfile
+	$(CC) -o $(TARGET) $(OBJ) -lraylib -lm
 
 clean :
 	$(RM) $(OBJ)
