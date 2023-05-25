@@ -60,6 +60,7 @@ typedef struct champion_s {
     int *r;
     bool is_loading;
     int load_cycle;
+    bool is_invalid_register;
 } champion_t;
 
 typedef struct vm_s {
@@ -104,6 +105,7 @@ int get_value_indirect(vm_t *vm, champion_t *champion, int copy);
 void init_exec_func(vm_t *vm);
 champion_t *copy_champion(champion_t *champion);
 int is_valid_instruction(vm_t *vm, champion_t *champ);
+int is_valid_register(int reg, champion_t *champ);
 
 void exec_live(vm_t *vm, champion_t *champ);
 void exec_ld(vm_t *vm, champion_t *champ);
