@@ -12,12 +12,10 @@ all :
 clean :
 	make clean -C asm/
 	make clean -C corewar/
-	make clean -C bonus/client/
 
 fclean : clean
 	make fclean -C asm/
 	make fclean -C corewar/
-	make fclean -C bonus/client/
 	$(RM) tests/*.html tests/*.css
 
 re : fclean all
