@@ -9,7 +9,7 @@ SRC = 	$(shell find -name "*.c")
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -W -Wall -Wextra -g3
+CFLAGS = -W -Wall -Wextra
 
 CPPFLAGS = -I./src/include
 
