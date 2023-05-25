@@ -16,7 +16,6 @@ clean :
 fclean : clean
 	make fclean -C asm/
 	make fclean -C corewar/
-	$(RM) tests/*.html tests/*.css
 
 re : fclean all
 
