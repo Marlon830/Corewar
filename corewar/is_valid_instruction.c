@@ -35,7 +35,7 @@ int check_coding_byte(vm_t *vm, champion_t *champ)
 {
     char type = 0;
     int j = 7;
-    char bytecode = vm->arena[champ->pc + 1];
+    char bytecode = vm->arena[my_modulo(champ->pc + 1, MEM_SIZE)];
 
     if (!check_type_arg(vm, champ, &j))
         return 0;
@@ -50,12 +50,23 @@ int check_coding_byte(vm_t *vm, champion_t *champ)
     return 1;
 }
 
+int is_valid_register(int reg, champion_t *champ)
+{
+    if (reg <= 0 || reg >= 17) {
+        champ->pc += 1;
+        return 0;
+    }
+    return 1;
+}
+
 int is_valid_instruction(vm_t *vm, champion_t *champ)
 {
     if (vm->arena[champ->pc] != 1 && vm->arena[champ->pc] != 9 &&
     vm->arena[champ->pc] != 12 && vm->arena[champ->pc] != 15) {
-        if (!check_coding_byte(vm, champ))
+        if (!check_coding_byte(vm, champ)) {
+            champ->pc += 1;
             return 0;
+        }
     }
     return 1;
 }
