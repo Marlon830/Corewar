@@ -23,6 +23,7 @@ void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in cl
     int clientSocket;
     int cycle = 0;
     char *cmd = malloc(sizeof(char) * 1024);
+    memset(cmd, 0, 1024);
 
     printf("Adresse IP du serveur : %s\n", ip);
     clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress,
@@ -35,6 +36,7 @@ void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in cl
             cycle = atoi(cmd + 1);
             send_arena(argc, argv, clientSocket, cycle);
         }
+        memset(cmd, 0, 1024);
     }
     close(serverSocket);
     close(clientSocket);
@@ -56,8 +58,9 @@ int main(int argc, char **argv)
     sizeof(reuse)) < 0)
         exit(EXIT_FAILURE);
     if (bind(serverSocket, (struct sockaddr *)&serverAddress,
-    sizeof(serverAddress)) < 0)
+    sizeof(serverAddress)) < 0) {
         exit(EXIT_FAILURE);
+    }
     if (listen(serverSocket, 1) < 0)
         exit(EXIT_FAILURE);
     next_server(argc, argv, serverSocket, clientAddress);

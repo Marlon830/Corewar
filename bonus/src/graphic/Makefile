@@ -6,7 +6,7 @@
 ##
 
 SRC = $(shell find . -name "*.c")
-CFLAGS = -W -Wextra -Wall
+CFLAGS = -W -Wextra -Wall -g3
 CPPFLAGS = -Iinclude
 TARGET = corewar
 OBJ = $(SRC:.c=.o)

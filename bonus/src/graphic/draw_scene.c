@@ -62,6 +62,8 @@ void draw_socket(app_t *app)
 
 void draw_corewar(app_t *app)
 {
+    int k = 0;
+    char hex[3] = {0};
     UpdateCamera(&app->corewar->camera, CAMERA_PERSPECTIVE);
     ClearBackground(app->corewar->colorMode.background);
     BeginMode3D(app->corewar->camera);
@@ -72,7 +74,11 @@ void draw_corewar(app_t *app)
             DrawCubeWires((Vector3){ i, 0.5, j }, 1.0f, 1.0f, 1.0f,
             app->corewar->colorMode.wire_color);
             app->corewar->param->position = (Vector3){i - 0.35, 1.1, j - 0.2};
-            drawtext3d(app->corewar->param, "0 0");
+            if (app->corewar->need_get == 0) {
+                charToHex(app->corewar->arena[k], hex);
+                drawtext3d(app->corewar->param, hex);
+                k++;
+            }
         }
     }
     EndMode3D();

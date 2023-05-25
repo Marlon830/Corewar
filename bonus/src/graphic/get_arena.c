@@ -24,8 +24,9 @@
 #include <net/if.h>
 #include <arpa/inet.h>
 #include <stddef.h>
+#include "corewar.h"
 
-#define PORT 12345
+#define PORT 13456
 #define BUFFER_SIZE 1024
 
 void my_revstr(char *str)
@@ -125,34 +126,40 @@ void display_arena(char *arena)
     write(1, "\n", 1);
 }
 
-int main(void)
+void get_arena(app_t *app)
 {
     int clientSocket;
     struct sockaddr_in serverAddress;
-    char *arena = malloc(sizeof(char) * 6144);
-    char *ip = "10.101.223.197";
     char *cmd = malloc(sizeof(char) * 1024);
     char *cycle = malloc(sizeof(char) * 1024);
+    char *c = malloc(sizeof(char) * 10);
 
+    c[0] = '0';
+    c[1] = '\0';
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket < 0)
         exit(84);
     serverAddress.sin_family = AF_INET;
-    serverAddress.sin_addr.s_addr = inet_addr(ip);
+    serverAddress.sin_addr.s_addr = inet_addr(app->connect->ip);
     serverAddress.sin_port = htons(PORT);
     if (connect(clientSocket, (struct sockaddr *)&serverAddress,
     sizeof(serverAddress)) < 0)
         exit(84);
     while (1) {
-        cmd[0] = 'C';
-        cmd[1] = '\0';
-        scanf("%s", cycle);
-        strcat(cmd, cycle);
-        if (send(clientSocket, cmd, strlen(cmd), 0) < 0)
-            exit(84);
-        for (int i = 0; i != 6144; i++)
-            read(clientSocket, &arena[i], 1);
-        display_arena(arena);
+        if (app->corewar->need_get) {
+            cmd[0] = 'C';
+            cmd[1] = '\0';
+            strcat(cmd, c);
+            if (send(clientSocket, cmd, strlen(cmd), 0) < 0)
+                exit(84);
+            for (int i = 0; i != 6144; i++)
+                read(clientSocket, &app->corewar->arena[i], 1);
+            app->corewar->need_get = 0;
+            c[0] = c[0] + 1;
+        }
     }
+    free(cmd);
+    free(cycle);
+    free(c);
     close(clientSocket);
 }

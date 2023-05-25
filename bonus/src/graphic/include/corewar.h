@@ -6,6 +6,7 @@
 */
 
 #include "ray.h"
+#include <stdio.h>
 
 #pragma once
 
@@ -88,13 +89,15 @@ typedef struct corewar_s {
     color_mode_t colorMode;
     Camera3D camera;
     d_text_t *param;
-    char **arena;
+    char *arena;
+    int need_get;
 } corewar_t;
 
 typedef struct app_s {
     int screenWidth;
     int screenHeight;
     game_screen screen;
+    pthread_t thread;
     int framesCounter;
     int display;
     logo_t *logo;
@@ -130,6 +133,7 @@ void socket_button_clicked(app_t *app);
 
 sprite_t *create_sprite(char *path, Vector2 pos,
 Vector2 frameSize, int nbFrames);
+void get_arena(app_t *app);
 
 app_t *init_app(void);
 menu_t *init_menu(app_t *app);
@@ -139,3 +143,4 @@ socket_t *init_socket(app_t *app);
 corewar_t *init_corewar(app_t *app);
 
 void push(list_t **list, void *elt);
+void charToHex(char c, char hexa[3]);

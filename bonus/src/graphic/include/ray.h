@@ -12,6 +12,7 @@
 #include <stddef.h>
 #include <math.h>
 #include <stdlib.h>
+#include <pthread.h>
 
 #define RAYLIB_NEW_RLGL
 #define LETTER_BOUNDRY_SIZE     0.25f

@@ -27,7 +27,7 @@
 #include <arpa/inet.h>
 #include <stddef.h>
 
-#define PORT 12345
+#define PORT 13456
 #define BUFFER_SIZE 1024
 
 char *get_ip(void);

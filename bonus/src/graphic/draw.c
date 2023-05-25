@@ -65,7 +65,6 @@ void draw(app_t *app)
         case LOGO: draw_logo(app); break;
         case MENU: draw_menu(app); break;
         case CONNECT: draw_connect(app); break;
-        case SOCKET: draw_socket(app); break;
         case COREWAR: draw_corewar(app); break;
         default: break;
     }

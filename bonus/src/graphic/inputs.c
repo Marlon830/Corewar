@@ -62,7 +62,6 @@ void inputs(app_t *app)
         case LOGO: logo_input(app); break;
         case MENU: menu_input(app); break;
         case CONNECT: connect_input(app); break;
-        case SOCKET: socket_input(app); break;
         case COREWAR: corewar_input(app); break;
         default: break;
     }
