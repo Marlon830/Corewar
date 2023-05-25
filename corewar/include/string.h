@@ -15,3 +15,4 @@ char *convert_to_hexa(int nb);
 void my_putstr(char *str);
 void my_put_nbr(int nb);
 int power(int nb, int p);
+int my_modulo(int nb, int modulo);
