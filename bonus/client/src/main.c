@@ -18,7 +18,7 @@ void main_loop(global_t *global)
             global->colorMode.cube_color);
             DrawCubeWires((Vector3){ i, 0.5, j }, 1.0f, 1.0f, 1.0f,
             global->colorMode.wire_color);
-            global->param->position = (Vector3){i - 0.3, 1.1, j - 0.2};
+            global->param->position = (Vector3){i - 0.35, 1.1, j - 0.2};
             drawtext3d(global->param, "0 0");
         }
     }
@@ -36,5 +36,7 @@ int main(void)
         main_loop(global);
     }
     CloseWindow();
+    free(global->param);
+    free(global);
     return 0;
 }
