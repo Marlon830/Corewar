@@ -1,0 +1,33 @@
+/*
+** EPITECH PROJECT, 2022
+** GraphicCorewar
+** File description:
+** server.h
+*/
+
+#pragma once
+
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdint.h>
+#include <ucontext.h>
+#include <time.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <pthread.h>
+#include <netdb.h>
+#include <sys/ioctl.h>
+#include <net/if.h>
+#include <arpa/inet.h>
+#include <stddef.h>
+
+#define PORT 12345
+#define BUFFER_SIZE 1024
+
+char *get_ip(void);
