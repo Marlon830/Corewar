@@ -6,26 +6,41 @@
 */
 
 #include "server.h"
+#include "corewar.h"
 
-void next_server(int serverSocket, struct sockaddr_in clientAddress)
+void send_arena(int argc, char *argv[], int clientSocket, int cycle)
+{
+    char *arena = get_arena_at_cycle(argc, argv, cycle);
+
+    if (arena == NULL || write(clientSocket, arena, 6144) < 0)
+        exit(EXIT_FAILURE);
+}
+
+void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in clientAddress)
 {
     char *ip = get_ip();
     socklen_t clientAddressLength = sizeof(clientAddress);
     int clientSocket;
+    int cycle = 0;
+    char *cmd = malloc(sizeof(char) * 1024);
 
     printf("Adresse IP du serveur : %s\n", ip);
     clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress,
     &clientAddressLength);
     if (clientSocket < 0)
         exit(EXIT_FAILURE);
-    printf("Client connecté !\n");
-    if (send(clientSocket, "Connected", strlen("Connected"), 0) < 0)
-        exit(EXIT_FAILURE);
+    while (1) {
+        read(clientSocket, cmd, 1024);
+        if (cmd[0] == 'C') {
+            cycle = atoi(cmd + 1);
+            send_arena(argc, argv, clientSocket, cycle);
+        }
+    }
     close(serverSocket);
     close(clientSocket);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
     int serverSocket;
     struct sockaddr_in serverAddress, clientAddress;
@@ -45,6 +60,6 @@ int main(void)
         exit(EXIT_FAILURE);
     if (listen(serverSocket, 1) < 0)
         exit(EXIT_FAILURE);
-    next_server(serverSocket, clientAddress);
-    return main();
+    next_server(argc, argv, serverSocket, clientAddress);
+    return 0;
 }
