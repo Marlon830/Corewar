@@ -47,12 +47,11 @@ void write_four_bytes(char *to_write, int pc, int param)
 {
     int k = 3;
 
-    if (pc >= MEM_SIZE || pc < 0)
-        pc = pc % MEM_SIZE;
+    pc = my_modulo(pc, MEM_SIZE);
     for (int i = pc; i < pc + 4; i++) {
-        to_write[i] = 0;
+        to_write[my_modulo(i, MEM_SIZE)] = 0;
         for (int j = 7; j >= 0; j--) {
-            set_bit_at(&to_write[i], j, get_bit_at(param, j + 8 * k));
+            set_bit_at(&to_write[my_modulo(i, MEM_SIZE)], j, get_bit_at(param, j + 8 * k));
         }
         k--;
     }
@@ -63,6 +62,10 @@ int analyze_type(int type, int *act_pc, champion_t *champion, vm_t *vm)
     int param = 0;
 
     if (type == 1) {
+        if (!is_valid_register((int) vm->arena[*act_pc], champion)) {
+            champion->is_invalid_register = true;
+            return 0;
+        }
         param = champion->r[(int) vm->arena[*act_pc]];
         *act_pc += 1;
     }
@@ -98,5 +101,6 @@ champion_t *copy_champion(champion_t *champion)
         new_champ->r[i] = champion->r[i];
     new_champ->is_loading = false;
     new_champ->load_cycle = champion->load_cycle;
+    new_champ->is_invalid_register = champion->is_invalid_register;
     return new_champ;
 }
