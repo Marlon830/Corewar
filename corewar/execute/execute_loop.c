@@ -16,6 +16,10 @@ void cycle_gestion(vm_t *vm)
     if (vm->nbr_live >= NBR_LIVE) {
         vm->cycle_to_die -= CYCLE_DELTA;
         vm->nbr_live -= NBR_LIVE;
+        if (vm->nbr_cycle >= vm->cycle_to_die) {
+            check_alive(vm);
+            vm->nbr_cycle = 0;
+        }
     }
     vm->nbr_cycle++;
 }
@@ -24,9 +28,8 @@ int check_champ_pc(vm_t *vm, champion_t *champ)
 {
     if (champ->is_dead)
         return 0;
-    champ->pc = champ->pc % MEM_SIZE;
-    if ((vm->arena[champ->pc] - 1) > 15 || (vm->arena[champ->pc] - 1) < 0 ||
-    !is_valid_instruction(vm, champ)) {
+    champ->pc = my_modulo(champ->pc, MEM_SIZE);
+    if ((vm->arena[champ->pc] - 1) > 15 || (vm->arena[champ->pc] - 1) < 0) {
         champ->pc += 1;
         return 0;
     }
