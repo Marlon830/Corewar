@@ -125,7 +125,7 @@ void display_arena(char *arena)
     write(1, "\n", 1);
 }
 
-int main()
+int main(void)
 {
     int clientSocket;
     struct sockaddr_in serverAddress;
@@ -150,7 +150,8 @@ int main()
         strcat(cmd, cycle);
         if (send(clientSocket, cmd, strlen(cmd), 0) < 0)
             exit(84);
-        read(clientSocket, arena, 6144);
+        for (int i = 0; i != 6144; i++)
+            read(clientSocket, &arena[i], 1);
         display_arena(arena);
     }
     close(clientSocket);
