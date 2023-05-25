@@ -51,7 +51,8 @@ void write_four_bytes(char *to_write, int pc, int param)
     for (int i = pc; i < pc + 4; i++) {
         to_write[my_modulo(i, MEM_SIZE)] = 0;
         for (int j = 7; j >= 0; j--) {
-            set_bit_at(&to_write[my_modulo(i, MEM_SIZE)], j, get_bit_at(param, j + 8 * k));
+            set_bit_at(&to_write[my_modulo(i, MEM_SIZE)], j,
+            get_bit_at(param, j + 8 * k));
         }
         k--;
     }
@@ -83,7 +84,6 @@ int analyze_type(int type, int *act_pc, champion_t *champion, vm_t *vm)
 champion_t *copy_champion(champion_t *champion)
 {
     champion_t *new_champ = malloc(sizeof(*new_champ));
-
     new_champ->prog_number = champion->prog_number;
     new_champ->load_address = champion->load_address;
     new_champ->alive = champion->alive;

@@ -11,8 +11,10 @@ int get_xor_param1(vm_t *vm, champion_t *champion, int *act_pc, int *param1)
 {
     int type = 0;
 
-    set_bit_int_at(&type, 0, get_bit_at(vm->arena[my_modulo(champion->pc + 1, MEM_SIZE)], 6));
-    set_bit_int_at(&type, 1, get_bit_at(vm->arena[my_modulo(champion->pc + 1, MEM_SIZE)], 7));
+    set_bit_int_at(&type, 0, get_bit_at(vm->arena[my_modulo(champion->pc + 1,
+    MEM_SIZE)], 6));
+    set_bit_int_at(&type, 1, get_bit_at(vm->arena[my_modulo(champion->pc + 1,
+    MEM_SIZE)], 7));
     *param1 = analyze_type(type, act_pc, champion, vm);
     if (champion->is_invalid_register) {
         champion->is_invalid_register = false;
@@ -25,8 +27,10 @@ int get_xor_param2(vm_t *vm, champion_t *champion, int *act_pc, int *param2)
 {
     int type = 0;
 
-    set_bit_int_at(&type, 0, get_bit_at(vm->arena[my_modulo(champion->pc + 1, MEM_SIZE)], 4));
-    set_bit_int_at(&type, 1, get_bit_at(vm->arena[my_modulo(champion->pc + 1, MEM_SIZE)], 5));
+    set_bit_int_at(&type, 0, get_bit_at(vm->arena[my_modulo(champion->pc + 1,
+    MEM_SIZE)], 4));
+    set_bit_int_at(&type, 1, get_bit_at(vm->arena[my_modulo(champion->pc + 1,
+    MEM_SIZE)], 5));
     *param2 = analyze_type(type, act_pc, champion, vm);
     if (champion->is_invalid_register) {
         champion->is_invalid_register = false;

@@ -26,8 +26,10 @@ int get_ldi_param1(vm_t *vm, champion_t *champion, int *act_pc, int *param1)
     int type = 0;
     int copy = 0;
 
-    set_bit_int_at(&type, 0, get_bit_at(vm->arena[my_modulo(champion->pc + 1, MEM_SIZE)], 6));
-    set_bit_int_at(&type, 1, get_bit_at(vm->arena[my_modulo(champion->pc + 1, MEM_SIZE)], 7));
+    set_bit_int_at(&type, 0, get_bit_at(vm->arena[my_modulo
+    (champion->pc + 1, MEM_SIZE)], 6));
+    set_bit_int_at(&type, 1, get_bit_at(vm->arena[my_modulo
+    (champion->pc + 1, MEM_SIZE)], 7));
     *param1 = analyze_type(type, act_pc, champion, vm);
     if (champion->is_invalid_register) {
         champion->is_invalid_register = false;
@@ -43,8 +45,10 @@ int get_ldi_param2(vm_t *vm, champion_t *champion, int *act_pc, int *param2)
 {
     int type = 0;
 
-    set_bit_int_at(&type, 0, get_bit_at(vm->arena[my_modulo(champion->pc + 1, MEM_SIZE)], 4));
-    set_bit_int_at(&type, 1, get_bit_at(vm->arena[my_modulo(champion->pc + 1, MEM_SIZE)], 5));
+    set_bit_int_at(&type, 0, get_bit_at(vm->arena[my_modulo
+    (champion->pc + 1, MEM_SIZE)], 4));
+    set_bit_int_at(&type, 1, get_bit_at(vm->arena[my_modulo
+    (champion->pc + 1, MEM_SIZE)], 5));
     *param2 = analyze_type(type, act_pc, champion, vm);
     if (champion->is_invalid_register) {
         champion->is_invalid_register = false;
@@ -70,7 +74,8 @@ void exec_ldi(vm_t *vm, champion_t *champion)
     if (!is_valid_register((int) vm->arena[act_pc], champion))
         return;
     champion->r[(int) vm->arena[act_pc]] =
-    vm->arena[my_modulo((champion->pc + (param1 + param2) % IDX_MOD), MEM_SIZE)];
+    vm->arena[my_modulo((champion->pc +
+    (param1 + param2) % IDX_MOD), MEM_SIZE)];
     champion->carry = (champion->r[(int) vm->arena[act_pc]] == 0) ? 1 : 0;
     champion->pc += byte_size;
 }
