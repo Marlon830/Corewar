@@ -27,6 +27,7 @@ champion_t *new_champ(char *champ_path, vm_t *vm)
     champ->is_loading = false;
     champ->load_cycle = 0;
     champ->is_dead = false;
+    champ->is_invalid_register = false;
     return champ;
 }
 
