@@ -24,6 +24,7 @@ void socket_button_clicked(app_t *app)
     app->screen = COREWAR;
     PlaySound(app->menu->fxBoom);
     DisableCursor();
+    SetTargetFPS(144);
 }
 
 void next_connect_button_clicked(app_t *app, int clientSocket,
