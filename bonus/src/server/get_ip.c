@@ -6,6 +6,7 @@
 */
 
 #include "server.h"
+#include <string.h>
 
 int get_ip_bis(struct ifreq *ifr, struct ifconf *ifc, int fd)
 {

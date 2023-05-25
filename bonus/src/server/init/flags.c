@@ -1,0 +1,64 @@
+/*
+** EPITECH PROJECT, 2022
+** Corewar
+** File description:
+** flags.c
+*/
+
+#include "init.h"
+
+bool is_arg(char *arg)
+{
+    if (arg != NULL && arg[0] != '-')
+        return true;
+    return false;
+}
+
+int check_dump(char **argv, int id, vm_t *vm)
+{
+    if (!my_strcmp(argv[id], "-dump") && is_arg(argv[id + 1])) {
+        if (vm->nbr_cycle_to_print != -1)
+            return 84;
+        vm->nbr_cycle_to_print = my_getnbr(argv[id + 1]);
+        return 1;
+    }
+    return 0;
+}
+
+int check_next_address(char **argv, int id, vm_t *vm)
+{
+    if (argv[id] == NULL)
+        return 84;
+    if (!my_strcmp(argv[id], "-a") && is_arg(argv[id + 1])) {
+        if (vm->load_address != -1)
+            return 84;
+        vm->load_address = my_getnbr(argv[id + 1]);
+        return 1;
+    }
+    return 0;
+}
+
+int check_next_prog_num(char **argv, int id, vm_t *vm)
+{
+    if (argv[id] == NULL)
+        return 84;
+    if (!my_strcmp(argv[id], "-n") && is_arg(argv[id + 1])) {
+        if (vm->prog_number != -1)
+            return 84;
+        vm->prog_number = my_getnbr(argv[id + 1]);
+        return 1;
+    }
+    return 0;
+}
+
+int check_args(char **argv, int id, vm_t *vm)
+{
+    int flag_return = 0;
+
+    vm->load_address = -1;
+    vm->prog_number = -1;
+    flag_return = check_dump(argv, id, vm);
+    if (flag_return != 0)
+        return flag_return;
+    return check_valid_champ(argv, id, vm);
+}
