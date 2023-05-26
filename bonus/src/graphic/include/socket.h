@@ -22,8 +22,8 @@ typedef enum packet_type {
 } packet_type;
 
 typedef struct server_s {
-    char *arena;
-    char *champ_bytes;
+    char arena[6144];
+    char champ_bytes[6144];
     int *pc;
 } server_t;
 
