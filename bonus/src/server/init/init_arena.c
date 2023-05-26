@@ -41,7 +41,7 @@ int init_arena(vm_t *vm)
 {
     list_t *temp = vm->champ_list;
     champion_t *champ = NULL;
-    int k = 0;
+    int k = 1;
 
     vm->cycles = 0;
     vm->cycle_to_die = CYCLE_TO_DIE;
