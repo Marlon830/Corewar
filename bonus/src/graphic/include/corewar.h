@@ -6,6 +6,7 @@
 */
 
 #include "ray.h"
+#include "socket.h"
 #include <stdio.h>
 
 #pragma once
@@ -108,6 +109,7 @@ typedef struct app_s {
     Vector2 mousePoint;
     bool loop;
     char *ip;
+    packet_t *packet;
 } app_t;
 
 void inputs(app_t *app);
