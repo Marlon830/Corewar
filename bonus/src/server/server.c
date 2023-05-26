@@ -7,6 +7,7 @@
 
 #include "server.h"
 #include "corewar.h"
+#include <string.h>
 
 void send_arena(int argc, char *argv[], int clientSocket, int cycle)
 {
