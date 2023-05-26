@@ -27,8 +27,6 @@ void exec_live(vm_t *vm, champion_t *champion)
 
     while (list_champion_live != NULL) {
         champion_live = list_champion_live->data;
-        if (count == 1)
-            print_live(param, champion_live);
         vm->nbr_live += 1;
         champion_live->nbr_live += 1;
         vm->winner = champion_live;
