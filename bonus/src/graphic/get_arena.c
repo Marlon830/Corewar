@@ -71,13 +71,14 @@ void exchange(app_t *app, int cycle_int)
     sizeof(serverAddress)) < 0)
         exit(84);
     while (!app->corewar->need_get);
+    app->corewar->prev = *app->packet;
     get_cycle(app, cycle_int, clientSocket);
     close(clientSocket);
 }
 
 void get_arena(app_t *app)
 {
-    int cycle_int = 823;
+    int cycle_int = 0;
     while (1) {
         exchange(app, cycle_int);
         cycle_int += 50;
