@@ -27,7 +27,7 @@
 #include <arpa/inet.h>
 #include <stddef.h>
 
-#define PORT 40000
+#define PORT 54321
 #define BUFFER_SIZE 1024
 
 typedef struct packet_s {
