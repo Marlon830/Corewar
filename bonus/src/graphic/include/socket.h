@@ -15,3 +15,9 @@
 #include <arpa/inet.h>
 
 #pragma once
+
+typedef struct packet_s {
+    char *arena;
+    char *champ_bytes;
+    int *pc;
+} packet_t;
