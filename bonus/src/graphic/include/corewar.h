@@ -6,6 +6,7 @@
 */
 
 #include "ray.h"
+#include "socket.h"
 #include <stdio.h>
 
 #pragma once

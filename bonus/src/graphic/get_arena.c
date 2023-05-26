@@ -25,7 +25,7 @@
 #include <arpa/inet.h>
 #include <stddef.h>
 #include "corewar.h"
-#include "socket.h"
+#include <string.h>
 
 #define PORT 13456
 #define BUFFER_SIZE 1024
@@ -152,7 +152,7 @@ void get_arena(app_t *app)
                 exit(84);
             if (read(clientSocket, &server_packet, sizeof(server_t)) < 0)
                 exit(84);
-            app->arena = server_packet.arena;
+            app->corewar->arena = server_packet.arena;
             app->corewar->need_get = 0;
             cycle_int++;
         }
