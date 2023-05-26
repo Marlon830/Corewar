@@ -61,9 +61,6 @@ corewar_t *init_corewar(app_t *app)
 
     (void)app;
     corewar->param = init_text((Vector3){0, 0, 0}, 5.0f);
-    corewar->arena = malloc(sizeof(char) * (6144));
-    for (int i = 0; i < 6144; i++)
-        corewar->arena[i] = 0;
     corewar->colorMode = init_color_mode();
     corewar->camera = (Camera3D){0};
     corewar->camera.position = (Vector3){10.0f, 10.0f, 10.0f};

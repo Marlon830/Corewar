@@ -91,7 +91,7 @@ typedef struct corewar_s {
     color_mode_t **colorMode;
     Camera3D camera;
     d_text_t *param;
-    char *arena;
+    server_t prev;
     int need_get;
 } corewar_t;
 
