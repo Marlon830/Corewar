@@ -7,6 +7,25 @@
 
 #include "corewar.h"
 
+//bleu, vert, rose, rouge
+
+color_mode_t **init_color_mode(void)
+{
+    color_mode_t **color_mode = malloc(sizeof(color_mode_t *) * 5);
+
+    for (int i = 0; i < 5; i++) {
+        color_mode[i] = malloc(sizeof(color_mode_t));
+        color_mode[i]->cube_color = BLACK;
+        color_mode[i]->text_color = DARKPURPLE;
+    }
+    color_mode[1]->wire_color = BLUE;
+    color_mode[2]->wire_color = GREEN;
+    color_mode[3]->wire_color = PINK;
+    color_mode[4]->wire_color = RED;
+    color_mode[0]->wire_color = DARKGRAY;
+    return color_mode;
+}
+
 char_info_t *init_char_info(Rectangle srcRec, Font font, Vector3 position)
 {
     char_info_t *char_info = malloc(sizeof(char_info_t));
@@ -44,7 +63,7 @@ corewar_t *init_corewar(app_t *app)
     corewar->arena = malloc(sizeof(char) * (6144));
     for (int i = 0; i < 6144; i++)
         corewar->arena[i] = 0;
-    corewar->colorMode = (color_mode_t){BLACK, GREEN, DARKGREEN, BLACK};
+    corewar->colorMode = init_color_mode();
     corewar->camera = (Camera3D){0};
     corewar->camera.position = (Vector3){10.0f, 10.0f, 10.0f};
     corewar->camera.target = (Vector3){0.0f, 0.0f, 0.0f};

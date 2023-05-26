@@ -64,18 +64,20 @@ void draw_corewar(app_t *app)
 {
     int k = 0;
     char hex[3] = {0};
+    color_mode_t *color;
     UpdateCamera(&app->corewar->camera, CAMERA_PERSPECTIVE);
-    ClearBackground(app->corewar->colorMode.background);
+    ClearBackground(BLACK);
     BeginMode3D(app->corewar->camera);
     for (int i = 0; i < 96 * 2; i += 2) {
         for (int j = 0; j < 64 * 2; j += 2) {
+            color = app->corewar->colorMode[app->packet->champ_bytes[k]];
             DrawCube((Vector3){ j, 0.5, i }, 1.0f, 1.0f, 1.0f,
-            app->corewar->colorMode.cube_color);
+            color->cube_color);
             DrawCubeWires((Vector3){ j, 0.5, i }, 1.0f, 1.0f, 1.0f,
-            app->corewar->colorMode.wire_color);
+            color->wire_color);
             app->corewar->param->position = (Vector3){j - 0.35, 1.1, i - 0.2};
             if (app->corewar->need_get == 0) {
-                charToHex(app->corewar->arena[k], hex);
+                charToHex(app->packet->arena[k], hex);
                 drawtext3d(app->corewar->param, hex);
                 k++;
             }
