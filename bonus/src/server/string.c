@@ -6,6 +6,7 @@
 */
 
 #include "corewar.h"
+#include "server.h"
 
 int my_strcmp(char *s1, char *s2)
 {
@@ -46,15 +47,16 @@ int my_strlen(char *str)
     return i;
 }
 
-int my_strcory(char *dest, champion_t *champ)
+int my_strcory(char *dest, champion_t *champ, vm_t *vm, int champ_val)
 {
     int i = champ->load_address;
     int j = 0;
 
     for (; j != champ->header->prog_size; j++) {
-        if (dest[i] == 0)
+        if (dest[i] == 0) {
             dest[i] = champ->body[j];
-        else
+            vm->champ_bytes[i] = champ_val;
+        } else
             return 84;
         i++;
     }

@@ -36,9 +36,9 @@ typedef enum packet_type {
 } packet_type;
 
 typedef struct server_s {
-    char *arena;
-    char *champ_bytes;
-    int *pc;
+    char arena[6144];
+    char champ_bytes[6144];
+    int my_errno;
 } server_t;
 
 typedef struct client_s {

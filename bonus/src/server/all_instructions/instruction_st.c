@@ -47,8 +47,8 @@ void exec_st(vm_t *vm, champion_t *champion)
     if (type == 3) {
         param2 = get_value_of_param(vm, type, my_modulo(champion->pc + 3,
         MEM_SIZE));
-        write_four_bytes(vm->arena, my_modulo(champion->pc + param2 % IDX_MOD,
-        MEM_SIZE), param1);
+        write_four_bytes(vm, my_modulo(champion->pc + param2 % IDX_MOD,
+        MEM_SIZE), param1, champion);
     }
     champion->pc += byte_size;
 }

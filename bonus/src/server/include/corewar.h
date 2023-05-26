@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include "my_string.h"
 #include "op.h"
+#include "server.h"
 
 #define live 0x01
 #define ld 0x02
@@ -70,6 +71,7 @@ typedef struct vm_s {
     int load_address;
     int nb_champ;
     char *arena;
+    char champ_bytes[6144];
     int cycles;
     int cycle_to_die;
     int nbr_live;
@@ -85,7 +87,7 @@ void display_arena(vm_t *vm);
 void display_vm_data(vm_t *vm);
 int handling_error(int argc, char **argv, vm_t *vm);
 void fill_champ_list(vm_t *vm);
-int my_strcory(char *dest, champion_t *champ);
+int my_strcory(char *dest, champion_t *champ, vm_t *vm, int champ_val);
 int init_arena(vm_t *vm);
 int verif_whos_alive(vm_t *vm);
 int nb_of_live(vm_t *vm);
@@ -97,7 +99,7 @@ void set_bit_at(char *x, int n, int value);
 void set_bit_int_at(int *x, int n, int value);
 int get_live_params(vm_t *vm, champion_t *champion);
 list_t *get_champion_with_prog_number(list_t *champ_list, int prog_number);
-void write_four_bytes(char *to_write, int pc, int param);
+void write_four_bytes(vm_t *vm, int pc, int param, champion_t *champ);
 int get_value_of_param(vm_t *vm, int type, int pc);
 int analyze_type(int type, int *act_pc, champion_t *champion, vm_t *vm);
 int main_loop(vm_t *vm, int cycle_to_stop);
@@ -106,7 +108,8 @@ void init_exec_func(vm_t *vm);
 champion_t *copy_champion(champion_t *champion);
 int is_valid_instruction(vm_t *vm, champion_t *champ);
 int is_valid_register(int reg, champion_t *champ);
-char *get_arena_at_cycle(int argc, char **argv, int cycle);
+server_t get_arena_at_cycle(int argc, char **argv, int cycle);
+int get_nb_champ(champion_t *champ, list_t *champ_list);
 
 void exec_live(vm_t *vm, champion_t *champ);
 void exec_ld(vm_t *vm, champion_t *champ);
