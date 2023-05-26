@@ -25,6 +25,7 @@
 #include <arpa/inet.h>
 #include <stddef.h>
 #include "corewar.h"
+#include "socket.h"
 
 #define PORT 13456
 #define BUFFER_SIZE 1024
@@ -130,12 +131,10 @@ void get_arena(app_t *app)
 {
     int clientSocket;
     struct sockaddr_in serverAddress;
-    char *cmd = malloc(sizeof(char) * 1024);
-    char *cycle = malloc(sizeof(char) * 1024);
-    char *c = malloc(sizeof(char) * 10);
+    client_t client_packet = {0};
+    server_t server_packet;
+    int cycle_int = 0;
 
-    c[0] = '0';
-    c[1] = '\0';
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket < 0)
         exit(84);
@@ -145,21 +144,18 @@ void get_arena(app_t *app)
     if (connect(clientSocket, (struct sockaddr *)&serverAddress,
     sizeof(serverAddress)) < 0)
         exit(84);
+    client_packet.type = CYCLE;
     while (1) {
         if (app->corewar->need_get) {
-            cmd[0] = 'C';
-            cmd[1] = '\0';
-            strcat(cmd, c);
-            if (send(clientSocket, cmd, strlen(cmd), 0) < 0)
+            client_packet.value = cycle_int;
+            if (send(clientSocket, &client_packet, sizeof(client_t), 0) < 0)
                 exit(84);
-            for (int i = 0; i != 6144; i++)
-                read(clientSocket, &app->corewar->arena[i], 1);
+            if (read(clientSocket, &server_packet, sizeof(server_t)) < 0)
+                exit(84);
+            app->arena = server_packet.arena;
             app->corewar->need_get = 0;
-            c[0] = c[0] + 1;
+            cycle_int++;
         }
     }
-    free(cmd);
-    free(cycle);
-    free(c);
     close(clientSocket);
 }
