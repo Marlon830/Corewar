@@ -27,6 +27,9 @@ app_t *init_app(void)
     app->connect = init_connect(app);
     app->socket = init_socket(app);
     app->corewar = init_corewar(app);
+    app->packet = malloc(sizeof(server_t));
+    memset(app->packet->arena, 0, 6144);
+    memset(app->packet->champ_bytes, 0, 6144);
     return app;
 }
 
