@@ -24,6 +24,7 @@ void exec_live(vm_t *vm, champion_t *champion)
     list_t *list_champion_live =
     get_champion_with_prog_number(vm->champ_list, param);
     int count = 1;
+    int champ_val = 0;
 
     while (list_champion_live != NULL) {
         champion_live = list_champion_live->data;
@@ -32,6 +33,8 @@ void exec_live(vm_t *vm, champion_t *champion)
         vm->winner = champion_live;
         list_champion_live = list_champion_live->next;
         count++;
+        champ_val = get_nb_champ(champion_live, vm->champ_list);
+        vm->lives[champ_val - 1] = vm->cycles;
     }
     champion->pc += byte_size;
 }

@@ -29,6 +29,8 @@ server_t get_arena_at_cycle(int argc, char **argv, int cycle)
     champion_t *champ;
     list_t *champ_list;
 
+    for (int i = 0; i != 4; i++)
+        vm->lives[i] = -1;
     if (handling_error(argc, argv, vm)) {
         server.my_errno = -1;
         return server;
@@ -51,5 +53,7 @@ server_t get_arena_at_cycle(int argc, char **argv, int cycle)
         server.champ_bytes[champ->pc] = 5;
         champ_list = champ_list->next;
     }
+    for (int i = 0; i < 4; i++)
+        server.lives[i] = vm->lives[i];
     return server;
 }

@@ -72,6 +72,7 @@ typedef struct vm_s {
     int nb_champ;
     char *arena;
     char champ_bytes[6144];
+    int lives[4];
     int cycles;
     int cycle_to_die;
     int nbr_live;
