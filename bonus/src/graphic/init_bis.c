@@ -11,7 +11,7 @@
 
 color_mode_t **init_color_mode(void)
 {
-    color_mode_t **color_mode = malloc(sizeof(color_mode_t *) * 5);
+    color_mode_t **color_mode = malloc(sizeof(color_mode_t *) * 6);
 
     for (int i = 0; i < 6; i++) {
         color_mode[i] = malloc(sizeof(color_mode_t));

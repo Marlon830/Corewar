@@ -133,7 +133,7 @@ void get_arena(app_t *app)
     struct sockaddr_in serverAddress;
     client_t client_packet = {0};
     server_t server_packet;
-    int cycle_int = 0;
+    int cycle_int = 16;
     int bytesReceived = 0;
     int totalBytesExpected = sizeof(server_packet);
 
@@ -150,11 +150,11 @@ void get_arena(app_t *app)
     while (1) {
         if (app->corewar->need_get) {
             client_packet.value = cycle_int;
-            if (send(clientSocket, &client_packet, sizeof(client_packet), 0) < 0)
+            if (write(clientSocket, &client_packet, sizeof(client_packet)) < 0)
                 exit(84);
             while (bytesReceived < totalBytesExpected) {
                 int remainingBytes = totalBytesExpected - bytesReceived;
-                int receivedBytes = recv(clientSocket, ((char*)&server_packet) + bytesReceived, remainingBytes, 0);
+                int receivedBytes = read(clientSocket, ((char*)&server_packet) + bytesReceived, remainingBytes);
                 if (receivedBytes <= 0)
                     exit(84);
                 bytesReceived += receivedBytes;
