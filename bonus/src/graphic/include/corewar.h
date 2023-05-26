@@ -147,3 +147,4 @@ corewar_t *init_corewar(app_t *app);
 
 void push(list_t **list, void *elt);
 void charToHex(char c, char hexa[3]);
+void display_arena(char *arena);
