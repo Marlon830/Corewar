@@ -111,6 +111,7 @@ typedef struct app_s {
     bool loop;
     char *ip;
     server_t *packet;
+    int next_cycle;
 } app_t;
 
 void inputs(app_t *app);
