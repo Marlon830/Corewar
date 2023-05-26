@@ -38,17 +38,15 @@ void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in cl
         perror("socket");
         exit(EXIT_FAILURE);
     }
-    while (1) {
-        while ((j = read(clientSocket, &client, sizeof(client))) == 0);
-        if (client.type == CYCLE) {
-            send_arena(argc, argv, clientSocket, client.value);
-        }
+    while ((j = read(clientSocket, &client, sizeof(client))) == 0);
+    if (client.type == CYCLE) {
+        send_arena(argc, argv, clientSocket, client.value);
     }
     close(serverSocket);
     close(clientSocket);
 }
 
-int main(int argc, char **argv)
+int new_server(int argc, char **argv)
 {
     int serverSocket;
     struct sockaddr_in serverAddress, clientAddress;
@@ -78,4 +76,11 @@ int main(int argc, char **argv)
     }
     next_server(argc, argv, serverSocket, clientAddress);
     return 0;
+}
+
+int main(int argc, char **argv)
+{
+    while (1) {
+        new_server(argc, argv);
+    }
 }
