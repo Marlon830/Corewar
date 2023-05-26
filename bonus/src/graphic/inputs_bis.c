@@ -16,6 +16,6 @@ void corewar_input(app_t *app)
 {
     if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
         PlaySound(app->menu->fxBoom);
-    if (IsKeyReleased(KEY_SPACE))
+    if (app->framesCounter % app->next_cycle == 0)
         app->corewar->need_get = true;
 }
