@@ -133,7 +133,7 @@ void get_arena(app_t *app)
     struct sockaddr_in serverAddress;
     client_t client_packet = {0};
     server_t server_packet;
-    int cycle_int = 16;
+    int cycle_int = 24;
     int bytesReceived = 0;
     int totalBytesExpected = sizeof(server_packet);
 
@@ -154,17 +154,21 @@ void get_arena(app_t *app)
                 exit(84);
             while (bytesReceived < totalBytesExpected) {
                 int remainingBytes = totalBytesExpected - bytesReceived;
-                int receivedBytes = read(clientSocket, ((char*)&server_packet) + bytesReceived, remainingBytes);
+                int receivedBytes = read(clientSocket, ((server_t *)&server_packet) + bytesReceived, remainingBytes);
                 if (receivedBytes <= 0)
                     exit(84);
                 bytesReceived += receivedBytes;
             }
             for (int i = 0; i != 6144; i++) {
+                printf("%x ", server_packet.champ_bytes[i]);
                 app->packet->arena[i] = server_packet.arena[i];
                 app->packet->champ_bytes[i] = server_packet.champ_bytes[i];
             }
             app->packet->my_errno = server_packet.my_errno;
             app->corewar->need_get = 0;
+            //for (int i= 0; i < 6144; i++)
+                //printf("%x ", app->packet->champ_bytes[i]);
+            printf("\n\n\n");
             cycle_int++;
         }
     }
