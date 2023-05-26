@@ -11,8 +11,10 @@
 void send_arena(int argc, char *argv[], int clientSocket, int cycle)
 {
     char *arena = get_arena_at_cycle(argc, argv, cycle);
+    server_t server = {0};
 
-    if (arena == NULL || write(clientSocket, arena, 6144) < 0)
+    strcpy(server.arena, arena);
+    if (arena == NULL || write(clientSocket, &server, sizeof(server)) < 0)
         exit(EXIT_FAILURE);
 }
 
@@ -23,20 +25,25 @@ void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in cl
     int clientSocket;
     int cycle = 0;
     char *cmd = malloc(sizeof(char) * 1024);
-    memset(cmd, 0, 1024);
+    client_t client;
 
+    memset(cmd, 0, 1024);
     printf("Adresse IP du serveur : %s\n", ip);
     clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress,
     &clientAddressLength);
     if (clientSocket < 0)
         exit(EXIT_FAILURE);
     while (1) {
-        read(clientSocket, cmd, 1024);
-        if (cmd[0] == 'C') {
-            cycle = atoi(cmd + 1);
-            send_arena(argc, argv, clientSocket, cycle);
+        read(clientSocket, &client, sizeof(client));;
+        if (client.type == CYCLE) {
+            send_arena(argc, argv, clientSocket, client.value);
         }
-        memset(cmd, 0, 1024);
+        // read(clientSocket, cmd, 1024);
+        // if (cmd[0] == 'C') {
+        //     cycle = atoi(cmd + 1);
+        //     send_arena(argc, argv, clientSocket, cycle);
+        // }
+        // memset(cmd, 0, 1024);
     }
     close(serverSocket);
     close(clientSocket);

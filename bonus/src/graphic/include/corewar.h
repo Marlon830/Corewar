@@ -109,7 +109,7 @@ typedef struct app_s {
     Vector2 mousePoint;
     bool loop;
     char *ip;
-    packet_t *packet;
+    server_t *packet;
 } app_t;
 
 void inputs(app_t *app);
