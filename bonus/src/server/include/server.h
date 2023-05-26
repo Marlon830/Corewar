@@ -30,4 +30,10 @@
 #define PORT 40000
 #define BUFFER_SIZE 1024
 
+typedef struct packet_s {
+    char *arena;
+    char *champ_bytes;
+    int *pc;
+} packet_t;
+
 char *get_ip(void);

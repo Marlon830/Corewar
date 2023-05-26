@@ -14,7 +14,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <fcntl.h>
-#include "string.h"
+#include "my_string.h"
 #include "op.h"
 
 #define live 0x01
