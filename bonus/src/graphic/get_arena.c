@@ -152,7 +152,7 @@ void get_arena(app_t *app)
                 exit(84);
             if (read(clientSocket, &server_packet, sizeof(server_t)) < 0)
                 exit(84);
-            app->packet = server_packet;
+            *app->packet = server_packet;
             app->corewar->need_get = 0;
             cycle_int++;
         }
