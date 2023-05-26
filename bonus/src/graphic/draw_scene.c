@@ -92,4 +92,8 @@ void draw_corewar(app_t *app)
         }
     }
     EndMode3D();
+    for (int i = 0; i != 4; i++) {
+        if (app->packet->lives[i] != -1)
+            DrawText(TextFormat("Champion %d last live: %d", i + 1, app->packet->lives[i]), 10, 10 + (i * 20), 20, WHITE);
+    }
 }
