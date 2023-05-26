@@ -69,11 +69,11 @@ void draw_corewar(app_t *app)
     BeginMode3D(app->corewar->camera);
     for (int i = 0; i < 96 * 2; i += 2) {
         for (int j = 0; j < 64 * 2; j += 2) {
-            DrawCube((Vector3){ i, 0.5, j }, 1.0f, 1.0f, 1.0f,
+            DrawCube((Vector3){ j, 0.5, i }, 1.0f, 1.0f, 1.0f,
             app->corewar->colorMode.cube_color);
-            DrawCubeWires((Vector3){ i, 0.5, j }, 1.0f, 1.0f, 1.0f,
+            DrawCubeWires((Vector3){ j, 0.5, i }, 1.0f, 1.0f, 1.0f,
             app->corewar->colorMode.wire_color);
-            app->corewar->param->position = (Vector3){i - 0.35, 1.1, j - 0.2};
+            app->corewar->param->position = (Vector3){j - 0.35, 1.1, i - 0.2};
             if (app->corewar->need_get == 0) {
                 charToHex(app->corewar->arena[k], hex);
                 drawtext3d(app->corewar->param, hex);

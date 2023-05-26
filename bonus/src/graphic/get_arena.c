@@ -26,7 +26,7 @@
 #include <stddef.h>
 #include "corewar.h"
 
-#define PORT 13456
+#define PORT 40000
 #define BUFFER_SIZE 1024
 
 void my_revstr(char *str)
