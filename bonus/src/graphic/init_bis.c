@@ -13,7 +13,7 @@ color_mode_t **init_color_mode(void)
 {
     color_mode_t **color_mode = malloc(sizeof(color_mode_t *) * 5);
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         color_mode[i] = malloc(sizeof(color_mode_t));
         color_mode[i]->cube_color = BLACK;
         color_mode[i]->text_color = DARKPURPLE;
@@ -22,6 +22,7 @@ color_mode_t **init_color_mode(void)
     color_mode[2]->wire_color = GREEN;
     color_mode[3]->wire_color = PINK;
     color_mode[4]->wire_color = RED;
+    color_mode[5]->wire_color = WHITE;
     color_mode[0]->wire_color = DARKGRAY;
     return color_mode;
 }
