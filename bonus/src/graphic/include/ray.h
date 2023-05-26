@@ -53,7 +53,6 @@ typedef struct color_mode_s {
     Color cube_color;
     Color wire_color;
     Color text_color;
-    Color background;
 } color_mode_t;
 
 void drawtext3d(d_text_t *param, const char *text);

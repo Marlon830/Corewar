@@ -8,6 +8,7 @@
 #include "ray.h"
 #include "socket.h"
 #include <stdio.h>
+#include "socket.h"
 
 #pragma once
 
@@ -87,7 +88,7 @@ typedef struct socket_s {
 } socket_t;
 
 typedef struct corewar_s {
-    color_mode_t colorMode;
+    color_mode_t **colorMode;
     Camera3D camera;
     d_text_t *param;
     char *arena;
@@ -109,6 +110,7 @@ typedef struct app_s {
     Vector2 mousePoint;
     bool loop;
     char *ip;
+    packet_t *packet;
 } app_t;
 
 void inputs(app_t *app);

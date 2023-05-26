@@ -101,7 +101,7 @@ void display_line_pos(int i)
     }
     write(1, "\n", 1);
     write(1, hex, strlen(hex));
-    for (int i = 0; i != 4 - strlen(hex); i++)
+    for (int i = 0; i != 4 - (int) strlen(hex); i++)
         write(1, " ", 1);
     write(1, " : ", 3);
 }
