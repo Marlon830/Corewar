@@ -45,12 +45,6 @@ void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in cl
         if (client.type == CYCLE) {
             send_arena(argc, argv, clientSocket, client.value);
         }
-        // read(clientSocket, cmd, 1024);
-        // if (cmd[0] == 'C') {
-        //     cycle = atoi(cmd + 1);
-        //     send_arena(argc, argv, clientSocket, cycle);
-        // }
-        // memset(cmd, 0, 1024);
     }
     close(serverSocket);
     close(clientSocket);
