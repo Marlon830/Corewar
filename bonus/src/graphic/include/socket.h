@@ -24,7 +24,7 @@ typedef enum packet_type {
 typedef struct server_s {
     char arena[6144];
     char champ_bytes[6144];
-    int *pc;
+    int my_errno;
 } server_t;
 
 typedef struct client_s {

@@ -33,7 +33,7 @@
 typedef struct packet_s {
     char *arena;
     char *champ_bytes;
-    int *pc;
+    int my_errno;
 } packet_t;
 
 char *get_ip(void);
