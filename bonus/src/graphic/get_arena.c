@@ -34,7 +34,6 @@ void get_cycle(app_t *app, int cycle_int, int clientSocket)
 {
     client_t client_packet = {0};
     server_t server_packet;
-    int cycle_int = 24;
     int bytesReceived = 0;
     int totalBytesExpected = sizeof(server_packet);
 
@@ -78,10 +77,10 @@ void exchange(app_t *app, int cycle_int)
 
 void get_arena(app_t *app)
 {
-    int cycle_int = 0;
+    int cycle_int = 823;
     while (1) {
         exchange(app, cycle_int);
-        cycle_int++;
+        cycle_int += 50;
     }
     
 }
