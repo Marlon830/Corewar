@@ -112,6 +112,7 @@ typedef struct app_s {
     char *ip;
     server_t *packet;
     int next_cycle;
+    bool is_ip_clicked;
 } app_t;
 
 void inputs(app_t *app);

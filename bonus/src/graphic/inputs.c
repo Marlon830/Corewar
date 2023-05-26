@@ -47,10 +47,12 @@ void connect_input(app_t *app)
         app->connect->mouseOnText = true;
     else
         app->connect->mouseOnText = false;
-    if (app->connect->mouseOnText)
-        text_box_input(app);
+    if (app->connect->mouseOnText);
+        //le booléen
     else
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+    // if (/*lebooléen*/)
+    //     text_box_input(app);
 }
 
 void inputs(app_t *app)
