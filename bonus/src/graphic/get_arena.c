@@ -134,6 +134,8 @@ void get_arena(app_t *app)
     client_t client_packet = {0};
     server_t server_packet;
     int cycle_int = 0;
+    int bytesReceived = 0;
+    int totalBytesExpected = sizeof(server_packet);
 
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket < 0)
@@ -148,11 +150,20 @@ void get_arena(app_t *app)
     while (1) {
         if (app->corewar->need_get) {
             client_packet.value = cycle_int;
-            if (send(clientSocket, &client_packet, sizeof(client_t), 0) < 0)
+            if (send(clientSocket, &client_packet, sizeof(client_packet), 0) < 0)
                 exit(84);
-            if (read(clientSocket, &server_packet, sizeof(server_t)) < 0)
-                exit(84);
-            *app->packet = server_packet;
+            while (bytesReceived < totalBytesExpected) {
+                int remainingBytes = totalBytesExpected - bytesReceived;
+                int receivedBytes = recv(clientSocket, ((char*)&server_packet) + bytesReceived, remainingBytes, 0);
+                if (receivedBytes <= 0)
+                    exit(84);
+                bytesReceived += receivedBytes;
+            }
+            for (int i = 0; i != 6144; i++) {
+                app->packet->arena[i] = server_packet.arena[i];
+                app->packet->champ_bytes[i] = server_packet.champ_bytes[i];
+            }
+            app->packet->my_errno = server_packet.my_errno;
             app->corewar->need_get = 0;
             cycle_int++;
         }
