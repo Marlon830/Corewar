@@ -43,15 +43,17 @@ int get_nb_byte(char instruction, char bytecode)
     return count + 2;
 }
 
-void write_four_bytes(char *to_write, int pc, int param)
+void write_four_bytes(vm_t *vm, int pc, int param, champion_t *champ)
 {
     int k = 3;
+    int champ_val = get_nb_champ(champ, vm->champ_list);
 
     pc = my_modulo(pc, MEM_SIZE);
     for (int i = pc; i < pc + 4; i++) {
-        to_write[my_modulo(i, MEM_SIZE)] = 0;
+        vm->arena[my_modulo(i, MEM_SIZE)] = 0;
+        vm->champ_bytes[my_modulo(i, MEM_SIZE)] = champ_val;
         for (int j = 7; j >= 0; j--) {
-            set_bit_at(&to_write[my_modulo(i, MEM_SIZE)], j,
+            set_bit_at(&vm->arena[my_modulo(i, MEM_SIZE)], j,
             get_bit_at(param, j + 8 * k));
         }
         k--;

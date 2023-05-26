@@ -6,6 +6,7 @@
 */
 
 #include "init.h"
+#include "server.h"
 
 void init_exec_func(vm_t *vm)
 {
@@ -40,6 +41,7 @@ int init_arena(vm_t *vm)
 {
     list_t *temp = vm->champ_list;
     champion_t *champ = NULL;
+    int k = 0;
 
     vm->cycles = 0;
     vm->cycle_to_die = CYCLE_TO_DIE;
@@ -47,9 +49,9 @@ int init_arena(vm_t *vm)
     vm->arena = malloc(sizeof(char) * MEM_SIZE);
     for (int i = 0; i < MEM_SIZE; i++)
         vm->arena[i] = 0;
-    for (; temp != NULL; temp = temp->next) {
+    for (; temp != NULL; temp = temp->next, k++) {
         champ = (champion_t *)temp->data;
-        if (my_strcory(vm->arena, champ) == 84)
+        if (my_strcory(vm->arena, champ, vm, k) == 84)
             return 84;
     }
     init_exec_func(vm);

@@ -27,7 +27,7 @@
 #include <arpa/inet.h>
 #include <stddef.h>
 
-#define PORT 13456
+#define PORT 54321
 #define BUFFER_SIZE 1024
 
 typedef enum packet_type {
@@ -36,9 +36,9 @@ typedef enum packet_type {
 } packet_type;
 
 typedef struct server_s {
-    char *arena;
-    char *champ_bytes;
-    int *pc;
+    char arena[6144];
+    char champ_bytes[6144];
+    int my_errno;
 } server_t;
 
 typedef struct client_s {
