@@ -24,7 +24,6 @@ void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in cl
     char *ip = get_ip();
     socklen_t clientAddressLength = sizeof(clientAddress);
     int clientSocket;
-    int cycle = 0;
     char *cmd = malloc(sizeof(char) * 1024);
     client_t client;
 
