@@ -14,7 +14,7 @@ void send_arena(int argc, char *argv[], int clientSocket, int cycle)
     server_t server = get_arena_at_cycle(argc, argv, cycle);
     int j = 0;
 
-    if (server.my_errno == -1 || (j = send(clientSocket, &server, sizeof(server), 0)) < 0) {
+    if (server.my_errno == -1 || (j = write(clientSocket, &server, sizeof(server))) < 0) {
         perror("socket");
         exit(EXIT_FAILURE);
     }
@@ -39,18 +39,10 @@ void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in cl
         exit(EXIT_FAILURE);
     }
     while (1) {
-
-        while ((j = recv(clientSocket, &client, sizeof(client), 0)) == 0);
-        printf("nb read : %d\n", j);
+        while ((j = read(clientSocket, &client, sizeof(client))) == 0);
         if (client.type == CYCLE) {
             send_arena(argc, argv, clientSocket, client.value);
         }
-        // read(clientSocket, cmd, 1024);
-        // if (cmd[0] == 'C') {
-        //     cycle = atoi(cmd + 1);
-        //     send_arena(argc, argv, clientSocket, cycle);
-        // }
-        // memset(cmd, 0, 1024);
     }
     close(serverSocket);
     close(clientSocket);
