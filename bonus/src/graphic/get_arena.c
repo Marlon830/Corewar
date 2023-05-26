@@ -53,6 +53,9 @@ void get_cycle(app_t *app, int cycle_int, int clientSocket)
         app->packet->champ_bytes[i] = server_packet.champ_bytes[i];
     }
     app->packet->my_errno = server_packet.my_errno;
+    for (int i = 0; i != 4; i++) {
+        app->packet->lives[i] = server_packet.lives[i];
+    }
     app->corewar->need_get = 0;
 }
 
@@ -81,7 +84,7 @@ void get_arena(app_t *app)
     int cycle_int = 0;
     while (1) {
         exchange(app, cycle_int);
-        cycle_int += 50;
+        cycle_int += 150;
     }
     
 }
