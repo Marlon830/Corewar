@@ -70,7 +70,8 @@ void draw_corewar(app_t *app)
     BeginMode3D(app->corewar->camera);
     for (int i = 0; i < 96 * 2; i += 2) {
         for (int j = 0; j < 64 * 2; j += 2) {
-            color = app->corewar->colorMode[app->packet->champ_bytes[k]];
+            color = app->corewar->colorMode[(int)app->packet->champ_bytes[k]];
+            app->corewar->param->tint = color->text_color;
             DrawCube((Vector3){ j, 0.5, i }, 1.0f, 1.0f, 1.0f,
             color->cube_color);
             DrawCubeWires((Vector3){ j, 0.5, i }, 1.0f, 1.0f, 1.0f,

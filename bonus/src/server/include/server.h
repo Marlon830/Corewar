@@ -30,10 +30,20 @@
 #define PORT 54321
 #define BUFFER_SIZE 1024
 
-typedef struct packet_s {
+typedef enum packet_type {
+    CYCLE = 0,
+    OTHER
+} packet_type;
+
+typedef struct server_s {
     char *arena;
     char *champ_bytes;
-    int my_errno;
-} packet_t;
+    int *pc;
+} server_t;
+
+typedef struct client_s {
+    enum packet_type type;
+    int value;
+} client_t;
 
 char *get_ip(void);
