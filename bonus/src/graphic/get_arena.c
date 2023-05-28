@@ -53,8 +53,11 @@ void get_cycle(app_t *app, int cycle_int, int clientSocket)
         app->packet->champ_bytes[i] = server_packet.champ_bytes[i];
     }
     app->packet->my_errno = server_packet.my_errno;
-    for (int i = 0; i != 4; i++)
+    for (int i = 0; i != 4; i++) {
         app->packet->lives[i] = server_packet.lives[i];
+        strcpy(app->packet->champ_name[i], server_packet.champ_name[i]);
+    }
+    app->packet->winner = server_packet.winner;
     app->corewar->need_get = 0;
 }
 
@@ -93,6 +96,8 @@ void get_arena(app_t *app)
         if (app->corewar->cycle_int < 0)
             app->corewar->cycle_int = 0;
         exchange(app, app->corewar->cycle_int);
+        if (app->packet->winner != -1)
+            app->corewar->is_playing = false;
         if (app->corewar->is_cycling) {
             app->corewar->is_playing = false;
             app->corewar->is_cycling = false;
