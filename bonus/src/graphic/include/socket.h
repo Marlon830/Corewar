@@ -34,3 +34,6 @@ typedef struct client_s {
     enum packet_type type;
     int value;
 } client_t;
+
+#define PORT 54321
+#define BUFFER_SIZE 1024

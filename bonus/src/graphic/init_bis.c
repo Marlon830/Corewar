@@ -56,7 +56,6 @@ d_text_t *init_text(Vector3 pos, float size)
 corewar_t *init_corewar(app_t *app)
 {
     corewar_t *corewar = malloc(sizeof(corewar_t));
-
     (void)app;
     corewar->param = init_text((Vector3){0, 0, 0}, 5.0f);
     corewar->colorMode = init_color_mode();
@@ -76,4 +75,21 @@ corewar_t *init_corewar(app_t *app)
     corewar->save_speed = 1;
     corewar->cycle_int = 0;
     return corewar;
+}
+
+socket_t *init_socket(app_t *app)
+{
+    socket_t *sockets = malloc(sizeof(socket_t));
+    button_t *tmp = NULL;
+
+    (void)app;
+    sockets->background = LoadTexture("src/graphic/assets/background.png");
+    sockets->fxBoom = LoadSound("src/graphic/assets/boom.ogg");
+    sockets->buttons = NULL;
+    tmp = create_button("src/graphic/assets/play_button.png",
+    (Vector2){app->screenWidth / 2 - 150, app->screenHeight / 2 + 175},
+    (Vector2){300, 150}, 1);
+    tmp->clicked = &socket_button_clicked;
+    push(&sockets->buttons, tmp);
+    return sockets;
 }

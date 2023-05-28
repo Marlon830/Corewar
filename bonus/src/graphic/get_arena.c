@@ -27,8 +27,22 @@
 #include "corewar.h"
 #include <string.h>
 
-#define PORT 54321
-#define BUFFER_SIZE 1024
+#include "socket.h"
+
+void get_cycle_bis(app_t *app, server_t *server_packet)
+{
+    for (int i = 0; i != 6144; i++) {
+        app->packet->arena[i] = server_packet->arena[i];
+        app->packet->champ_bytes[i] = server_packet->champ_bytes[i];
+    }
+    app->packet->my_errno = server_packet->my_errno;
+    for (int i = 0; i != 4; i++) {
+        app->packet->lives[i] = server_packet->lives[i];
+        strcpy(app->packet->champ_name[i], server_packet->champ_name[i]);
+    }
+    app->packet->winner = server_packet->winner;
+    app->corewar->need_get = 0;
+}
 
 void get_cycle(app_t *app, int cycle_int, int clientSocket)
 {
@@ -43,29 +57,19 @@ void get_cycle(app_t *app, int cycle_int, int clientSocket)
         exit(84);
     while (bytesReceived < totalBytesExpected) {
         int remainingBytes = totalBytesExpected - bytesReceived;
-        int receivedBytes = read(clientSocket, ((char*)&server_packet) + bytesReceived, remainingBytes);
+        int receivedBytes = read(clientSocket, ((char*)&server_packet)
+        + bytesReceived, remainingBytes);
         if (receivedBytes <= 0)
             exit(84);
         bytesReceived += receivedBytes;
     }
-    for (int i = 0; i != 6144; i++) {
-        app->packet->arena[i] = server_packet.arena[i];
-        app->packet->champ_bytes[i] = server_packet.champ_bytes[i];
-    }
-    app->packet->my_errno = server_packet.my_errno;
-    for (int i = 0; i != 4; i++) {
-        app->packet->lives[i] = server_packet.lives[i];
-        strcpy(app->packet->champ_name[i], server_packet.champ_name[i]);
-    }
-    app->packet->winner = server_packet.winner;
-    app->corewar->need_get = 0;
+    get_cycle_bis(app, &server_packet);
 }
 
 void exchange(app_t *app, int cycle_int)
 {
     int clientSocket;
     struct sockaddr_in serverAddress;
-    
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket < 0)
         exit(84);
