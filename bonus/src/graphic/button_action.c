@@ -43,21 +43,5 @@ struct sockaddr_in serverAddress, char buffer[1024])
 
 void connect_button_clicked(app_t *app)
 {
-    // int clientSocket;
-    // struct sockaddr_in serverAddress;
-    // char buffer[1024] = {0};
-
-    // app->screen = SOCKET;
-    // app->ip = app->connect->ip;
-    // PlaySound(app->menu->fxBoom);
-    // clientSocket = socket(AF_INET, SOCK_STREAM, 0);
-    // if (clientSocket < 0) {
-    //     app->connect->text = "Erreur lors de la création de la socket";
-    //     app->screen = CONNECT;
-    // }
-    // serverAddress.sin_family = AF_INET;
-    // serverAddress.sin_addr.s_addr = inet_addr(app->ip);
-    // serverAddress.sin_port = htons(PORT);
-    // next_connect_button_clicked(app, clientSocket, serverAddress, buffer);
     app->screen = COREWAR;
 }
