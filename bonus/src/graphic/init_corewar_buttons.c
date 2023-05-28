@@ -27,7 +27,7 @@ void init_corewar_buttons(app_t *app, corewar_t *corewar)
     tmp->clicked = &stop_corewar;
     push(&corewar->buttons, tmp);
     tmp = create_button("src/graphic/assets/cycle_l.png",
-    (Vector2){app->screenWidth - 225, 75},
+    (Vector2){app->screenWidth - 375, 75},
     (Vector2){75, 75}, 3);
     tmp->clicked = &cycle_l;
     push(&corewar->buttons, tmp);
