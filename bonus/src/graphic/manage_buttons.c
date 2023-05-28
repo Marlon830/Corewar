@@ -29,6 +29,7 @@ void stop_corewar(app_t *app)
     app->corewar->is_stopped = true;
     app->corewar->is_cycling = false;
     app->corewar->cycle_speed = 1;
+    app->corewar->save_speed = 1;
 }
 
 void cycle_l(app_t *app)
