@@ -8,7 +8,7 @@
 #include "corewar.h"
 #include <stdint.h>
 
-void charToHex(char chr, char hexa[3])
+void chartohex(char chr, char hexa[3])
 {
     hexa[0] = "0123456789ABCDEF"[chr / 16];
     hexa[2] = "0123456789ABCDEF"[chr % 16];

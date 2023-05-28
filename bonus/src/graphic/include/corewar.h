@@ -140,7 +140,6 @@ void draw(app_t *app);
 void draw_buttons(list_t *buttons);
 void draw_sprites(app_t *app, list_t *sprites);
 void draw_connect_textbox(app_t *app);
-void draw_socket(app_t *app);
 void draw_connect(app_t *app);
 void draw_menu(app_t *app);
 void draw_logo(app_t *app);
@@ -169,7 +168,7 @@ corewar_t *init_corewar(app_t *app);
 void init_corewar_buttons(app_t *app, corewar_t *corewar);
 
 void push(list_t **list, void *elt);
-void charToHex(char c, char hexa[3]);
+void chartohex(char c, char hexa[3]);
 void display_arena(char *arena);
 
 void play_corewar(app_t *app);

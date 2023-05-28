@@ -7,20 +7,8 @@
 
 #include "corewar.h"
 
-void init_corewar_buttons(app_t *app, corewar_t *corewar)
+void init_corewar_buttons_bis(app_t *app, corewar_t *corewar, button_t *tmp)
 {
-    button_t *tmp = NULL;
-
-    tmp = create_button("src/graphic/assets/play_corewar.png",
-    (Vector2){app->screenWidth  - 150, 0},
-    (Vector2){75, 75}, 3);
-    tmp->clicked = &play_corewar;
-    push(&corewar->buttons, tmp);
-    tmp = create_button("src/graphic/assets/pause_corewar.png",
-    (Vector2){app->screenWidth  - 225, 0},
-    (Vector2){75, 75}, 3);
-    tmp->clicked = &pause_corewar;
-    push(&corewar->buttons, tmp);
     tmp = create_button("src/graphic/assets/stop_corewar.png",
     (Vector2){app->screenWidth - 300, 0},
     (Vector2){75, 75}, 3);
@@ -41,6 +29,23 @@ void init_corewar_buttons(app_t *app, corewar_t *corewar)
     (Vector2){75, 75}, 3);
     tmp->clicked = &speed_l;
     push(&corewar->buttons, tmp);
+}
+
+void init_corewar_buttons(app_t *app, corewar_t *corewar)
+{
+    button_t *tmp = NULL;
+
+    tmp = create_button("src/graphic/assets/play_corewar.png",
+    (Vector2){app->screenWidth  - 150, 0},
+    (Vector2){75, 75}, 3);
+    tmp->clicked = &play_corewar;
+    push(&corewar->buttons, tmp);
+    tmp = create_button("src/graphic/assets/pause_corewar.png",
+    (Vector2){app->screenWidth  - 225, 0},
+    (Vector2){75, 75}, 3);
+    tmp->clicked = &pause_corewar;
+    push(&corewar->buttons, tmp);
+    init_corewar_buttons_bis(app, corewar, tmp);
     tmp = create_button("src/graphic/assets/speed_r.png",
     (Vector2){app->screenWidth  - 75, 0},
     (Vector2){75, 75}, 3);

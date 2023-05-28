@@ -8,6 +8,21 @@
 #include "corewar.h"
 #include "socket.h"
 
+void init_app_bis(app_t *app)
+{
+    app->cursor = 0;
+    app->next_cycle = 10;
+    for (int i = 0; i < 4; i++)
+        app->packet->lives[i] = -1;
+    memset(app->packet->arena, 0, 6144);
+    memset(app->packet->champ_bytes, 0, 6144);
+    memset(app->corewar->prev.arena, 0, 6144);
+    memset(app->corewar->prev.champ_bytes, 0, 6144);
+    app->packet->winner = -1;
+    for (int i = 0; i < 4; i++)
+        memset(app->packet->champ_name[i], 0, 129);
+}
+
 app_t *init_app(void)
 {
     app_t *app = malloc(sizeof(app_t));
@@ -28,17 +43,7 @@ app_t *init_app(void)
     app->socket = init_socket(app);
     app->corewar = init_corewar(app);
     app->packet = malloc(sizeof(server_t));
-    app->cursor = 0;
-    app->next_cycle = 10;
-    for (int i = 0; i < 4; i++)
-        app->packet->lives[i] = -1;
-    memset(app->packet->arena, 0, 6144);
-    memset(app->packet->champ_bytes, 0, 6144);
-    memset(app->corewar->prev.arena, 0, 6144);
-    memset(app->corewar->prev.champ_bytes, 0, 6144);
-    app->packet->winner = -1;
-    for (int i = 0; i < 4; i++)
-        memset(app->packet->champ_name[i], 0, 129);
+    init_app_bis(app);
     return app;
 }
 
@@ -101,21 +106,4 @@ connect_t *init_connect(app_t *app)
     tmp->clicked = &connect_button_clicked;
     push(&connect->buttons, tmp);
     return connect;
-}
-
-socket_t *init_socket(app_t *app)
-{
-    socket_t *sockets = malloc(sizeof(socket_t));
-    button_t *tmp = NULL;
-
-    (void)app;
-    sockets->background = LoadTexture("src/graphic/assets/background.png");
-    sockets->fxBoom = LoadSound("src/graphic/assets/boom.ogg");
-    sockets->buttons = NULL;
-    tmp = create_button("src/graphic/assets/play_button.png",
-    (Vector2){app->screenWidth / 2 - 150, app->screenHeight / 2 + 175},
-    (Vector2){300, 150}, 1);
-    tmp->clicked = &socket_button_clicked;
-    push(&sockets->buttons, tmp);
-    return sockets;
 }

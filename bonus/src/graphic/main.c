@@ -15,7 +15,8 @@ int main(void)
     PlayMusicStream(app->logo->music);
     while (!WindowShouldClose() && app->loop) {
         if (app->screen == COREWAR && b == false) {
-            app->thread = pthread_create(&app->thread, NULL, (void *)&get_arena, app);
+            app->thread = pthread_create(&app->thread, NULL,
+            (void *)&get_arena, app);
             b = true;
             DisableCursor();
         }
@@ -27,6 +28,5 @@ int main(void)
     UnloadMusicStream(app->menu->music);
     CloseAudioDevice();
     CloseWindow();
-
     return 0;
 }
