@@ -55,9 +55,6 @@ void speed_l(app_t *app)
         app->corewar->cycle_speed = -1;
     if (app->corewar->cycle_speed > 1)
         app->corewar->cycle_speed -= app->corewar->cycle_speed / 2;
-    app->corewar->is_playing = true;
-    app->corewar->is_cycling = false;
-    app->corewar->is_stopped = false;
 }
 
 void speed_r(app_t *app)
@@ -68,7 +65,4 @@ void speed_r(app_t *app)
         app->corewar->cycle_speed = 1;
     if (app->corewar->cycle_speed < -1)
         app->corewar->cycle_speed -= app->corewar->cycle_speed / 2;
-    app->corewar->is_playing = true;
-    app->corewar->is_cycling = false;
-    app->corewar->is_stopped = false;
 }
