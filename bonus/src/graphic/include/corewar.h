@@ -148,6 +148,7 @@ logo_t *init_logo(void);
 connect_t *init_connect(app_t *app);
 socket_t *init_socket(app_t *app);
 corewar_t *init_corewar(app_t *app);
+void init_corewar_buttons(app_t *app, corewar_t *corewar);
 
 void push(list_t **list, void *elt);
 void charToHex(char c, char hexa[3]);

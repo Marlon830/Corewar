@@ -26,4 +26,5 @@ void corewar_input(app_t *app)
     if (IsKeyPressed(KEY_X)) {
         app->corewar->camera.position = (Vector3){64.0f, 180.0f, 96.0f};
     }
+    update_buttons(app, app->corewar->buttons);
 }
