@@ -94,6 +94,12 @@ typedef struct corewar_s {
     server_t prev;
     list_t *buttons;
     int need_get;
+    bool is_playing;
+    bool is_stopped;
+    bool is_cycling;
+    int cycle_speed;
+    int save_speed;
+    int cycle_int;
 } corewar_t;
 
 typedef struct app_s {
@@ -153,3 +159,11 @@ void init_corewar_buttons(app_t *app, corewar_t *corewar);
 void push(list_t **list, void *elt);
 void charToHex(char c, char hexa[3]);
 void display_arena(char *arena);
+
+void play_corewar(app_t *app);
+void pause_corewar(app_t *app);
+void stop_corewar(app_t *app);
+void cycle_l(app_t *app);
+void cycle_r(app_t *app);
+void speed_l(app_t *app);
+void speed_r(app_t *app);
