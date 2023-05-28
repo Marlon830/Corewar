@@ -36,6 +36,9 @@ app_t *init_app(void)
     memset(app->packet->champ_bytes, 0, 6144);
     memset(app->corewar->prev.arena, 0, 6144);
     memset(app->corewar->prev.champ_bytes, 0, 6144);
+    app->packet->winner = -1;
+    for (int i = 0; i < 4; i++)
+        memset(app->packet->champ_name[i], 0, 129);
     return app;
 }
 
