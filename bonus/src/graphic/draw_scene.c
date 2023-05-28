@@ -94,9 +94,11 @@ void draw_corewar(app_t *app)
     EndMode3D();
     for (int i = 0; i != 4; i++) {
         if (app->packet->lives[i] != -1)
-            DrawText(TextFormat("Champion %d last live: %d", i + 1, app->packet->lives[i]), 10, 10 + (i * 20), 20, WHITE);
+            DrawText(TextFormat("Champion %s (%d) last live: %d", app->packet->champ_name[i], i + 1, app->packet->lives[i]), 10, 10 + (i * 20), 20, WHITE);
     }
     draw_buttons(app->corewar->buttons);
     DrawText(TextFormat("Cycle: %d", app->corewar->cycle_int), 0, 600, 20, WHITE);
     DrawText(TextFormat("Cycle speed: %d", app->corewar->cycle_speed), 0, 620, 20, WHITE);
+    if (app->packet->winner != -1)
+        DrawText(TextFormat("Winner : champion %s (%d)", app->packet->champ_name[app->packet->winner - 1], app->packet->winner), 940, 540, 150, WHITE);
 }
