@@ -80,9 +80,20 @@ void exchange(app_t *app, int cycle_int)
 
 void get_arena(app_t *app)
 {
-    int cycle_int = 0;
+    app->corewar->cycle_int = 0;
+
     while (1) {
-        exchange(app, cycle_int);
-        cycle_int += 50;
+        if (!app->corewar->is_playing)
+            continue;
+        if (app->corewar->is_stopped) {
+            app->corewar->cycle_int = 0;
+            app->corewar->is_playing = false;
+        }
+        app->corewar->cycle_int += app->corewar->cycle_speed;
+        exchange(app, app->corewar->cycle_int);
+        if (app->corewar->is_cycling) {
+            app->corewar->is_playing = false;
+            app->corewar->is_cycling = false;
+        }
     }
 }
