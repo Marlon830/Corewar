@@ -80,6 +80,8 @@ typedef struct vm_s {
     function_t *exec_func;
     char *r;
     champion_t *winner;
+    int winner_champ;
+    char champ_name[4][129];
 } vm_t;
 
 void push(list_t **list, void *data);
