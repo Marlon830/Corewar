@@ -51,18 +51,10 @@ void draw_connect(app_t *app)
     draw_buttons(app->connect->buttons);
 }
 
-void draw_socket(app_t *app)
-{
-    UpdateMusicStream(app->menu->music);
-    DrawTexture(app->socket->background, 0, 0, WHITE);
-    draw_buttons(app->socket->buttons);
-    DrawText(app->socket->text, 1920 / 2 -
-    MeasureText(app->socket->text, 40) / 2, 1080 / 2, 40, WHITE);
-}
-
 void draw_corewar(app_t *app)
 {
     pos_t pos = (pos_t){0, 0, 0};
+    UpdateMusicStream(app->menu->music);
     UpdateCamera(&app->corewar->camera, CAMERA_PERSPECTIVE);
     if (app->cursor == 1) {
         app->corewar->camera.position = app->corewar->saved_pos;
