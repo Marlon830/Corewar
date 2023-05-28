@@ -112,6 +112,7 @@ typedef struct app_s {
     char *ip;
     server_t *packet;
     int next_cycle;
+    int cursor;
 } app_t;
 
 void inputs(app_t *app);

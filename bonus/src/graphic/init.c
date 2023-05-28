@@ -28,6 +28,7 @@ app_t *init_app(void)
     app->socket = init_socket(app);
     app->corewar = init_corewar(app);
     app->packet = malloc(sizeof(server_t));
+    app->cursor = 1;
     app->next_cycle = 10;
     for (int i = 0; i < 4; i++)
         app->packet->lives[i] = -1;
