@@ -18,7 +18,6 @@ void send_arena(int argc, char *argv[], int clientSocket, int cycle)
         perror("socket");
         exit(EXIT_FAILURE);
     }
-    printf("nb write : %d\n", j);
 }
 
 void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in clientAddress)
@@ -31,7 +30,7 @@ void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in cl
     int j = 0;
 
     memset(cmd, 0, 1024);
-    printf("Adresse IP du serveur : %s\n", ip);
+    printf("IP : %s\n", ip);
     clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress,
     &clientAddressLength);
     if (clientSocket < 0) {
