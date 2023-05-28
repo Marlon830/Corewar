@@ -92,6 +92,7 @@ typedef struct corewar_s {
     Camera3D camera;
     d_text_t *param;
     server_t prev;
+    list_t *buttons;
     int need_get;
 } corewar_t;
 
@@ -118,7 +119,6 @@ typedef struct app_s {
 } app_t;
 
 void inputs(app_t *app);
-void socket_input(app_t *app);
 void corewar_input(app_t *app);
 void draw(app_t *app);
 void draw_buttons(list_t *buttons);
