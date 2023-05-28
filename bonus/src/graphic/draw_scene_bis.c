@@ -42,5 +42,5 @@ void draw_2d_objects(app_t *app)
     DrawText(TextFormat("Cycle: %d", app->corewar->cycle_int), 0, 600, 20, WHITE);
     DrawText(TextFormat("Cycle speed: %d", app->corewar->is_playing == 1 ? app->corewar->cycle_speed : app->corewar->save_speed), 0, 620, 20, WHITE);
     if (app->packet->winner != -1)
-        DrawText(TextFormat("Winner : champion %s (%d)", app->packet->champ_name[app->packet->winner - 1], app->packet->winner), 900, 540, 100, WHITE);
+        DrawText(TextFormat("Winner : champion %s (%d)", app->packet->champ_name[app->packet->winner - 1], app->packet->winner), 150, 540, 90, WHITE);
 }
