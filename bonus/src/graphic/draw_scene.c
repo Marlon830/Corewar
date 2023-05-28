@@ -62,41 +62,23 @@ void draw_socket(app_t *app)
 
 void draw_corewar(app_t *app)
 {
-    int k = 0;
-    char hex[3] = {0};
-    color_mode_t *color;
+    pos_t pos = (pos_t){0, 0, 0};
     UpdateCamera(&app->corewar->camera, CAMERA_PERSPECTIVE);
+    if (app->cursor == 1) {
+        app->corewar->camera.position = app->corewar->saved_pos;
+        app->corewar->camera.target = app->corewar->saved_target;
+    } else {
+        app->corewar->saved_pos = app->corewar->camera.position;
+        app->corewar->saved_target = app->corewar->camera.target;
+    }
     ClearBackground(BLACK);
     BeginMode3D(app->corewar->camera);
-    for (int i = 0; i < 96 * 2; i += 2) {
-        for (int j = 0; j < 64 * 2; j += 2) {
-            if (app->corewar->need_get == 1) {
-                color = app->corewar->colorMode[(int)app->corewar->prev.champ_bytes[k]];
-            } else {
-                color = app->corewar->colorMode[(int)app->packet->champ_bytes[k]];
-                app->corewar->param->tint = color->text_color;
-            }
-            DrawCube((Vector3){ j, 0.5, i }, 1.0f, 1.0f, 1.0f,
-            color->cube_color);
-            DrawCubeWires((Vector3){ j, 0.5, i }, 1.0f, 1.0f, 1.0f,
-            color->wire_color);
-            app->corewar->param->position = (Vector3){j - 0.35, 1.1, i - 0.2};
-            if (app->corewar->need_get == 1) {
-                charToHex(app->corewar->prev.arena[k], hex);
-                drawtext3d(app->corewar->param, hex);
-            } else {
-                charToHex(app->packet->arena[k], hex);
-                drawtext3d(app->corewar->param, hex);
-            }
-            k++;
+    for (; pos.i < 96 * 2; pos.i += 2) {
+        for (; pos.j < 64 * 2; pos.j += 2) {
+            draw_all(app, &pos);
         }
+        pos.j = 0;
     }
     EndMode3D();
-    for (int i = 0; i != 4; i++) {
-        if (app->packet->lives[i] != -1)
-            DrawText(TextFormat("Champion %d last live: %d", i + 1, app->packet->lives[i]), 10, 10 + (i * 20), 20, WHITE);
-    }
-    draw_buttons(app->corewar->buttons);
-    DrawText(TextFormat("Cycle: %d", app->corewar->cycle_int), 0, 600, 20, WHITE);
-    DrawText(TextFormat("Cycle speed: %d", app->corewar->cycle_speed), 0, 620, 20, WHITE);
+    draw_2d_objects(app);
 }

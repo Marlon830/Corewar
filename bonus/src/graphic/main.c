@@ -17,6 +17,7 @@ int main(void)
         if (app->screen == COREWAR && b == false) {
             app->thread = pthread_create(&app->thread, NULL, (void *)&get_arena, app);
             b = true;
+            DisableCursor();
         }
         inputs(app);
         draw(app);
