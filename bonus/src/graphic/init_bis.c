@@ -67,5 +67,11 @@ corewar_t *init_corewar(app_t *app)
     corewar->camera.fovy = 45.0f;
     corewar->camera.projection = CAMERA_PERSPECTIVE;
     corewar->need_get = false;
+    corewar->is_playing = false;
+    corewar->is_stopped = false;
+    corewar->is_cycling = false;
+    corewar->cycle_speed = 1;
+    corewar->save_speed = 1;
+    corewar->cycle_int = 0;
     return corewar;
 }
