@@ -26,6 +26,8 @@ typedef struct server_s {
     char champ_bytes[6144];
     int my_errno;
     int lives[4];
+    int winner;
+    char champ_name[4][129];
 } server_t;
 
 typedef struct client_s {
