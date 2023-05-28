@@ -62,6 +62,7 @@ corewar_t *init_corewar(app_t *app)
     corewar->param = init_text((Vector3){0, 0, 0}, 5.0f);
     corewar->colorMode = init_color_mode();
     corewar->buttons = NULL;
+    init_corewar_buttons(app, corewar);
     corewar->camera = (Camera3D){0};
     corewar->camera.position = (Vector3){10.0f, 10.0f, 10.0f};
     corewar->camera.target = (Vector3){0.0f, 0.0f, 0.0f};

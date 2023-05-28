@@ -96,4 +96,7 @@ void draw_corewar(app_t *app)
         if (app->packet->lives[i] != -1)
             DrawText(TextFormat("Champion %d last live: %d", i + 1, app->packet->lives[i]), 10, 10 + (i * 20), 20, WHITE);
     }
+    draw_buttons(app->corewar->buttons);
+    DrawText(TextFormat("Cycle: %d", app->corewar->cycle_int), 0, 600, 20, WHITE);
+    DrawText(TextFormat("Cycle speed: %d", app->corewar->cycle_speed), 0, 620, 20, WHITE);
 }
