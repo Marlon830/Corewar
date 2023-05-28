@@ -65,6 +65,7 @@ void print_winner(vm_t *vm)
         my_putstr(" (");
         my_putstr(vm->winner->header->prog_name);
         my_putstr(") a gagné.\n");
+        vm->winner_champ = vm->winner->prog_number;
     }
 }
 
