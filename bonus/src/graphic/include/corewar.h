@@ -22,6 +22,12 @@ typedef enum game_screen {
     COREWAR
 } game_screen;
 
+typedef struct pos_s {
+    int i;
+    int j;
+    int k;
+} pos_t;
+
 typedef struct list_s {
     void *elt;
     struct list_s *next;
@@ -93,6 +99,9 @@ typedef struct corewar_s {
     d_text_t *param;
     server_t prev;
     list_t *buttons;
+    int camero_lock;
+    Vector3 saved_pos;
+    Vector3 saved_target;
     int need_get;
     bool is_playing;
     bool is_stopped;
@@ -135,6 +144,8 @@ void draw_connect(app_t *app);
 void draw_menu(app_t *app);
 void draw_logo(app_t *app);
 void draw_corewar(app_t *app);
+void draw_2d_objects(app_t *app);
+void draw_all(app_t *app, pos_t *pos);
 
 button_t *create_button(char *path, Vector2 pos, Vector2 frameSize,
 int nbFrames);
