@@ -23,7 +23,8 @@ void menu_input(app_t *app)
 
 void text_box_input(app_t *app)
 {
-    SetMouseCursor(MOUSE_CURSOR_IBEAM);
+    if (app->connect->mouseOnText)
+        SetMouseCursor(MOUSE_CURSOR_IBEAM);
     int key = GetCharPressed();
     while (key > 0) {
         if ((key >= 32) && (key <= 125) && (app->connect->letterCount < 16)) {
