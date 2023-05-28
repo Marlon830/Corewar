@@ -92,7 +92,7 @@ connect_t *init_connect(app_t *app)
     connect->text = "Enter the server IP";
     connect->textBox = (Rectangle){app->screenWidth / 2.0f - 250,
     app->screenHeight / 2.0f - 100, 500, 50};
-    tmp = create_button("src/graphic/assets/quit_button.png",
+    tmp = create_button("src/graphic/assets/start_button.png",
     (Vector2){app->screenWidth / 2 - 150, app->screenHeight / 2 + 75},
     (Vector2){300, 150}, 1);
     tmp->clicked = &connect_button_clicked;
