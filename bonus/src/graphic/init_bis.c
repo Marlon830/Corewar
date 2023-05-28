@@ -56,7 +56,6 @@ d_text_t *init_text(Vector3 pos, float size)
 corewar_t *init_corewar(app_t *app)
 {
     corewar_t *corewar = malloc(sizeof(corewar_t));
-    button_t *tmp = NULL;
 
     (void)app;
     corewar->param = init_text((Vector3){0, 0, 0}, 5.0f);
