@@ -92,6 +92,7 @@ typedef struct corewar_s {
     Camera3D camera;
     d_text_t *param;
     server_t prev;
+    list_t *buttons;
     int need_get;
 } corewar_t;
 
@@ -112,11 +113,12 @@ typedef struct app_s {
     char *ip;
     server_t *packet;
     int next_cycle;
+    bool is_ip_clicked;
+    bool is_input;
     int cursor;
 } app_t;
 
 void inputs(app_t *app);
-void socket_input(app_t *app);
 void corewar_input(app_t *app);
 void draw(app_t *app);
 void draw_buttons(list_t *buttons);

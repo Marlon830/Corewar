@@ -7,8 +7,6 @@
 
 #include "corewar.h"
 
-//bleu, vert, rose, rouge
-
 color_mode_t **init_color_mode(void)
 {
     color_mode_t **color_mode = malloc(sizeof(color_mode_t *) * 6);

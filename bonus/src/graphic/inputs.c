@@ -47,10 +47,12 @@ void connect_input(app_t *app)
         app->connect->mouseOnText = true;
     else
         app->connect->mouseOnText = false;
-    if (app->connect->mouseOnText)
-        text_box_input(app);
+    if (app->connect->mouseOnText && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        app->is_input = true;
     else
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+    if (app->is_input)
+        text_box_input(app);
 }
 
 void inputs(app_t *app)

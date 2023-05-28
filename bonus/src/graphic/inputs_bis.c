@@ -8,11 +8,6 @@
 #include "corewar.h"
 #include "ray.h"
 
-void socket_input(app_t *app)
-{
-    update_buttons(app, app->socket->buttons);
-}
-
 void corewar_input(app_t *app)
 {
     if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
