@@ -31,15 +31,19 @@ int get_first_prog_number(vm_t *vm)
 void fill_champ_list(vm_t *vm)
 {
     champion_t *champ;
+    int count = 0;
 
     for (list_t *tmp = vm->champ_list; tmp; tmp = tmp->next) {
         champ = tmp->data;
         if (champ->prog_number == -1) {
             champ->prog_number = get_first_prog_number(vm);
             champ->r[1] = champ->prog_number;
+            strcpy(vm->champ_name[count++], champ->header->prog_name);
         }
         open_bin(champ);
     }
+    for (int i = count; i < 4; i++)
+        vm->champ_name[i][0] = '\0';
     set_champ_address(vm);
     for (list_t *tmp = vm->champ_list; tmp; tmp = tmp->next) {
         champ = tmp->data;
