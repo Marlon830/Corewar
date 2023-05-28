@@ -19,6 +19,7 @@ vm_t *init_vm(void)
     vm->nb_champ = 0;
     vm->champ_list = NULL;
     vm->nbr_live = 0;
+    vm->winner_champ = -1;
     return vm;
 }
 
@@ -55,5 +56,10 @@ server_t get_arena_at_cycle(int argc, char **argv, int cycle)
     }
     for (int i = 0; i < 4; i++)
         server.lives[i] = vm->lives[i];
+    server.winner = -1;
+    if (vm->winner_champ != -1)
+        server.winner = get_nb_champ(vm->winner, vm->champ_list);
+    for (int i = 0; i < 4; i++)
+        strcpy(server.champ_name[i], vm->champ_name[i]);
     return server;
 }
