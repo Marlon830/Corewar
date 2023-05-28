@@ -83,7 +83,6 @@ void get_arena(app_t *app)
     int cycle_int = 0;
     while (1) {
         exchange(app, cycle_int);
-        cycle_int += 150;
+        cycle_int += 50;
     }
-    
 }
