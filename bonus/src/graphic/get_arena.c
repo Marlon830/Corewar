@@ -90,6 +90,8 @@ void get_arena(app_t *app)
             app->corewar->is_playing = false;
         }
         app->corewar->cycle_int += app->corewar->cycle_speed;
+        if (app->corewar->cycle_int < 0)
+            app->corewar->cycle_int = 0;
         exchange(app, app->corewar->cycle_int);
         if (app->corewar->is_cycling) {
             app->corewar->is_playing = false;
