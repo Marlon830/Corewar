@@ -67,6 +67,7 @@ void exec_sti(vm_t *vm, champion_t *champion)
         return;
     write_four_bytes(vm, my_modulo((champion->pc + (param2 + param3) %
     IDX_MOD), MEM_SIZE),
-    champion->r[(int) vm->arena[my_modulo(champion->pc + 2, MEM_SIZE)]], champion);
+    champion->r[(int) vm->arena[my_modulo(champion->pc + 2, MEM_SIZE)]],
+    champion);
     champion->pc += byte_size;
 }

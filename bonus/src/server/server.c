@@ -14,13 +14,15 @@ void send_arena(int argc, char *argv[], int clientSocket, int cycle)
     server_t server = get_arena_at_cycle(argc, argv, cycle);
     int j = 0;
 
-    if (server.my_errno == -1 || (j = write(clientSocket, &server, sizeof(server))) < 0) {
+    if (server.my_errno == -1 ||
+    (j = write(clientSocket, &server, sizeof(server))) < 0) {
         perror("socket");
         exit(EXIT_FAILURE);
     }
 }
 
-void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in clientAddress)
+void next_server(int argc, char *argv[], int serverSocket,
+    struct sockaddr_in clientAddress)
 {
     char *ip = get_ip();
     socklen_t clientAddressLength = sizeof(clientAddress);
@@ -38,9 +40,8 @@ void next_server(int argc, char *argv[], int serverSocket, struct sockaddr_in cl
         exit(EXIT_FAILURE);
     }
     while ((j = read(clientSocket, &client, sizeof(client))) == 0);
-    if (client.type == CYCLE) {
+    if (client.type == CYCLE)
         send_arena(argc, argv, clientSocket, client.value);
-    }
     close(serverSocket);
     close(clientSocket);
 }
@@ -52,27 +53,19 @@ int new_server(int argc, char **argv)
     int reuse = 1;
 
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
-    if (serverSocket < 0) {
-        perror("socket");
+    if (serverSocket < 0)
         exit(EXIT_FAILURE);
-    }
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_addr.s_addr = INADDR_ANY;
     serverAddress.sin_port = htons(PORT);
     if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &reuse,
-    sizeof(reuse)) < 0) {
-        perror("socket");
+    sizeof(reuse)) < 0)
         exit(EXIT_FAILURE);
-    }
     if (bind(serverSocket, (struct sockaddr *)&serverAddress,
-    sizeof(serverAddress)) < 0) {
-        perror("socket");
+    sizeof(serverAddress)) < 0)
         exit(EXIT_FAILURE);
-    }
-    if (listen(serverSocket, 1) < 0) {
-        perror("socket");
+    if (listen(serverSocket, 1) < 0)
         exit(EXIT_FAILURE);
-    }
     next_server(argc, argv, serverSocket, clientAddress);
     return 0;
 }
