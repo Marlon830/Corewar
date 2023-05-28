@@ -133,6 +133,7 @@ typedef struct app_s {
     int cursor;
 } app_t;
 
+void exchange(app_t *app, int cycle_int);
 void inputs(app_t *app);
 void corewar_input(app_t *app);
 void draw(app_t *app);
